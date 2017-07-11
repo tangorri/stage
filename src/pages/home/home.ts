@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { AlertController } from 'ionic-angular';
 
+import { Firebase } from '@ionic-native/firebase';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -12,7 +14,7 @@ export class HomePage {
   user: string;
   password: string;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private firebase: Firebase) {
 
   }
 

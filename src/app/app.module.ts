@@ -14,8 +14,10 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AlertController } from 'ionic-angular';
 
+// Native components
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Firebase } from '@ionic-native/firebase';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     AlertController,
+    Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
