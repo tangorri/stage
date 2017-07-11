@@ -12,6 +12,8 @@ import { ClientsPage } from '../pages/clients/clients';
 import { InventairePage } from '../pages/inventaire/inventaire';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { AlertController } from 'ionic-angular';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -44,6 +46,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    AlertController,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -6,21 +6,8 @@
 
 <ion-content padding>
 
-    <img src="../../assets/img/logo.png" alt="logo Etcheverry Hariscain" id="logo">
+    <img src="../../assets/img/logo.svg" alt="logo Etcheverry Hariscain" id="logo">
 
-    <ion-list id="connect">
+    <button ion-button full (tap)="showPrompt()" id="connect">Connexion</button>
 
-        <ion-item>
-            <ion-label floating>Chauffeur</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>Mot de passe</ion-label>
-            <ion-input type="password"></ion-input>
-        </ion-item>
-
-        <button ion-button block>Valider</button>
-
-    </ion-list>
 </ion-content>
