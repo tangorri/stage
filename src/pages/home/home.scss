@@ -1,3 +1,16 @@
 page-home {
-
+    .scroll-content {
+        background-color: grey;
+    }
+    #logo {
+        display: block;
+        margin: 30px auto;
+    }
+    #connect {
+        width: 50%;
+        margin: 150px auto 0;
+    }
+    button {
+        margin: 0 auto;
+    }
 }
