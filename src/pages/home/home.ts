@@ -18,7 +18,8 @@ export class HomePage {
 
   }
 
-    showPrompt() {
+    // Affichage de l' Alert Login
+    alertLogin(): void {
     let prompt = this.alertCtrl.create({
       title: 'Login',
       message: "Entrez votre nom et votre mot de passe pour vous connecter.",
@@ -49,6 +50,15 @@ export class HomePage {
       ]
     });
     prompt.present();
+  }
+
+  private firebaseConnect():void {
+    this.firebase.getToken()
+    .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
+    .catch(error => console.error('Error getting token', error));
+
+    this.firebase.onTokenRefresh()
+    .subscribe((token: string) => console.log(`Got a new token ${token}`));
   }
 
 
