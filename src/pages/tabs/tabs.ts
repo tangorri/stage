@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HomePage } from '../home/home';
+import { AccueilPage } from '../accueil/accueil';
 import { RamassagePage } from '../ramassage/ramassage';
 import { LivraisonPage } from '../livraison/livraison';
 import { EchangePage } from '../echange/echange';

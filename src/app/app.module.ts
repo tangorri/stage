@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 // Pages
 import { HomePage } from '../pages/home/home';
+import { AccueilPage } from '../pages/accueil/accueil';
 import { RamassagePage } from '../pages/ramassage/ramassage';
 import { LivraisonPage } from '../pages/livraison/livraison';
 import { EchangePage } from '../pages/echange/echange';
@@ -19,10 +20,23 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Firebase } from '@ionic-native/firebase';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
+  authDomain: "etcheverry-hariscain.firebaseapp.com",
+  databaseURL: "https://etcheverry-hariscain.firebaseio.com",
+  storageBucket: "etcheverry-hariscain.appspot.com",
+  messagingSenderId: '1053939384333'
+};
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    AccueilPage,
     RamassagePage,
     LivraisonPage,
     EchangePage,
@@ -32,12 +46,16 @@ import { Firebase } from '@ionic-native/firebase';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
+    AccueilPage,
     RamassagePage,
     LivraisonPage,
     EchangePage,

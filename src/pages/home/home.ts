@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { AccueilPage } from '../accueil/accueil';
+
 import { AlertController } from 'ionic-angular';
 
 import { Firebase } from '@ionic-native/firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'page-home',
@@ -11,54 +15,38 @@ import { Firebase } from '@ionic-native/firebase';
 })
 export class HomePage {
 
-  user: string;
+  email: string;
   password: string;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private firebase: Firebase) {
-
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private firebase: Firebase, private afAuth: AngularFireAuth) {
+    console.log('se connecter avec: admin@admin.fr   mdp: admin1');
+    console.log('ou avec: livreur@livreur.fr   mdp: livreur');
   }
 
-    // Affichage de l' Alert Login
-    alertLogin(): void {
-    let prompt = this.alertCtrl.create({
-      title: 'Login',
-      message: "Entrez votre nom et votre mot de passe pour vous connecter.",
-      inputs: [
-        {
-          name: 'user',
-          placeholder: 'Chauffeur'
-        },
-        {
-          name: 'password',
-          placeholder: 'Mot de passe',
-          type: 'password',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Annuler',
-          handler: data => {
-            console.log('Annuler');
-          }
-        },
-        {
-          text: 'Valider',
-          handler: data => {
-            console.log('Valider');
-          }
-        }
-      ]
+  
+
+  connexion() {
+    firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+    // Handle Errors here.
+    var errorMessage = error.message;
+    alert(errorMessage);
+    // ...
+    })
+    .then((result) => {
+      this.navCtrl.push(AccueilPage);
+      alert('Vous êtes bien connecté !'); 
     });
-    prompt.present();
   }
 
-  private firebaseConnect():void {
-    this.firebase.getToken()
-    .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
-    .catch(error => console.error('Error getting token', error));
-
-    this.firebase.onTokenRefresh()
-    .subscribe((token: string) => console.log(`Got a new token ${token}`));
+  deconnexion() {
+    firebase.auth().signOut()
+    .then(function() {
+      // Sign-out successful.
+      alert('Vous avez bien été déconnecté !');
+    })
+    .catch(function(error) {
+      // An error happened.
+    });
   }
 
 

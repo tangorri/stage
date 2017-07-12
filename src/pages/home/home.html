@@ -8,6 +8,21 @@
 
     <ion-img src="../../assets/img/logo.svg" alt="logo Etcheverry Hariscain Transports" id="logo" width="550" height="200"></ion-img>
 
-    <button ion-button full (tap)="alertLogin()" id="connect">Connexion</button>
+    <ion-list id="connect">
+
+        <ion-item>
+            <ion-label floating>email</ion-label>
+            <ion-input [(ngModel)]="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>password</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+
+        <button ion-button full (tap)="connexion()">Connexion</button>
+        <button ion-button full (tap)="deconnexion()">Déconnexion</button>
+
+    </ion-list>
 
 </ion-content>

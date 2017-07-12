@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1053939384333",
+    "firebase_url": "https://etcheverry-hariscain.firebaseio.com",
+    "project_id": "etcheverry-hariscain",
+    "storage_bucket": "etcheverry-hariscain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053939384333:android:d3073562c270f9b9",
+        "android_client_info": {
+          "package_name": "com.chrisparis.etcheverryhariscaintransports"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053939384333-sobr6mudskb8smei9nf85qa3vahhdo47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisparis.etcheverryhariscaintransports",
+            "certificate_hash": "199d97094096299d059a2a2e099ee58ffd88608b"
+          }
+        },
+        {
+          "client_id": "1053939384333-ak977maja762rrbh11nd3fr4d77gf4ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO_986ZTZLt7WpsNl1g68XLTQjoaJfmmE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053939384333-ak977maja762rrbh11nd3fr4d77gf4ot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
