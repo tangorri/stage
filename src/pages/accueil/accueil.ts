@@ -12,20 +12,34 @@ import * as firebase from 'firebase/app';
 })
 export class AccueilPage {
 
-/*   email: string;
-  password: string; */
+  reference: number;
+  designation: string;
+  quantite: number;
+  poids: number;
+  prix: number;
+  expediteur: string; 
+  destinataire: string; 
 
   constructor(public navCtrl: NavController , private firebase: Firebase, private afAuth: AngularFireAuth ) {
 
-    var userId = firebase.auth().currentUser.uid;
+    /* var userId = firebase.auth().currentUser.uid;
     console.log(userId);
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       var username = snapshot.val().username;
       console.log(username);
-    }); 
+    });  */
 
   }
     
+  public setObject(): void {
+    console.log('reference : ' + this.reference);
+    console.log('designation : ' + this.designation);
+    console.log('quantite : ' + this.quantite);
+    console.log('poids : ' + this.poids);
+    console.log('prix : ' + this.prix);
+    console.log('expediteur : ' + this.expediteur);
+    console.log('destinataire : ' + this.destinataire);
+  }
 
 
 }

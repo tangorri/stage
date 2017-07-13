@@ -42,7 +42,7 @@ export class HomePage {
     firebase.auth().signOut()
     .then(function() {
       // Sign-out successful.
-      alert('Vous avez bien été déconnecté !');
+      console.log('Vous avez bien été déconnecté !');
     })
     .catch(function(error) {
       // An error happened.
