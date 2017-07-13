@@ -19,7 +19,14 @@ $ sudo npm install -g ionic cordova
 $ ionic start myTabs tabs
 ```
 
-Then, to run it, cd into `myTabs` and run:
+Try it on your navigator:
+
+```bash
+$ cd myTabs
+$ ionic serve
+```
+
+Then, to run it on android emulator:
 
 ```bash
 $ ionic cordova platform add android
