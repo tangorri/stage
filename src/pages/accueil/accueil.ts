@@ -39,6 +39,14 @@ export class AccueilPage {
     console.log('prix : ' + this.prix);
     console.log('expediteur : ' + this.expediteur);
     console.log('destinataire : ' + this.destinataire);
+
+    alert('La référence n° ' + this.reference + ' à bien été ajoutée !' +
+          ' designation : ' + this.designation + 
+          ' quantite : ' + this.quantite +
+          ' poids : ' + this.poids + 
+          ' prix : ' + this.prix +
+          ' expediteur : ' + this.expediteur +
+          ' destinataire : ' + this.destinataire);
   }
 
 

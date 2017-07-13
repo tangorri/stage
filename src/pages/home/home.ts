@@ -15,15 +15,15 @@ import * as firebase from 'firebase/app';
 })
 export class HomePage {
 
+  name: string;
   email: string;
   password: string;
+
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, private firebase: Firebase, private afAuth: AngularFireAuth) {
     console.log('se connecter avec: admin@admin.fr   mdp: admin1');
     console.log('ou avec: livreur@livreur.fr   mdp: livreur');
   }
-
-  
 
   connexion() {
     firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
@@ -34,7 +34,7 @@ export class HomePage {
     })
     .then((result) => {
       this.navCtrl.push(AccueilPage);
-      alert('Vous êtes bien connecté !'); 
+      console.log('Vous êtes bien connecté !'); 
     });
   }
 

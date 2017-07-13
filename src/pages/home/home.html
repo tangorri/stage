@@ -11,12 +11,17 @@
     <ion-list id="connect">
 
         <ion-item>
-            <ion-label floating>email</ion-label>
+            <ion-label floating>Nom :</ion-label>
+            <ion-input [(ngModel)]="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Email :</ion-label>
             <ion-input [(ngModel)]="email"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label floating>password</ion-label>
+            <ion-label floating>Mot de passe :</ion-label>
             <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
 
