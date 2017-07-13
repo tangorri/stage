@@ -20,21 +20,20 @@ export class HomePage {
   password: string;
 
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private firebase: Firebase, private afAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private firebase: Firebase, public afAuth: AngularFireAuth) {
     console.log('se connecter avec: admin@admin.fr   mdp: admin1');
     console.log('ou avec: livreur@livreur.fr   mdp: livreur');
   }
 
   connexion() {
-    firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-    // Handle Errors here.
-    var errorMessage = error.message;
-    alert(errorMessage);
-    // ...
-    })
-    .then((result) => {
-      this.navCtrl.push(AccueilPage);
+     let thisClass = this; 
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then((result) => {
+      /* thisClass.navCtrl.push(AccueilPage); */
       console.log('Vous êtes bien connecté !'); 
+      thisClass.navCtrl.push(AccueilPage);
+    },
+    function(e) {
+      console.log('n\'existe pas');
     });
   }
 

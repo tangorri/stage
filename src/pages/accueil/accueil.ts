@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Firebase } from '@ionic-native/firebase';
+
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app'; 
+import { AngularFireDatabase } from 'angularfire2/database';
+
 
 
 @Component({
@@ -20,14 +21,15 @@ export class AccueilPage {
   expediteur: string; 
   destinataire: string; 
 
-  constructor(public navCtrl: NavController , private firebase: Firebase, private afAuth: AngularFireAuth ) {
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase ) {
 
-    /* var userId = firebase.auth().currentUser.uid;
-    console.log(userId);
-    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-      var username = snapshot.val().username;
-      console.log(username);
-    });  */
+    var userId = afAuth.auth.currentUser.uid;
+    console.log('userId: '+userId);
+
+    dbAf.database.ref('/objects/1/').once('value').then(function(snapshot) {
+      var designation = snapshot.val().designation;
+      console.log('designation: '+designation);
+    }); 
 
   }
     
