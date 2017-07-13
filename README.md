@@ -3,7 +3,6 @@
 Developpement d'une appli mobile destinée à la gestion des livraisons.
 Réalisée avec Ionic 3 et Android Studio, utilisation de Firebase
 
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
 ## How to use this template
 
@@ -23,9 +22,6 @@ $ ionic start myTabs tabs
 Then, to run it, cd into `myTabs` and run:
 
 ```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+$ ionic cordova platform add android
+$ ionic cordova run android
 ```
-
-Substitute ios for android if not on a Mac.
-
