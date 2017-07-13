@@ -1,4 +1,4 @@
-#Projet Stage Etcheverry-Hariscain
+# Projet Stage Etcheverry-Hariscain
 
 Developpement d'une appli mobile destinée à la gestion des livraisons.
 Réalisée avec Ionic 3 et Android Studio, utilisation de Firebase
