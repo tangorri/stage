@@ -15,11 +15,17 @@ export class AccueilPage {
 /*   email: string;
   password: string; */
 
-
   constructor(public navCtrl: NavController , private firebase: Firebase, private afAuth: AngularFireAuth ) {
 
-  }
+    var userId = firebase.auth().currentUser.uid;
+    console.log(userId);
+    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+      var username = snapshot.val().username;
+      console.log(username);
+    }); 
 
+  }
+    
 
 
 }
