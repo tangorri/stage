@@ -13,27 +13,27 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AccueilPage {
 
-  reference: number;
+  /* reference: number;
   designation: string;
   quantite: number;
   poids: number;
   prix: number;
   expediteur: string; 
-  destinataire: string; 
+  destinataire: string;  */
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase ) {
 
     var userId = afAuth.auth.currentUser.uid;
     console.log('userId: '+userId);
 
-    dbAf.database.ref('/objects/1/').once('value').then(function(snapshot) {
-      var designation = snapshot.val().designation;
-      console.log('designation: '+designation);
+    dbAf.database.ref('/users/'+ userId).once('value').then(function(snapshot) {
+      var username = snapshot.val().username;
+      console.log('username: '+username);
     }); 
 
   }
     
-  public setObject(): void {
+  /* public setObject(): void {
     console.log('reference : ' + this.reference);
     console.log('designation : ' + this.designation);
     console.log('quantite : ' + this.quantite);
@@ -49,7 +49,7 @@ export class AccueilPage {
           ' prix : ' + this.prix +
           ' expediteur : ' + this.expediteur +
           ' destinataire : ' + this.destinataire);
-  }
+  } */
 
 
 }
