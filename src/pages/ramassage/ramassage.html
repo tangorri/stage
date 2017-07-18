@@ -7,5 +7,43 @@
 </ion-header>
 
 <ion-content padding>
+    <h2>Ajouter une marchandise :</h2>
+
+    <ion-item>
+        <ion-label stacked>Référence</ion-label>
+        <ion-input type="number" [(ngModel)]="reference"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Designation</ion-label>
+        <ion-input type="text" [(ngModel)]="designation"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Quantité</ion-label>
+        <ion-input type="number" [(ngModel)]="quantite"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Poids (en kg)</ion-label>
+        <ion-input type="number" [(ngModel)]="poids"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Prix TTC (en €)</ion-label>
+        <ion-input type="number" [(ngModel)]="prix"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Expediteur</ion-label>
+        <ion-input type="text" [(ngModel)]="expediteur"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Destinataire</ion-label>
+        <ion-input type="text" [(ngModel)]="destinataire"></ion-input>
+    </ion-item>
+
+    <button ion-button full color="primary" (tap)="setObject()">Ajouter une marchandise</button>
 
 </ion-content>
