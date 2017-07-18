@@ -5,6 +5,12 @@ import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
+// Pages
+import { RamassagePage } from '../ramassage/ramassage';
+import { EchangePage } from '../echange/echange';
+import { LivraisonPage } from '../livraison/livraison';
+import { InventairePage } from '../inventaire/inventaire';
+
 // modèle pour User
 class User {
   username:string;
@@ -37,5 +43,24 @@ export class AccueilPage {
 
   }
 
+  addBL() {
+    let thisClass = this; 
+    thisClass.navCtrl.push(RamassagePage);
+  };
+
+  updateBL() {
+    let thisClass = this; 
+    thisClass.navCtrl.push(EchangePage);
+  };
+
+  deleteBL() {
+    let thisClass = this; 
+    thisClass.navCtrl.push(LivraisonPage);
+  };
+
+  showBL() {
+    let thisClass = this; 
+    thisClass.navCtrl.push(InventairePage);
+  };
 
 }

@@ -5,5 +5,35 @@
 </ion-header>
 
 <ion-content padding>
+    <h2>Afficher les bons de livraison :</h2>
+
+    <ul>
+        <li *ngFor="let item of items | async">
+            <div>
+                référence : {{ marchandise.reference }}
+            </div>
+            <div>
+                désignation : {{ marchandise.designation }}
+            </div>
+            <div>
+                quantité : {{ marchandise.quantite }}
+            </div>
+            <div>
+                poids (en kg) : {{ marchandise.poids }}
+            </div>
+            <div>
+                prix TTC (en €): {{ marchandise.prix }}
+            </div>
+            <div>
+                expéditeur : {{ marchandise.expediteur }}
+            </div>
+            <div>
+                destinataire : {{ marchandise.destinataire }}
+            </div>
+        </li>
+    </ul>
+
+
+
 
 </ion-content>
