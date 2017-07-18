@@ -1,25 +1,58 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Accueil</ion-title>
+        <ion-title>
+            <div id="profile">
+                <!-- User est chargé en asynchrone, on attend le flag -->
+                <div *ngIf="profileLoaded">
+                    <h2>Bonjour {{ user.username }}</h2>
+                </div>
+
+                <!-- Lors que User n'est pas chargé -->
+                <div *ngIf="!profileLoaded">
+                    <h2>Chargement ...</h2>
+                </div>
+            </div>
+        </ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <!-- <ion-img src="../../assets/img/logo.svg" alt="logo Etcheverry Hariscain Transports" id="logo" width="275" height="100"></ion-img> -->
+    <ion-list id="todo">
 
+        <ion-grid>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-card>
+                        <img src="../../assets/img/ajouter.svg" alt="icone ajouter" width="100" height="100">
+                        <h4>AJOUTER un Bon de Livraison</h4>
+                    </ion-card>
+                </ion-col>
 
-    <ion-list id="addObject">
+                <ion-col col-6>
+                    <ion-card>
+                        <img src="../../assets/img/modifier.svg" alt="icone modifier" width="100" height="100">
+                        <h4>MODIFIER un Bon de Livraison</h4>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
 
-      <!-- User est chargé en asynchrone, on attend le flag -->
-      <div *ngIf="profileLoaded">
-        <h2>Bienvenue {{ user.username }}</h2>
-      </div>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-card>
+                        <img src=" ../../assets/img/supprimer.svg " alt="icone supprimer " width="100" height="100">
+                        <h4>SUPPRIMER un Bon de Livraison</h4>
+                    </ion-card>
+                </ion-col>
 
-      <!-- Lors que User n'est pas chargé -->
-      <div *ngIf="!profileLoaded">
-        <h2>Chargement ...</h2>
-      </div>
+                <ion-col col-6>
+                    <ion-card>
+                        <img src="../../assets/img/afficher.svg" alt="icone afficher" width="100" height="100">
+                        <h4>AFFICHER les Bons de Livraison</h4>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
 
     </ion-list>
 
