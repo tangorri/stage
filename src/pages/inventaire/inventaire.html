@@ -14,26 +14,30 @@
     <div *ngIf="inventaireLoaded">
         <ul id="listeMarchandise">
             <li *ngFor="let marchandise of marchandise | async">
-                <div>
+
+                <!-- reference article -->
+                <div class="ref">
                     référence : {{ marchandise.reference }}
                 </div>
-                <div>
-                    désignation : {{ marchandise.designation }}
+
+                <!-- fiche article -->
+                <div class="fiche">
+                    désignation : <span class="result">{{ marchandise.designation }}</span>
                 </div>
-                <div>
-                    quantité : {{ marchandise.quantite }}
+                <div class="fiche">
+                    quantité : <span class="result">{{ marchandise.quantite }}</span>
                 </div>
-                <div>
-                    poids (en kg) : {{ marchandise.poids }}
+                <div class="fiche">
+                    poids (en kg) : <span class="result">{{ marchandise.poids }}</span>
                 </div>
-                <div>
-                    prix TTC (en €): {{ marchandise.prix }}
+                <div class="fiche">
+                    prix TTC (en €): <span class="result">{{ marchandise.prix }}</span>
                 </div>
-                <div>
-                    expéditeur : {{ marchandise.expediteur }}
+                <div class="fiche">
+                    expéditeur : <span class="result">{{ marchandise.expediteur }}</span>
                 </div>
-                <div>
-                    destinataire : {{ marchandise.destinataire }}
+                <div class="fiche">
+                    destinataire : <span class="result">{{ marchandise.destinataire }}</span>
                 </div>
             </li>
         </ul>
