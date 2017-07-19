@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 // modèle pour Marchandise
 class Marchandise {
@@ -23,11 +23,15 @@ class Marchandise {
 export class InventairePage {
 
   // le modèle des marchandises
-  marchandise:Object;
+  marchandise: FirebaseListObservable<any>;
   // indiquer à la vue si les données sont chargée.
   inventaireLoaded:boolean = false;
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase) {
+
+    this.marchandise = dbAf.list('/marchandise');
+    this.inventaireLoaded = true;
+     
 
   }
 

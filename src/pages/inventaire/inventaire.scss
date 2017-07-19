@@ -3,4 +3,18 @@ page-inventaire {
         background-color: lightgrey;
         color: #282828;
     }
+    #loader {
+        margin: 100px auto;
+        text-align: center;
+        color: #02a2d8;
+    }
+    #listeMarchandise li {
+        width: 80%;
+        font-size: 2rem;
+        list-style-type: none;
+        padding: 1.5rem;
+        margin: 1.5rem;
+        background-color: white;
+        border: 2px solid black;
+    }
 }
