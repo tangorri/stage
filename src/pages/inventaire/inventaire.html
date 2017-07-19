@@ -7,6 +7,10 @@
 <ion-content padding>
     <h2>Afficher les bons de livraison :</h2>
 
+    <div *ngIf="!inventaireLoaded">
+        <h2 id="loader">Chargement ...</h2>
+    </div>
+
     <div *ngIf="inventaireLoaded">
         <ul id="listeMarchandise">
             <li *ngFor="let marchandise of marchandise | async">
@@ -35,9 +39,6 @@
         </ul>
     </div>
 
-    <div *ngIf="!inventaireLoaded">
-        <h2 id="loader">Chargement ...</h2>
-    </div>
 
 
 
