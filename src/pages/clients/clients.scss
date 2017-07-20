@@ -3,4 +3,35 @@ page-clients {
         background-color: lightgrey;
         color: #282828;
     }
+    #loader {
+        margin: 100px auto;
+        text-align: center;
+        color: #059dfc;
+    }
+    #listeClient li {
+        display: inline-block;
+        width: 30%;
+        font-size: 1.8rem;
+        list-style-type: none;
+        /* padding: 1.5rem; */
+        margin: 1.5rem;
+        background-color: white;
+        /* border: 2px solid black; */
+    }
+    #listeClient .numClient {
+        background-color: #b425ed;
+        color: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        /* padding-right: 1rem; */
+    }
+    #listeClient .fiche {
+        padding: 1rem;
+    }
+    #listeClient .result {
+        display: block;
+        float: right;
+        font-size: 2rem;
+        font-weight: bold;
+    }
 }

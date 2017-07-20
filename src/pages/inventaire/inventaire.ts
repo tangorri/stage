@@ -28,8 +28,8 @@ class Client {
   selector: 'page-inventaire',
   templateUrl: 'inventaire.html'
 })
-export class InventairePage {
 
+export class InventairePage {
   // le modèle des marchandises
   marchandise: FirebaseListObservable<any>;
   // le modèle des clients
@@ -45,7 +45,7 @@ export class InventairePage {
     
     setTimeout(() => { 
       this.inventaireLoaded = true;
-      }, 3000);
+      }, 2000);
      
 
   }

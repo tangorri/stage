@@ -6,4 +6,55 @@
 
 <ion-content padding>
 
+    <div *ngIf="!clientsLoaded">
+        <h2 id="loader">Chargement ...</h2>
+    </div>
+
+    <div *ngIf="clientsLoaded">
+        <ul id="listeClient">
+            <li *ngFor="let client of client | async">
+
+                <!-- reference article -->
+                <div class="numClient">
+                    Numéro Client :
+                    <span class="result">{{ client.id }}</span>
+                </div>
+
+                <!-- fiche article -->
+                <div class="fiche">
+                    Nom :
+                    <span class="result">{{ client.nom_client }}</span>
+                </div>
+                <div class="fiche">
+                    Type :
+                    <span class="result">{{ client.type }}</span>
+                </div>
+                <div class="fiche">
+                    Nom Contact :
+                    <span class="result">{{ client.nomContact }}</span>
+                </div>
+                <div class="fiche">
+                    Adresse :
+                    <span class="result">{{ client.adresse }}</span>
+                </div>
+                <div class="fiche">
+                    Code Postal :
+                    <span class="result">{{ client.codePostal }}</span>
+                </div>
+                <div class="fiche">
+                    Ville :
+                    <span class="result">{{ client.ville }}</span>
+                </div>
+                <div class="fiche">
+                    Telephone :
+                    <span class="result">{{ client.tel }}</span>
+                </div>
+                <div class="fiche">
+                    Mail :
+                    <span class="result">{{ client.mail }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
 </ion-content>
