@@ -42,9 +42,10 @@ export class InventairePage {
 
     this.marchandise = dbAf.list('/marchandise');
     this.client = dbAf.list('/clients');
-    if(this.marchandise && this.client) {
+    
+    setTimeout(() => { 
       this.inventaireLoaded = true;
-    };
+      }, 3000);
      
 
   }
