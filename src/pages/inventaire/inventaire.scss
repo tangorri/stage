@@ -9,7 +9,8 @@ page-inventaire {
         color: #02a2d8;
     }
     #listeMarchandise li {
-        width: 33%;
+        display: inline-block;
+        width: 30%;
         font-size: 1.8rem;
         list-style-type: none;
         padding: 1.5rem;
@@ -21,14 +22,13 @@ page-inventaire {
         background-color: #282828;
         color: lightgrey;
         padding: 1rem;
-        text-align: right;
         margin-bottom: 1rem;
         padding-right: 1rem;
     }
     #listeMarchandise .fiche {
         padding: 1rem;
     }
-    #listeMarchandise .fiche .result {
+    #listeMarchandise .result {
         display: block;
         float: right;
         font-size: 2rem;
