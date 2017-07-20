@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 // modèle pour Marchandise
 class Marchandise {
@@ -19,10 +19,11 @@ class Marchandise {
   selector: 'page-ramassage',
   templateUrl: 'ramassage.html'
 })
+
 export class RamassagePage {
 
   // le modèle des marchandises
-  marchandise: FirebaseListObservable<any>;
+  marchandise: FirebaseObjectObservable<any>; 
   reference: number;
   designation: string;
   quantite: number;
@@ -33,18 +34,15 @@ export class RamassagePage {
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase) {
 
-      /* const Marchandise = this.dbAf.object('/marchandise');
-      console.log(Marchandise); 
-      
-      Marchandise.push({ 
-        reference: this.reference,
-        designation: this.designation,
-        quantite: this.quantite,
-        poids: this.poids,
-        prix: this.prix,
-        expediteur: this.expediteur,
-        destinataire: this.destinataire
-      }); */
+    const marchandise = dbAf.object('/marchandise');
+    console.log(marchandise);
+    
   }
+
+  save(newRef: number) {
+    /* let thisClass = this; */
+    this.marchandise.set({ reference: newRef });
+  }
+
 
 }
