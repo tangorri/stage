@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Loader } from '../../services/loader/loader';
 
 @Component({
   selector: 'page-echange',
@@ -7,7 +8,7 @@ import { NavController } from 'ionic-angular';
 })
 export class EchangePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public loader: Loader) {
 
   }
 

@@ -1,0 +1,19 @@
+service-loader {
+    #loader {
+        width: 600px;
+        height: 200px;
+        margin: 200px auto;
+        margin-bottom: 600px;
+        background-color: #282828;
+        h2 {
+            text-align: center;
+            color: #2271ea;
+            font-size: 3rem;
+            padding-top: 50px;
+        }
+        img {
+            display: block;
+            margin: 2rem auto;
+        }
+    }
+}

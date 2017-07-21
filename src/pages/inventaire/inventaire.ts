@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { Loader } from '../../services/loader/loader';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -35,19 +36,11 @@ export class InventairePage {
   // le modèle des clients
   client: FirebaseListObservable<any>;
 
-  // indiquer à la vue si les données sont chargée.
-  inventaireLoaded:boolean = false;
-
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase) {
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader) {
 
     this.marchandise = dbAf.list('/marchandise');
     this.client = dbAf.list('/clients');
     
-    setTimeout(() => { 
-      this.inventaireLoaded = true;
-      }, 2000);
-     
-
   }
 
 }

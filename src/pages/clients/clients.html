@@ -5,12 +5,8 @@
 </ion-header>
 
 <ion-content padding>
-
-    <div *ngIf="!clientsLoaded">
-        <h2 id="loader">Chargement ...</h2>
-    </div>
-
-    <div *ngIf="clientsLoaded">
+    <service-loader></service-loader>
+    <div>
         <ul id="listeClient">
             <li *ngFor="let client of client | async">
 

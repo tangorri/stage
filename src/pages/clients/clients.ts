@@ -5,6 +5,9 @@ import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
+// loader
+import { Loader } from '../../services/loader/loader';
+
 // modèle pour Clients
 class Client {
   id:number;
@@ -26,17 +29,10 @@ class Client {
 export class ClientsPage {
   // le modèle des clients
   client: FirebaseListObservable<any>;
-  // indiquer à la vue si les données sont chargée.
-  clientsLoaded:boolean = false;
-  
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader) {
 
     this.client = dbAf.list('/clients');
-
-    setTimeout(() => { 
-      this.clientsLoaded = true;
-    }, 2000);
 
   }
 

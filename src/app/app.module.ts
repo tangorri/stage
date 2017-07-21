@@ -13,17 +13,18 @@ import { ClientsPage } from '../pages/clients/clients';
 import { InventairePage } from '../pages/inventaire/inventaire';
 import { TabsPage } from '../pages/tabs/tabs';
 
-import { AlertController } from 'ionic-angular';
-
 // Native components
+import { AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Firebase } from '@ionic-native/firebase';
 
+// AngulireFire
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+// Database Config
 export const firebaseConfig = {
   apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
   authDomain: "etcheverry-hariscain.firebaseapp.com",
@@ -31,6 +32,9 @@ export const firebaseConfig = {
   storageBucket: "etcheverry-hariscain.appspot.com",
   messagingSenderId: '1053939384333'
 };
+
+// Loader
+import { Loader } from '../services/loader/loader'
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ export const firebaseConfig = {
     EchangePage,
     ClientsPage,
     InventairePage,
-    TabsPage
+    TabsPage,
+    Loader
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AlertController,
+    Loader,
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

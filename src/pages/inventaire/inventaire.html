@@ -1,17 +1,12 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Inventaire</ion-title>
+        <ion-title>Bons de livraison</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <h2>Bons de livraison :</h2>
-
-    <div *ngIf="!inventaireLoaded">
-        <h2 id="loader">Chargement ...</h2>
-    </div>
-
-    <div *ngIf="inventaireLoaded">
+    <service-loader></service-loader>
+    <div>
         <ul id="listeMarchandise">
             <li *ngFor="let marchandise of marchandise | async">
 
