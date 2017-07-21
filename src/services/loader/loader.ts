@@ -13,6 +13,6 @@ export class Loader {
     // on laisse 3sec de chargement
     setTimeout(() => { 
       this.itemsLoaded = true;
-    }, 3000);
+    }, 2500);
   }
 }

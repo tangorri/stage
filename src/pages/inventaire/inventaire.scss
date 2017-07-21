@@ -6,22 +6,6 @@ page-inventaire {
     ion-title {
         text-align: center;
     }
-    #loader {
-        width: 600px;
-        height: 200px;
-        margin: 200px auto;
-        background-color: #282828;
-        h2 {
-            text-align: center;
-            color: #2271ea;
-            font-size: 3rem;
-            padding-top: 50px;
-        }
-        img {
-            display: block;
-            margin: 2rem auto;
-        }
-    }
     #listeMarchandise li {
         display: inline-block;
         width: 30%;

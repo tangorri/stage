@@ -1,13 +1,13 @@
 service-loader {
     #loader {
-        width: 600px;
+        width: 500px;
         height: 200px;
         margin: 200px auto;
         margin-bottom: 600px;
-        background-color: #282828;
+        background-color: rgba(40, 40, 40, .6);
         h2 {
             text-align: center;
-            color: #2271ea;
+            color: white;
             font-size: 3rem;
             padding-top: 50px;
         }
