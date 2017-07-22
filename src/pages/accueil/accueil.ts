@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
+import firebase from 'firebase';
 
 
 // Pages
@@ -19,28 +20,29 @@ class User {
 
 @Component({
   selector: 'page-accueil',
-  templateUrl: 'accueil.html'
+  templateUrl: 'accueil.html',
+  providers: [UtilisateurProvider]
 })
 export class AccueilPage {
 
   // le profil de l'utilistateur
-  user:Object;
+  user: Object;
   // indiquer à la vue si les données sont chargée.
   profileLoaded:boolean = false;
 
   constructor(public navCtrl: NavController, private utilisateurProvider: UtilisateurProvider) {
 
-    /* var userId = afAuth.auth.currentUser.uid;
-    console.log('userId: '+userId);
+  
+     this.getUserName(firebase.auth().currentUser.uid);
 
-    dbAf.database.ref('/users/'+ userId).once('value').then((snapshot) => {
-      // @TODO à placer dans un Service pour le rendre accessible globalement
-      // dans  aufAuth.auth.currentUser par exemple ?
+  }
+
+  getUserName(userId) {
+    this.utilisateurProvider.getUser(userId).then(snapshot => {
       this.user = snapshot.val() as User;
       console.log('username: '+ this.user);
-      this.profileLoaded = true;
-    }); */
-
+     this.profileLoaded = true; 
+    });
   }
 
   logout() {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { AccueilPage } from '../accueil/accueil';
+import { TabsPage } from '../tabs/tabs';
 
 import { AlertController } from 'ionic-angular';
 
@@ -28,7 +28,8 @@ export class HomePage {
 
   login() {
     this.utilisateurProvider.connexion(this.email, this.password).then(authData => {
-      this.navCtrl.setRoot(AccueilPage)
+      console.log('login !');
+      this.navCtrl.setRoot(TabsPage)
     }, error => {
       console.log('erreur de connexion');
     }
