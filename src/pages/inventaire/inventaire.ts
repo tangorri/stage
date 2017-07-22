@@ -42,17 +42,8 @@ export class InventairePage {
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider ) {
 
-    var essai = {
-      "designation":"essai",
-      "expediteur":"lol"
-    }
-
-
-
-     this.marchandise = dbAf.list('/marchandise');
-     this.marchandise.push(essai);
-
-   
+    this.marchandise = dbAf.list('/marchandise');
+    
   }
 
 }

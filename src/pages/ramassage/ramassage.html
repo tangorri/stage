@@ -1,49 +1,50 @@
 <ion-header>
     <ion-navbar>
         <ion-title>
-            Ramassage
+            Nouveau bon de livraison
         </ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <h2>Ajouter un bon de livraison :</h2>
+    <ion-list id="form">
 
-    <ion-item>
-        <ion-label stacked>Référence</ion-label>
-        <ion-input type="number" #newref></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Référence</ion-label>
+            <ion-input type="number" [(ngModel)]="reference"></ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Designation</ion-label>
-        <ion-input type="text" [(ngModel)]="designation"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Designation</ion-label>
+            <ion-input type="text" [(ngModel)]="designation"></ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Quantité</ion-label>
-        <ion-input type="number" [(ngModel)]="quantite"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Quantité</ion-label>
+            <ion-input type="number" [(ngModel)]="quantite"></ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Poids (en kg)</ion-label>
-        <ion-input type="number" [(ngModel)]="poids"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Poids (en kg)</ion-label>
+            <ion-input type="number" [(ngModel)]="poids"></ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Prix TTC (en €)</ion-label>
-        <ion-input type="number" [(ngModel)]="prix"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Prix TTC (en €)</ion-label>
+            <ion-input type="number" [(ngModel)]="prix"></ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Expediteur</ion-label>
-        <ion-input type="text" [(ngModel)]="expediteur"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Expediteur</ion-label>
+            <ion-input type="text" [(ngModel)]="expediteur"></ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Destinataire</ion-label>
-        <ion-input type="text" [(ngModel)]="destinataire"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Destinataire</ion-label>
+            <ion-input type="text" [(ngModel)]="destinataire"></ion-input>
+        </ion-item>
 
-    <button ion-button full color="primary" (click)="save(newref.value)">Ajouter une marchandise</button>
+        <button ion-button full color="primary" (click)="saveBL()">Ajouter une marchandise</button>
+    </ion-list>
 
 </ion-content>

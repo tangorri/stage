@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import firebase from 'firebase';
+import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
+
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 // modèle pour Marchandise
 class Marchandise {
@@ -15,33 +18,63 @@ class Marchandise {
   destinataire:string;
 }
 
+// modèle pour Clients
+class Client {
+  nom:string;
+  adresse:string;
+  code_postal:number;
+  ville:string;
+}
+
 @Component({
   selector: 'page-ramassage',
-  templateUrl: 'ramassage.html'
+  templateUrl: 'ramassage.html',
+  providers: [UtilisateurProvider]
 })
 
 export class RamassagePage {
 
   // le modèle des marchandises
-  marchandise: FirebaseObjectObservable<any>; 
-  reference: number;
-  designation: string;
-  quantite: number;
-  poids: number;
-  prix: number;
-  expediteur: string; 
-  destinataire: string;
+  marchandise: FirebaseListObservable<any>;
+  // le modèle des clients
+  client: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase) {
+  reference:number;
+  designation:string;
+  quantite:number;
+  poids:number;
+  prix:number;
+  expediteur:string;
+  destinataire:string;
 
-    const marchandise = dbAf.object('/marchandise');
-    console.log(marchandise);
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider ) {
+
+    this.marchandise = dbAf.list('/marchandise');
     
   }
 
-  save(newRef: number) {
-    /* let thisClass = this; */
-    this.marchandise.set({ reference: newRef });
+  saveBL() {
+    var newBL = {
+      "reference": this.reference,
+      "designation": this.designation,
+      "quantite": this.quantite,
+      "poids": this.poids,
+      "prix": this.prix,
+      "expediteur": this.expediteur,
+      "destinataire": this.destinataire
+    }
+    this.marchandise.push(newBL).then( res => {
+      this.reference = null;
+      this.designation = null;
+      this.quantite = null;
+      this.poids = null;
+      this.prix = null;
+      this.expediteur = null;
+      this.destinataire = null;
+      alert('Bon de livraison ajouté avec succés');
+    }).catch(e => {
+      console.log('Une erreur est survenue');
+    });
   }
 
 
