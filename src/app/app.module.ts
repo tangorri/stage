@@ -30,7 +30,13 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // Loader
 import { Loader } from '../services/loader/loader'
 import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
-
+ export   const firebaseConfig = {
+      apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
+      authDomain: "etcheverry-hariscain.firebaseapp.com",
+      databaseURL: "https://etcheverry-hariscain.firebaseio.com",
+      storageBucket: "etcheverry-hariscain.appspot.com",
+      messagingSenderId: '1053939384333'
+    };
 @NgModule({
   declarations: [
     MyApp,
@@ -47,6 +53,7 @@ import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     HttpModule

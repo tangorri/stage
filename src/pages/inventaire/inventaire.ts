@@ -3,6 +3,9 @@ import { NavController } from 'ionic-angular';
 
 import { Loader } from '../../services/loader/loader';
 
+import firebase from 'firebase';
+import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
+
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
@@ -27,7 +30,8 @@ class Client {
 
 @Component({
   selector: 'page-inventaire',
-  templateUrl: 'inventaire.html'
+  templateUrl: 'inventaire.html',
+  providers: [UtilisateurProvider]
 })
 
 export class InventairePage {
@@ -36,11 +40,19 @@ export class InventairePage {
   // le modèle des clients
   client: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader) {
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider ) {
 
-    this.marchandise = dbAf.list('/marchandise');
-    this.client = dbAf.list('/clients');
-    
+    var essai = {
+      "designation":"essai",
+      "expediteur":"lol"
+    }
+
+
+
+     this.marchandise = dbAf.list('/marchandise');
+     this.marchandise.push(essai);
+
+   
   }
 
 }
