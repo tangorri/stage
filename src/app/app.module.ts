@@ -35,6 +35,7 @@ export const firebaseConfig = {
 
 // Loader
 import { Loader } from '../services/loader/loader'
+import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { Loader } from '../services/loader/loader'
     AlertController,
     Loader,
     Firebase,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UtilisateurProvider
   ]
 })
 export class AppModule {}
