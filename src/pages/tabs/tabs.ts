@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HomePage } from '../home/home';
-/* import { AccueilPage } from '../accueil/accueil'; */
+ import { AccueilPage } from '../accueil/accueil'; 
 import { RamassagePage } from '../ramassage/ramassage';
 import { LivraisonPage } from '../livraison/livraison';
 import { EchangePage } from '../echange/echange';
@@ -13,7 +13,7 @@ import { InventairePage } from '../inventaire/inventaire';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
+  tab1Root = AccueilPage;
   tab2Root = RamassagePage;
   tab3Root = LivraisonPage;
   tab4Root = EchangePage;

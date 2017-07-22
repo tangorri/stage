@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
@@ -24,14 +25,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-// Database Config
-export const firebaseConfig = {
-  apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
-  authDomain: "etcheverry-hariscain.firebaseapp.com",
-  databaseURL: "https://etcheverry-hariscain.firebaseio.com",
-  storageBucket: "etcheverry-hariscain.appspot.com",
-  messagingSenderId: '1053939384333'
-};
+
 
 // Loader
 import { Loader } from '../services/loader/loader'
@@ -53,9 +47,9 @@ import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

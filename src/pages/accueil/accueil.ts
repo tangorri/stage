@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
 
 // Pages
 import { RamassagePage } from '../ramassage/ramassage';
 import { EchangePage } from '../echange/echange';
 import { LivraisonPage } from '../livraison/livraison';
 import { InventairePage } from '../inventaire/inventaire';
+import { HomePage } from '../home/home';
 
 // modèle pour User
 class User {
@@ -28,9 +28,9 @@ export class AccueilPage {
   // indiquer à la vue si les données sont chargée.
   profileLoaded:boolean = false;
 
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase ) {
+  constructor(public navCtrl: NavController, private utilisateurProvider: UtilisateurProvider) {
 
-    var userId = afAuth.auth.currentUser.uid;
+    /* var userId = afAuth.auth.currentUser.uid;
     console.log('userId: '+userId);
 
     dbAf.database.ref('/users/'+ userId).once('value').then((snapshot) => {
@@ -39,8 +39,14 @@ export class AccueilPage {
       this.user = snapshot.val() as User;
       console.log('username: '+ this.user);
       this.profileLoaded = true;
-    });
+    }); */
 
+  }
+
+  logout() {
+    this.utilisateurProvider.deconnexion().then( (rep) => {
+      this.navCtrl.setRoot(HomePage);
+    });
   }
 
   addBL() {
