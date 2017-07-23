@@ -51,7 +51,8 @@ export class RamassagePage {
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
 
-    this.marchandise = dbAf.list('/marchandise');
+    var user = firebase.auth().currentUser.uid;
+    this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
     
   }
 

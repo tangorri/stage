@@ -42,8 +42,13 @@ export class InventairePage {
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider ) {
 
-    this.marchandise = dbAf.list('/marchandise');
+    var user = firebase.auth().currentUser.uid;
+    this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
     
+  }
+
+  coucou() {
+    alert('COUCOU je ne suis pas encore programmé !')
   }
 
 }

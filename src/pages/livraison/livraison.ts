@@ -42,7 +42,7 @@ export class LivraisonPage {
   }
 
   supprBL() {
-    console.log('coucou je ne suis pas encore programmé !');
+    alert('COUCOU je ne suis pas encore programmé !');
 
   }
 }

@@ -39,7 +39,7 @@ export class UtilisateurProvider {
 
   getUser(userId: any) {
     var userRef= this.userProfile.child(userId);
-    console.log('userId' + userId);
+    console.log('userId : ' + userId);
     return userRef.once('value');
   }
   

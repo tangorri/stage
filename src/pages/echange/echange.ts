@@ -30,7 +30,7 @@ export class EchangePage {
   
   modifierUnBon: boolean = false;
 
-  toUpdate: number;
+  toUpdate: any;
   reference:number;
   designation:string;
   quantite:number;
@@ -46,8 +46,15 @@ export class EchangePage {
 
     this.marchandise = dbAf.list('/marchandise');
 
-  }
+    console.log("utilisateur :" + firebase.auth().currentUser.uid);
 
+  }
+   
+
+  chooseBL() {
+    console.log("bon à modifier :"+this.toUpdate.key());
+    alert('COUCOU je ne suis pas encore programmé !');
+  }
   // Affichage formulaire du BL a modifier
   // avec champs préremplis
   /* chooseBL() {
