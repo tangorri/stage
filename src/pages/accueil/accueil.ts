@@ -53,22 +53,22 @@ export class AccueilPage {
 
   addBL() {
     let thisClass = this; 
-    thisClass.navCtrl.push(RamassagePage);
+    thisClass.navCtrl.setRoot(RamassagePage);
   };
 
   updateBL() {
     let thisClass = this; 
-    thisClass.navCtrl.push(EchangePage);
+    thisClass.navCtrl.setRoot(EchangePage);
   };
 
   deleteBL() {
     let thisClass = this; 
-    thisClass.navCtrl.push(LivraisonPage);
+    thisClass.navCtrl.setRoot(LivraisonPage);
   };
 
   showBL() {
     let thisClass = this; 
-    thisClass.navCtrl.push(InventairePage);
+    thisClass.navCtrl.setRoot(InventairePage);
   };
 
 }

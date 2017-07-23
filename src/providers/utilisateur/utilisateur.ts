@@ -20,10 +20,12 @@ export class UtilisateurProvider {
   private afAuth: any;
   private userProfile: any;
 
+
   constructor(public http: Http ) {
-    console.log('Hello UtilisateurProvider Provider');
+    /* console.log('Hello UtilisateurProvider Provider'); */
     this.afAuth = firebase.auth();
     this.userProfile = firebase.database().ref('users');
+    
 
   }
 

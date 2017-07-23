@@ -3,9 +3,11 @@ import { NavController } from 'ionic-angular';
 
 import firebase from 'firebase';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+// Pages
+import { AccueilPage } from '../accueil/accueil';
 
 // modèle pour Marchandise
 class Marchandise {
@@ -72,6 +74,7 @@ export class RamassagePage {
       this.expediteur = null;
       this.destinataire = null;
       alert('Bon de livraison ajouté avec succés');
+      this.navCtrl.setRoot(AccueilPage)
     }).catch(e => {
       console.log('Une erreur est survenue');
     });

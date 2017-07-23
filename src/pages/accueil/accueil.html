@@ -2,14 +2,14 @@
     <ion-navbar>
         <ion-title>
             <div id="profile">
-                <!-- User est chargé en asynchrone, on attend le flag -->
-                <div *ngIf="profileLoaded">
-                    <h2>Bonjour {{ user.username }}</h2>
-                </div>
 
                 <!-- Lors que User n'est pas chargé -->
                 <div *ngIf="!profileLoaded">
                     <h2>Chargement ...</h2>
+                </div>
+                <!-- User est chargé en asynchrone, on attend le flag -->
+                <div *ngIf="profileLoaded">
+                    <h2>Bonjour {{ user.username }}</h2>
                 </div>
             </div>
         </ion-title>

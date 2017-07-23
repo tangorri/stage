@@ -12,7 +12,7 @@
         <ion-select [(ngModel)]="toUpdate">
             <ion-option *ngFor="let marchandise of marchandise | async">{{ marchandise.reference }}</ion-option>
         </ion-select>
-        <button ion-button (click)="chooseBL(marchandise.$key)">valider</button>
+        <button ion-button (click)="chooseBL()">valider</button>
     </div>
     <div *ngIf="modifierUnBon">
         <ion-list id="form">

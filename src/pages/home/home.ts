@@ -3,8 +3,6 @@ import { NavController } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
 
-import { AlertController } from 'ionic-angular';
-
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 
 
@@ -21,7 +19,7 @@ export class HomePage {
   password: string;
 
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private utilisateurProvider: UtilisateurProvider) {
+  constructor(public navCtrl: NavController, private utilisateurProvider: UtilisateurProvider) {
     console.log('se connecter avec: admin@admin.fr   mdp: admin1');
     console.log('ou avec: livreur@livreur.fr   mdp: livreur');
   }
