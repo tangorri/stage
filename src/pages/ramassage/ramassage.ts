@@ -47,7 +47,7 @@ export class RamassagePage {
   expediteur:string;
   destinataire:string;
 
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider ) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
 
     this.marchandise = dbAf.list('/marchandise');
     

@@ -1,14 +1,60 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Echange</ion-title>
+        <ion-title>Modifications</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-    <service-loader></service-loader>
+    <div>
+        <ion-label>Quel bon de livraison voulez vous modifier ?</ion-label>
+        <ion-select [(ngModel)]="toUpdate">
+            <ion-option *ngFor="let marchandise of marchandise | async">{{ marchandise.reference }}</ion-option>
+        </ion-select>
+        <button ion-button (click)="chooseBL(item.$key)">valider</button>
+    </div>
+    <div *ngIf="modifierUnBon">
+        <ion-list id="form">
 
-    <h2>Modifier un bon de livraison :</h2>
+            <ion-item>
+                <ion-label stacked>Référence</ion-label>
+                <ion-input type="number" [(ngModel)]="newReference">{{ reference }}</ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Designation</ion-label>
+                <ion-input type="text" [(ngModel)]="newDesignation" value="">{{ designation }}</ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Quantité</ion-label>
+                <ion-input type="number" [(ngModel)]="newQuantite" value="">{{ quantite }}</ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Poids (en kg)</ion-label>
+                <ion-input type="number" [(ngModel)]="newPoids" value="">{{ poids }}</ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Prix TTC (en €)</ion-label>
+                <ion-input type="number" [(ngModel)]="newPrix" value="">{{ prix }}</ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Expediteur</ion-label>
+                <ion-input type="text" [(ngModel)]="newExpediteur" value="">{{ expediteur }}</ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Destinataire</ion-label>
+                <ion-input type="text" [(ngModel)]="newDestinataire" value="">{{ destinataire }}</ion-input>
+            </ion-item>
+
+            <button ion-button full color="primary" (click)="saveBL()">Modifier Le Bon de Livraison</button>
+        </ion-list>
+
+    </div>
 
 </ion-content>
