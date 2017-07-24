@@ -2,13 +2,17 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
+// Services
 import { Loader } from '../../services/loader/loader';
-
-import firebase from 'firebase';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 
+// Firebase
+import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+// Pages
+import { EchangePage } from "../echange/echange";
 
 // modèle pour Marchandises
 class Marchandise {
@@ -53,8 +57,8 @@ export class InventairePage {
   suppr(key:string) {
     // Confirmer la suppression
     let confirm = this.alertCtrl.create({
-      title: 'SUPPRIMER ?',
-      message: 'Etes vous vraiment sûr de vouloir supprimer ce bon de livraison ?',
+      title: 'SUPPRIMER',
+      message: 'La suppression sera définitive, êtes vous vraiment sûr de vouloir supprimer ce bon de livraison ?',
       buttons: [
         {
           text: 'Annuler',
@@ -72,6 +76,30 @@ export class InventairePage {
             .catch(error => {
               console.log( "Une erreur est survenue !");
             });
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }; 
+
+  modifier(key:string) {
+    // Confirmer la modif
+    let confirm = this.alertCtrl.create({
+      title: 'MODIFIER',
+      message: 'Voulez vous bien modifier ce bon ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Modifier',
+          handler: () => {
+            // Rediriger vers formulaire de modification
+            this.navCtrl.push(EchangePage, {key:key});
           }
         }
       ]
