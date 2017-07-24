@@ -43,16 +43,18 @@ export class RamassagePage {
 
   reference:number;
   designation:string;
-  quantite:number;
-  poids:number;
-  prix:number;
-  expediteur:string;
-  destinataire:string;
+  quantite:string = " ";
+  poids:string = " ";
+  prix:string = " ";
+  expediteur:string = " ";
+  destinataire:string = " ";
+
+  user:string;
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
 
-    var user = firebase.auth().currentUser.uid;
-    this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
+    this.user = firebase.auth().currentUser.uid;
+    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
     
   }
 
@@ -64,7 +66,9 @@ export class RamassagePage {
       "poids": this.poids,
       "prix": this.prix,
       "expediteur": this.expediteur,
-      "destinataire": this.destinataire
+      "destinataire": this.destinataire,
+      "dateRamassage": Date.now(),
+      "chauffeurId": this.user
     }
     this.marchandise.push(newBL).then( res => {
       this.reference = null;
