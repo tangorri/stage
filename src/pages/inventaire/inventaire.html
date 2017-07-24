@@ -8,42 +8,42 @@
     <service-loader></service-loader>
     <div>
         <ul id="listeMarchandise">
-            <li *ngFor="let marchandise of marchandise | async">
+            <li *ngFor="let marchandis of marchandise | async">
 
                 <!-- reference article -->
                 <div class="ref">
                     Référence :
-                    <span class="result">{{ marchandise.reference }}</span>
+                    <span class="result">{{ marchandis.reference }}</span>
                 </div>
 
                 <!-- fiche article -->
                 <div class="fiche">
                     Désignation :
-                    <span class="result">{{ marchandise.designation }}</span>
+                    <span class="result">{{ marchandis.designation }}</span>
                 </div>
                 <div class="fiche">
                     Quantité :
-                    <span class="result">{{ marchandise.quantite }}</span>
+                    <span class="result">{{ marchandis.quantite }}</span>
                 </div>
                 <div class="fiche">
                     Poids (en kg) :
-                    <span class="result">{{ marchandise.poids }}</span>
+                    <span class="result">{{ marchandis.poids }}</span>
                 </div>
                 <div class="fiche">
                     Prix TTC (en €):
-                    <span class="result">{{ marchandise.prix }}</span>
+                    <span class="result">{{ marchandis.prix }}</span>
                 </div>
                 <div class="fiche">
                     Expéditeur :
-                    <span class="result">{{ marchandise.expediteur }}</span>
+                    <span class="result">{{ marchandis.expediteur }}</span>
                 </div>
                 <div class="fiche">
                     Destinataire :
-                    <span class="result">{{ marchandise.destinataire }}</span>
+                    <span class="result">{{ marchandis.destinataire }}</span>
                 </div>
                 <div class="action">
-                    <img (click)="coucou()" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
-                    <img (click)="coucou()" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
+                    <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
+                    <img (click)="suppr(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
                 </div>
             </li>
         </ul>
