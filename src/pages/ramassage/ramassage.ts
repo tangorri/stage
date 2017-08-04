@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { NgForm } from '@angular/forms';
 
 import firebase from 'firebase';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
@@ -9,16 +10,9 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 // Pages
 import { AccueilPage } from '../accueil/accueil';
 
-// modèle pour Marchandise
-class Marchandise {
-  reference:number;
-  designation:string;
-  quantite:number;
-  poids:number;
-  prix:number;
-  expediteur:string;
-  destinataire:string;
-}
+
+//Modèle
+import { Marchandise } from '../../modeles/marchandise.modele';
 
 // modèle pour Clients
 class Client {
@@ -41,15 +35,9 @@ export class RamassagePage {
   // le modèle des clients
   client: FirebaseListObservable<any>;
 
-  reference:number;
-  designation:string;
-  quantite:string = " ";
-  poids:string = " ";
-  prix:string = " ";
-  expediteur:string = " ";
-  destinataire:string = " ";
+  marchandiseBinding : any;
 
-  user:string;
+  user:any;
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
 
@@ -58,32 +46,25 @@ export class RamassagePage {
     
   }
 
-  saveBL() {
-    var newBL = {
-      "reference": this.reference,
-      "designation": this.designation,
-      "quantite": this.quantite,
-      "poids": this.poids,
-      "prix": this.prix,
-      "expediteur": this.expediteur,
-      "destinataire": this.destinataire,
-      "dateRamassage": Date.now(),
-      "chauffeurId": this.user
+   saveBL(bl) {
+
+    this.marchandiseBinding = bl.value as Marchandise;
+    this.marchandiseBinding.dateRamassage = Date.now();
+    console.log(this.marchandiseBinding);
+    for(let cle in this.marchandiseBinding) {
+      if (this.marchandiseBinding[cle] === undefined) {
+        delete this.marchandiseBinding[cle];
+        console.log("coucou"+cle);
+      }
     }
-    this.marchandise.push(newBL).then( res => {
-      this.reference = null;
-      this.designation = null;
-      this.quantite = null;
-      this.poids = null;
-      this.prix = null;
-      this.expediteur = null;
-      this.destinataire = null;
+
+    this.marchandise.push(this.marchandiseBinding).then( res => {
       alert('Bon de livraison ajouté avec succés');
       this.navCtrl.setRoot(AccueilPage)
     }).catch(e => {
       console.log('Une erreur est survenue');
-    });
-  }
+    }); 
+  } 
 
 
 }

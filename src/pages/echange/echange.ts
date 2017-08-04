@@ -5,23 +5,14 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 //Pages
 import { InventairePage } from '../inventaire/inventaire';
+import { AccueilPage } from '../accueil/accueil';
 
-// modèle pour Marchandise
-class Marchandise {
-  reference:number;
-  designation:string;
-  quantite:number;
-  poids:number;
-  prix:number;
-  expediteur:string;
-  destinataire:string;
-}
-
-
+//Modèle
+import { Marchandise } from '../../modeles/marchandise.modele';
 
 @Component({
   selector: 'page-echange',
@@ -30,39 +21,33 @@ class Marchandise {
 })
 export class EchangePage {
 
-
-  reference:string = " ";
-  designation:string = " ";
-  quantite:string = " ";
-  poids:string = " ";
-  prix:string = " ";
-  expediteur:string = " ";
-  destinataire:string = " ";
-  key:string = " ";
-  user:string = " ";
-
   // le modèle des marchandises
-  marchandise: FirebaseListObservable<any>;
+  marchandise: FirebaseObjectObservable<any>;
+  key:string;
+  user:any;
+  marchandiseBinding : object;
+
 
   constructor( public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
 
-      this.key = navParams.get("key");
-      console.log("key:"+this.key);
+    // On récupère l'id de l'utilisateur en cours
+    this.user = firebase.auth().currentUser.uid;
+    console.log(this.user);
 
-      var user = firebase.auth().currentUser.uid;
+    // On récupère l'id du bon de livraison à modifier
+    this.key = navParams.get("key");
+    console.log("key:"+this.key);
 
-      this.marchandise = dbAf.list('/users/' + user + '/cargaison/', {
-        query : {
-          equalTo: this.key
-        }
-      });
+    // On se connecte à la base de donnée sur l'élément à modifier
+    this.marchandise = dbAf.object('/users/' + this.user + '/cargaison/' + this.key);
+    this.marchandise.subscribe(res => {
+      this.marchandiseBinding = res as Marchandise;
+    });
 
-
-      /* var bl = this.marchandise.forEach */
-      console.log("ref: ");
-  }
-    updateBL() {
-          // Confirmer la modif
+  } 
+  
+   updateBL() {
+    // Confirmer la modif
     let confirm = this.alertCtrl.create({
       title: 'MODIFIER',
       message: 'Voulez vous bien modifier ce bon ?',
@@ -76,19 +61,11 @@ export class EchangePage {
         {
           text: 'Modifier',
           handler: () => {
-            var newBL = {
-              "reference": this.reference,
-              "designation": this.designation,
-              "quantite": this.quantite,
-              "poids": this.poids,
-              "prix": this.prix,
-              "expediteur": this.expediteur,
-              "destinataire": this.destinataire,
-              "chauffeurId": this.user
-            }
+
             //Modifier le bon
-            this.marchandise.update(this.key, newBL).then(res => {
+            this.marchandise.update(this.marchandiseBinding).then(res => {
               alert("Le bon à bien été modifié");
+              this.navCtrl.setRoot(AccueilPage);
             }).catch(e => {
               console.log("Une erreur est survenue");
             })
@@ -96,8 +73,8 @@ export class EchangePage {
         }
       ]
     });
-    confirm.present();
-    }
+    confirm.present(); 
+  }
   
   
 
