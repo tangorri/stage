@@ -12,11 +12,15 @@
 
                 <!-- reference article -->
                 <div class="ref">
-                    Référence :
-                    <span class="result">{{ marchandis.reference }}</span>
+                    Destinataire :
+                    <span class="result">{{ marchandis.destinataire }}</span>
                 </div>
 
                 <!-- fiche article -->
+                <div class="fiche">
+                    Expéditeur :
+                    <span class="result">{{ marchandis.expediteur }}</span>
+                </div>
                 <div class="fiche">
                     Désignation :
                     <span class="result">{{ marchandis.designation }}</span>
@@ -33,14 +37,7 @@
                     Prix TTC (en €):
                     <span class="result">{{ marchandis.prix }}</span>
                 </div>
-                <div class="fiche">
-                    Expéditeur :
-                    <span class="result">{{ marchandis.expediteur }}</span>
-                </div>
-                <div class="fiche">
-                    Destinataire :
-                    <span class="result">{{ marchandis.destinataire }}</span>
-                </div>
+
                 <div class="action">
                     <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
                     <img (click)="suppr(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">

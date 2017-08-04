@@ -14,17 +14,9 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 // Pages
 import { EchangePage } from "../echange/echange";
 
-// modèle pour Marchandises
-class Marchandise {
-  key:string;
-  reference:number;
-  designation:string;
-  quantite:number;
-  poids:number;
-  prix:number;
-  expediteur:string;
-  destinataire:string;
-}
+
+//Modèle
+import { Marchandise } from '../../modeles/marchandise.modele';
 
 // modèle pour Clients
 class Client {

@@ -10,40 +10,45 @@
     <form #newBl="ngForm" (ngSubmit)="saveBL(newBl)">
         <ion-list id="form">
 
-            <ion-item>
-                <ion-label stacked>Référence</ion-label>
-                <ion-input type="number" [(ngModel)]="reference" name="reference"></ion-input>
-            </ion-item>
+            <ion-row>
+                <ion-item>
+                    <ion-label stacked>Expediteur</ion-label>
+                    <ion-input type="text" [(ngModel)]="expediteur" name="expediteur"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label stacked>Destinataire</ion-label>
+                    <ion-input type="text" [(ngModel)]="destinataire" name="destinataire"></ion-input>
+                </ion-item>
+            </ion-row>
 
             <ion-item>
                 <ion-label stacked>Designation</ion-label>
                 <ion-input type="text" [(ngModel)]="designation" name="designation"></ion-input>
             </ion-item>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label fixed>Quantité</ion-label>
+                        <ion-input type="number" [(ngModel)]="quantite" name="quantite"></ion-input>
+                    </ion-item>
+                </ion-col>
 
-            <ion-item>
-                <ion-label stacked>Quantité</ion-label>
-                <ion-input type="number" [(ngModel)]="quantite" name="quantite"></ion-input>
-            </ion-item>
+                <ion-col>
+                    <ion-item>
+                        <ion-label fixed>Poids (en kg)</ion-label>
+                        <ion-input type="number" [(ngModel)]="poids" name="poids"></ion-input>
+                    </ion-item>
+                </ion-col>
 
-            <ion-item>
-                <ion-label stacked>Poids (en kg)</ion-label>
-                <ion-input type="number" [(ngModel)]="poids" name="poids"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label stacked>Prix TTC (en €)</ion-label>
-                <ion-input type="number" [(ngModel)]="prix" name="prix"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label stacked>Expediteur</ion-label>
-                <ion-input type="text" [(ngModel)]="expediteur" name="expediteur"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label stacked>Destinataire</ion-label>
-                <ion-input type="text" [(ngModel)]="destinataire" name="destinataire"></ion-input>
-            </ion-item>
+                <ion-col>
+                    <ion-item>
+                        <ion-label fixed>Prix TTC (€)</ion-label>
+                        <ion-input type="number" [(ngModel)]="prix" name="prix"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
 
             <button ion-button full color="primary">Ajouter une marchandise</button>
         </ion-list>
