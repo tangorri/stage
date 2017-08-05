@@ -32,6 +32,14 @@ page-inventaire {
         font-size: 2rem;
         font-weight: bold;
     }
+    #listeMarchandise li .adresse {
+        display: block;
+        width: 90%;
+        background-color: #2271ea;
+        clear: both;
+        text-align: right;
+        font-size: 1.5rem;
+    }
     .action {
         width: 100%;
         background-color: #f3f3f3;

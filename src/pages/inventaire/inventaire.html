@@ -12,8 +12,13 @@
 
                 <!-- reference article -->
                 <div class="ref">
-                    Destinataire :
-                    <span class="result">{{ marchandis.destinataire }}</span>
+                    <div>
+                        Destinataire :
+                        <span class="result">{{ marchandis.destinataire }}</span>
+                    </div>
+                    <li class="adresse" *ngFor="let adress of client | async">
+                        {{ adress.adresse }} {{ adress.codePostal }} {{ adress.ville }}
+                    </li>
                 </div>
 
                 <!-- fiche article -->

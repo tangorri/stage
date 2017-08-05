@@ -17,14 +17,7 @@ import { EchangePage } from "../echange/echange";
 
 //Modèle
 import { Marchandise } from '../../modeles/marchandise.modele';
-
-// modèle pour Clients
-class Client {
-  nom:string;
-  adresse:string;
-  code_postal:number;
-  ville:string;
-}
+import { Client } from '../../modeles/client.modele';
 
 @Component({
   selector: 'page-inventaire',
@@ -33,16 +26,21 @@ class Client {
 })
 
 export class InventairePage {
-  // le modèle des marchandises
+  // Modèles
   marchandise: any;
-  // le modèle des clients
-  client: FirebaseListObservable<any>;
+  client: any;
 
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController) {
 
     var user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
+    this.client = dbAf.list('/clients/',{
+      query: {
+        equalTo: this.marchandise.destinataire
+      }
+    });
+    console.log("client:"+this.client);
     
   }
 
