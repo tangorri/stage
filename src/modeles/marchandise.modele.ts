@@ -9,4 +9,5 @@ export class Marchandise {
   expediteur:string;
   destinataire:string;
   dateRamassage:string;
+  CR:boolean;
 }

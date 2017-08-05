@@ -42,6 +42,9 @@
                     Prix TTC (en €):
                     <span class="result">{{ marchandis.prix }}</span>
                 </div>
+                <div class="fiche" *ngIf="marchandis.CR == true">
+                    <span id="cr">!! Avec Contre Remboursement !!</span>
+                </div>
 
                 <div class="action">
                     <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
