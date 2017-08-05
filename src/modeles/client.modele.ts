@@ -1,5 +1,5 @@
 // modèle pour Clients
-export class Clients {
+export class Client {
   idFacturation:string;
   raisonSociale:string;
   nomContact:string;
