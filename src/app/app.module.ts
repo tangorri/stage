@@ -28,7 +28,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 // Loader
-import { Loader } from '../services/loader/loader'
+import { Loader } from '../providers/loader/loader'
 import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
  export   const firebaseConfig = {
       apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
@@ -77,7 +77,7 @@ import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
     Loader,
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UtilisateurProvider
+    UtilisateurProvider,
   ]
 })
 export class AppModule {}

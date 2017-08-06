@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 // Services
-import { Loader } from '../../services/loader/loader';
+import { Loader } from '../../providers/loader/loader';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 
 // Firebase
@@ -106,14 +106,17 @@ export class InventairePage {
     confirm.present();
   }; 
 
+  delivered(key:string) {
+    console.log('livré');
+    
+  }; 
 
-  /* modifier(key:string) {
-    this.marchandise.update(key).then(snapshot => {
-      console.log( "Ce bon de livraison n°" + this.marchandise.reference + "à bien été modifié");
-    })
-    .catch(error => {
-      console.log( "Une erreur est survenue !");
-    }) */
+  geoloc(key:string) {
+    console.log('geoloc');
+  }; 
+
+
+
 
 
 }

@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 // loader
-import { Loader } from '../../services/loader/loader';
+import { Loader } from '../../providers/loader/loader';
 
 // modèle pour Clients
 class Client {
