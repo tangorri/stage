@@ -16,9 +16,9 @@
                         Destinataire :
                         <span class="result">{{ marchandis.destinataire }}</span>
                     </div>
-                    <li class="adresse" *ngFor="let adress of client | async">
-                        {{ adress.adresse }} {{ adress.codePostal }} {{ adress.ville }}
-                    </li>
+                    <div class="adresse" *ngIf="marchandis.destinataire === clientName">
+                        {{ clientAdress }}
+                    </div>
                 </div>
 
                 <!-- fiche article -->

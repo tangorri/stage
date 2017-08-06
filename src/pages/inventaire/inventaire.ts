@@ -29,18 +29,27 @@ export class InventairePage {
   // Modèles
   marchandise: any;
   client: any;
+  clientName: string;
+  clientAdress: string;
 
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController) {
 
     var user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
-    this.client = dbAf.list('/clients/',{
-      query: {
-        equalTo: this.marchandise.destinataire
-      }
+
+    this.client = dbAf.list('/clients/', { preserveSnapshot: true });
+    this.client.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        this.clientName = snapshot.key;
+        this.client = snapshot.val() as Client;
+        this.clientAdress = this.client.adresse + ', ' + this.client.codePostal + ' ' + this.client.ville;
+        console.log(this.client);
+        console.log("nom: "+this.clientName);
+        console.log("adresse: "+this.clientAdress);
+        
+      });
     });
-    console.log("client:"+this.client);
     
   }
 

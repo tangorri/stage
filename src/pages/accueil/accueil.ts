@@ -40,7 +40,7 @@ export class AccueilPage {
   getUserName(userId) {
     this.utilisateurProvider.getUser(userId).then(snapshot => {
       this.user = snapshot.val() as User;
-      console.log('username: '+ this.user);
+      console.log(this.user);
      this.profileLoaded = true; 
     });
   }

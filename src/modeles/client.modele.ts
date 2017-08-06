@@ -1,7 +1,7 @@
 // modèle pour Clients
 export class Client {
   idFacturation:string;
-  raisonSociale:string;
+  nom_client:string;
   nomContact:string;
   telephone:number;
   adresse:string;
