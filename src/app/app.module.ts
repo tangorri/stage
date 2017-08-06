@@ -25,18 +25,21 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+// Connexion Firebase
+export const firebaseConfig = {
+  apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
+  authDomain: "etcheverry-hariscain.firebaseapp.com",
+  databaseURL: "https://etcheverry-hariscain.firebaseio.com",
+  storageBucket: "etcheverry-hariscain.appspot.com",
+  messagingSenderId: '1053939384333'
+};
 
-
-// Loader
+// Services
 import { Loader } from '../providers/loader/loader'
 import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
- export   const firebaseConfig = {
-      apiKey: "AIzaSyDP8kdmMVaJ_HY6XZu75AsKcWnAaiTdAN8",
-      authDomain: "etcheverry-hariscain.firebaseapp.com",
-      databaseURL: "https://etcheverry-hariscain.firebaseio.com",
-      storageBucket: "etcheverry-hariscain.appspot.com",
-      messagingSenderId: '1053939384333'
-    };
+
+
+
 @NgModule({
   declarations: [
     MyApp,
