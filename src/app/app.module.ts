@@ -13,6 +13,7 @@ import { EchangePage } from '../pages/echange/echange';
 import { ClientsPage } from '../pages/clients/clients';
 import { InventairePage } from '../pages/inventaire/inventaire';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SignatureModalPage } from '../pages/signature-modal/signature-modal';
 
 // Native components
 import { AlertController } from 'ionic-angular';
@@ -37,6 +38,7 @@ export const firebaseConfig = {
 // Services
 import { Loader } from '../providers/loader/loader'
 import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 
 
@@ -51,6 +53,7 @@ import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
     ClientsPage,
     InventairePage,
     TabsPage,
+    SignatureModalPage,
     Loader
   ],
   imports: [
@@ -59,6 +62,7 @@ import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    SignaturePadModule,
     HttpModule
   ],
   bootstrap: [IonicApp],
@@ -71,7 +75,8 @@ import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
     EchangePage,
     ClientsPage,
     InventairePage,
-    TabsPage
+    TabsPage,
+    SignatureModalPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>signature-modal</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <signature-pad [options]="signaturePadOptions"></signature-pad>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4>
+                <button ion-button full color="danger" (click)="drawCancel()">Cancel</button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button full color="primary" (click)="drawClear()">Clear</button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button full color="secondary" (click)="drawComplete()">Done</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <button ion-button block (click)="closeModal()">Close Modal</button>
+
+</ion-content>

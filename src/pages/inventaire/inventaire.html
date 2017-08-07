@@ -45,11 +45,12 @@
                 <div class="fiche" *ngIf="marchandis.CR == true">
                     <span id="cr">!! Avec Contre Remboursement !!</span>
                 </div>
+                <div><img [src]="signatureImage" *ngIf="signatureImage" /></div>
 
                 <div class="action">
                     <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
                     <img (click)="suppr(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
-                    <img (click)="delivered(marchandis.$key)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
+                    <img (click)="openModal(marchandis.$key)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
                     <img (click)="geoloc(marchandis.$key)" src="assets/img/geoloc.svg" alt="geoloc" width="50" height="50">
                 </div>
             </li>

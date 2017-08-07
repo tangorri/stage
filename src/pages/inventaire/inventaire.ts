@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
+import { ModalController } from 'ionic-angular';
+import { SignatureModalPage } from '../signature-modal/signature-modal';
+
 // Services
 import { Loader } from '../../providers/loader/loader';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
@@ -33,7 +36,7 @@ export class InventairePage {
   clientAdress: string;
 
 
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController) {
 
     var user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
@@ -106,7 +109,9 @@ export class InventairePage {
     confirm.present();
   }; 
 
-  delivered(key:string) {
+  openModal(key:string) {
+    let myModal = this.modalCtrl.create(SignatureModalPage);
+    myModal.present();
     console.log('livré');
     
   }; 
