@@ -11,7 +11,7 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'page-signature-modal',
@@ -20,6 +20,7 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 export class SignatureModalPage {
 
   marchandise: any;
+  delivered:any;
   key: string;
   user: any;
   signatureImage : string;
@@ -42,7 +43,9 @@ export class SignatureModalPage {
     this.key = navParams.get("key");
 
     // On se connecte à la base de donnée sur l'élément à modifier
-    this.marchandise = dbAf.object('/users/' + this.user + '/cargaison/' + this.key);
+    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
+    this.delivered = dbAf.list('/delivered/');
+
     
   }
 
@@ -53,7 +56,7 @@ export class SignatureModalPage {
 
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
-    /* this.marchandise.push({"signature": this.signatureImage}); */
+    this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now()});
     this.navCtrl.setRoot(InventairePage, {signatureImage: this.signatureImage});
   }
 

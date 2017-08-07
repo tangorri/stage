@@ -56,7 +56,6 @@ export class InventairePage {
     });
 
     this.signatureImage = navParams.get('signatureImage');
-    console.log("signature: "+this.signatureImage);
     
   }
 
@@ -114,7 +113,7 @@ export class InventairePage {
   }; 
 
   openModal(key:string) {
-    let myModal = this.modalCtrl.create(SignatureModalPage);
+    let myModal = this.modalCtrl.create(SignatureModalPage, {key:key});
     myModal.present();
   }; 
 
