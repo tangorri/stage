@@ -28,12 +28,12 @@ export class SignatureModalPage {
 
   
   drawCancel() {
-    this.navCtrl.push(InventairePage);
+    this.navCtrl.setRoot(InventairePage);
   }
 
    drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
-    this.navCtrl.push(InventairePage, {signatureImage: this.signatureImage});
+    this.navCtrl.setRoot(InventairePage, {signatureImage: this.signatureImage});
   }
 
   drawClear() {

@@ -41,10 +41,11 @@ page-inventaire {
         font-size: 1.5rem;
     }
     #listeMarchandise .fiche #cr {
-        text-align: center;
+        margin-right: 2rem;
         font-size: 2rem;
         font-weight: bold;
         margin-left: 2rem;
+        color: red;
     }
     .action {
         width: 100%;

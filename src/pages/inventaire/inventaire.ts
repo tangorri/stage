@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 
 import { ModalController } from 'ionic-angular';
 import { SignatureModalPage } from '../signature-modal/signature-modal';
@@ -34,9 +35,9 @@ export class InventairePage {
   client: any;
   clientName: string;
   clientAdress: string;
+  signatureImage: string;
 
-
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams) {
 
     var user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
@@ -53,6 +54,8 @@ export class InventairePage {
         
       });
     });
+
+    this.signatureImage = navParams.get('signatureImage');
     
   }
 
@@ -112,8 +115,6 @@ export class InventairePage {
   openModal(key:string) {
     let myModal = this.modalCtrl.create(SignatureModalPage);
     myModal.present();
-    console.log('livré');
-    
   }; 
 
   geoloc(key:string) {
