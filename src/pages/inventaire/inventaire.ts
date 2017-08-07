@@ -56,6 +56,7 @@ export class InventairePage {
     });
 
     this.signatureImage = navParams.get('signatureImage');
+    console.log("signature: "+this.signatureImage);
     
   }
 

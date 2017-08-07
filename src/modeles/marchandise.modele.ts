@@ -10,4 +10,5 @@ export class Marchandise {
   destinataire:string;
   dateRamassage:string;
   CR:boolean;
+  signature:any;
 }

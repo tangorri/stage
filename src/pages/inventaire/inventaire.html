@@ -43,7 +43,7 @@
                     <span class="result">{{ marchandis.prix }}</span>
                     <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
                 </div>
-                <div><img [src]="signatureImage" *ngIf="signatureImage" /></div>
+                <div *ngIf="signatureImage"><img [src]="signatureImage" /></div>
 
                 <div class="action">
                     <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
