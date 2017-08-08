@@ -39,6 +39,7 @@ export const firebaseConfig = {
 import { Loader } from '../providers/loader/loader'
 import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
 import { SignaturePadModule } from 'angular2-signaturepad';
+import { ClientSearchComponent } from '../components/client-search/client-search';
 
 
 
@@ -54,7 +55,8 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     InventairePage,
     TabsPage,
     SignatureModalPage,
-    Loader
+    Loader,
+    ClientSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     ClientsPage,
     InventairePage,
     TabsPage,
-    SignatureModalPage
+    SignatureModalPage,
+    ClientSearchComponent
   ],
   providers: [
     StatusBar,
@@ -85,7 +88,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     Loader,
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UtilisateurProvider,
+    UtilisateurProvider
   ]
 })
 export class AppModule {}

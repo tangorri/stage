@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
+import { ModalController } from 'ionic-angular';
 
 import firebase from 'firebase';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
@@ -10,22 +11,17 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 // Pages
 import { AccueilPage } from '../accueil/accueil';
 
-
-//Modèle
+//Modèles
 import { Marchandise } from '../../modeles/marchandise.modele';
+import { Client } from '../../modeles/client.modele';
+import { ClientSearchComponent } from "../../components/client-search/client-search";
 
-// modèle pour Clients
-class Client {
-  nom:string;
-  adresse:string;
-  code_postal:number;
-  ville:string;
-}
 
 @Component({
   selector: 'page-ramassage',
   templateUrl: 'ramassage.html',
-  providers: [UtilisateurProvider]
+  providers: [UtilisateurProvider],
+  entryComponents: [ClientSearchComponent]
 })
 
 export class RamassagePage {
@@ -39,7 +35,7 @@ export class RamassagePage {
 
   user:any;
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider,public modalCtrl: ModalController) {
 
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
@@ -66,5 +62,9 @@ export class RamassagePage {
     }); 
   } 
 
+  searchClient() {
+    let myModal = this.modalCtrl.create(ClientSearchComponent);
+    myModal.present();
+  };
 
 }

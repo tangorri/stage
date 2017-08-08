@@ -11,16 +11,20 @@
         <ion-list id="form">
 
             <ion-row>
-                <ion-item>
-                    <ion-label fixed>Expediteur</ion-label>
-                    <ion-input type="text" [(ngModel)]="expediteur" name="expediteur"></ion-input>
-                </ion-item>
+                <ion-col>
+                    <ion-item>
+                        <ion-label fixed>Expediteur</ion-label>
+                        <ion-input type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchClient()"></ion-input>
+                    </ion-item>
+                </ion-col>
             </ion-row>
             <ion-row>
-                <ion-item>
-                    <ion-label fixed>Destinataire</ion-label>
-                    <ion-input type="text" [(ngModel)]="destinataire" name="destinataire"></ion-input>
-                </ion-item>
+                <ion-col>
+                    <ion-item>
+                        <ion-label fixed>Destinataire</ion-label>
+                        <ion-input type="text" [(ngModel)]="destinataire" name="destinataire" (tap)="searchClient()"></ion-input>
+                    </ion-item>
+                </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>
