@@ -6,11 +6,12 @@
 
 <ion-content padding>
 
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
         <ion-item *ngFor="let item of items">
             {{ item }}
         </ion-item>
     </ion-list>
+    <button ion-button full (click)="saveClient(searchQuery)">Valider</button>
 
 </ion-content>

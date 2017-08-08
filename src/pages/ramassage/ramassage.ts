@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
+import { NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 
 import firebase from 'firebase';
@@ -34,11 +35,16 @@ export class RamassagePage {
   marchandiseBinding : any;
 
   user:any;
+  clientId:any;
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider,public modalCtrl: ModalController, public navParams: NavParams) {
 
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
+
+    // On récupère le client
+    this.clientId = navParams.get("searchQuery");
+    console.log("client:"+this.clientId);
     
   }
 

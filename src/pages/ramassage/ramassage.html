@@ -14,7 +14,7 @@
                 <ion-col>
                     <ion-item>
                         <ion-label fixed>Expediteur</ion-label>
-                        <ion-input type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchClient()"></ion-input>
+                        <ion-input type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchClient()" value="clientId"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -22,7 +22,7 @@
                 <ion-col>
                     <ion-item>
                         <ion-label fixed>Destinataire</ion-label>
-                        <ion-input type="text" [(ngModel)]="destinataire" name="destinataire" (tap)="searchClient()"></ion-input>
+                        <ion-input type="text" [(ngModel)]="destinataire" name="destinataire" (tap)="searchClient()">{{ clientId }}</ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>

@@ -23,28 +23,26 @@ export class ClientSearchComponent {
   clientId:string;
 
   constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase) {
+    console.log("coucou recherche un client...");
+
+    this.initializeItems();
 
     this.client = dbAf.list('/clients/');
     
-
-    this.initializeItems();
-   
-    console.log("coucou recherche un client...");
-
-
-    this.client.forEach(item => {
-      for(var i:number = 0; i < item.length; i++) {
-        this.clientId = item[i].$key + ',   ' + item[i].ville; 
+    this.client.subscribe(snap => {
+      for(var i:number = 0; i < snap.length; i++) {
+        this.clientId = snap[i].$key + ',   ' + snap[i].ville; 
         this.items.push(this.clientId);
       };
     });
+
   }
 
   initializeItems() {
     this.items = [
-      this.clientId,
+      this.clientId
     ];
-    console.log('Item:', this.items);     
+    console.log('Clients:', this.items);     
   }
 
   getItems(ev: any) {
@@ -61,5 +59,9 @@ export class ClientSearchComponent {
     }
   }
 
+  saveClient(searchQuery) {
+    console.log(searchQuery);
+    this.navCtrl.setRoot(RamassagePage, {searchQuery});
+  }
 
 }
