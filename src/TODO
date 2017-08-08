@@ -1,7 +1,40 @@
-traduire l'heure de prise en charge
+***********************************************************
+// DEV //
+--------------
+  Fixer le composant client avec liste deroulante
+  proposer un ajout si il n'est pas dans la liste
+    (kasu aux doublons)
 
-implémenter le service ou composant client avec liste deroulante sur formulaires
+  Fixer l'adresse de livraison dans l'inventaire
 
-fixer l'adresse de livraison dans l'inventaire
+  Traduire l'heure de prise en charge
+
+  Migrer un bon vers la base delivered quand il est signé
+
+  Gérer les échanges (avec notifications ?)
+
+  Soigner l'ui et css
+
+  Nettoyer et commenter le code
 
 
+***********************************************************
+// OPTIONNEL //
+--------------
+  Implémenter google map  
+
+  Envoie de mails
+
+
+***********************************************************
+// PRODUCTION //
+--------------
+  Lier avec bdd locale
+
+  Déployer 
+  
+  Tester
+
+***********************************************************
+// PRESENTER //
+--------------
