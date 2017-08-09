@@ -4,4 +4,15 @@ client-search {
         text-align: center;
         padding: 10px;
     }
+    #name {
+        padding-left: 2rem;
+        text-transform: capitalize;
+    }
+    #ville {
+        text-transform: capitalize;
+        padding-right: 2rem;
+        float: right;
+        font-style: italic;
+        font-size: 1.2rem;
+    }
 }

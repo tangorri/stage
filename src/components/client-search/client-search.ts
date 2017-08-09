@@ -19,8 +19,10 @@ export class ClientSearchComponent {
 
   client: any;
   searchQuery: string = '';
-  items: string[];
+  items: any;
   clientId:string;
+  clientName:any;
+  clientVille:string;
 
   constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase) {
     console.log("coucou recherche un client...");
@@ -31,8 +33,10 @@ export class ClientSearchComponent {
     
     this.client.subscribe(snap => {
       for(var i:number = 0; i < snap.length; i++) {
+        this.clientName = snap[i].$key;
+        this.clientVille = snap[i].ville;
         this.clientId = snap[i].$key + ',   ' + snap[i].ville; 
-        this.items.push(this.clientId);
+        this.items.push([this.clientName, this.clientVille]);
       };
     });
 
@@ -40,21 +44,22 @@ export class ClientSearchComponent {
 
   initializeItems() {
     this.items = [
-      this.clientId
+      this.clientName,
+      this.clientVille
     ];
     console.log('Clients:', this.items);     
   }
 
   getItems(ev: any) {
     // reset items back to all of the items
-    this.initializeItems();
+     this.initializeItems(); 
 
     // set val to the value of the searchbar
     let val = ev.target.value;
 
     if (val && val.trim() != ' ') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.items = this.items.filter((clientName, clientVille) => {
+        return (clientName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }

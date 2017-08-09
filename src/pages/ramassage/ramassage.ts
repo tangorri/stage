@@ -35,7 +35,7 @@ export class RamassagePage {
   marchandiseBinding : any;
 
   user:any;
-  clientId:any;
+  clientId:string;
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider,public modalCtrl: ModalController, public navParams: NavParams) {
 
