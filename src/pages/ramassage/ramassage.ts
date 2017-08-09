@@ -27,24 +27,28 @@ import { ClientSearchComponent } from "../../components/client-search/client-sea
 
 export class RamassagePage {
 
-  // le modèle des marchandises
   marchandise: FirebaseListObservable<any>;
-  // le modèle des clients
   client: FirebaseListObservable<any>;
-
   marchandiseBinding : any;
-
   user:any;
   clientId:string;
+  clientVille: any;
+  clientName: any;
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider,public modalCtrl: ModalController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
 
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
 
     // On récupère le client
     this.clientId = navParams.get("searchQuery");
-    console.log("client:"+this.clientId);
+    this.clientName = navParams.get("clientName");
+    this.clientVille = navParams.get("clientVille");
+    if(this.clientId) {
+      console.log("new client: " + this.clientId);
+    } else {
+      console.log("client: " + this.clientName + ", " + this.clientVille);
+    }
     
   }
 

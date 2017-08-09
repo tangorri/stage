@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 // Database
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -15,6 +15,7 @@ import { Client } from '../../modeles/client.modele';
   selector: 'client-search',
   templateUrl: 'client-search.html'
 })
+
 export class ClientSearchComponent {
 
   client: any;
@@ -24,7 +25,7 @@ export class ClientSearchComponent {
   clientName:any;
   clientVille:string;
 
-  constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase) {
+  constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController) {
     console.log("coucou recherche un client...");
 
     this.initializeItems();
@@ -58,13 +59,17 @@ export class ClientSearchComponent {
     let val = ev.target.value;
 
     if (val && val.trim() != ' ') {
-      this.items = this.items.filter((clientName, clientVille) => {
-        return (clientName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.items = this.items.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
-  saveClient(searchQuery) {
+  saveClient(clientName, clientVille) {
+    console.log(clientName, clientVille);
+    this.navCtrl.setRoot(RamassagePage, {clientName, clientVille});
+  }
+  nouveauClient(searchQuery) {
     console.log(searchQuery);
     this.navCtrl.setRoot(RamassagePage, {searchQuery});
   }

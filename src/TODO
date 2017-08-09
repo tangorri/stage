@@ -2,8 +2,11 @@
 // DEV //
 --------------
   Fixer le composant client avec liste deroulante
-  proposer un ajout si il n'est pas dans la liste
-    (kasu aux doublons)
+  -limiter à 5 items
+  -focus à l'ouverture de la modal
+  -gérer entrées destinataire / expediteur
+  -proposer un ajout si il n'est pas dans la liste
+    >>(kasu aux doublons)
 
   Fixer l'adresse de livraison dans l'inventaire
 
@@ -24,6 +27,8 @@
   Implémenter google map  
 
   Envoie de mails
+
+  Motifications push (pour les échanges)
 
 
 ***********************************************************
