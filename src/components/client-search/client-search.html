@@ -7,10 +7,11 @@
 <ion-content padding>
 
     <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" placeholder="Nom, raison sociale" class="searchBar"></ion-searchbar>
+
     <ion-list *ngFor="let item of items">
-        <ion-item (click)="saveClient(clientName, clientVille)">
-            <span id="name">{{ clientName }}</span>
-            <span id="ville">{{ clientVille }}</span>
+        <ion-item (click)="saveClient(item)">
+            <span id="name">{{ item.$key }}</span>
+            <span id="ville">{{ item.ville }}</span>
         </ion-item>
     </ion-list>
     <button ion-button full (click)="nouveauClient(searchQuery)">Nouveau Client</button>

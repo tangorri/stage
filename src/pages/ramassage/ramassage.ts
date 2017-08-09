@@ -31,36 +31,39 @@ export class RamassagePage {
   client: FirebaseListObservable<any>;
   marchandiseBinding : any;
   user:any;
-  clientId:string;
+  clientId:string ='';
+  clientObject: any;
   clientVille: any;
   clientName: any;
+  expediteur:any;
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
-
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
 
     // On récupère le client
     this.clientId = navParams.get("searchQuery");
-    this.clientName = navParams.get("clientName");
-    this.clientVille = navParams.get("clientVille");
+    this.clientObject= navParams.get("itemClicked");
+    console.log(navParams.get("name"));
+    this.expediteur = navParams.get("name");
+
+
     if(this.clientId) {
       console.log("new client: " + this.clientId);
     } else {
-      console.log("client: " + this.clientName + ", " + this.clientVille);
+      console.log("client: ", this.expediteur);
     }
     
   }
 
    saveBL(bl) {
-
     this.marchandiseBinding = bl.value as Marchandise;
     this.marchandiseBinding.dateRamassage = Date.now();
     console.log(this.marchandiseBinding);
     for(let cle in this.marchandiseBinding) {
       if (this.marchandiseBinding[cle] === undefined) {
         delete this.marchandiseBinding[cle];
-        console.log("coucou"+cle);
+        /* console.log("coucou"+cle); */
       }
     }
 

@@ -42,6 +42,8 @@ export class InventairePage {
     var user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
 
+    
+
     this.client = dbAf.list('/clients/', { preserveSnapshot: true });
     this.client.subscribe(snapshots => {
       snapshots.forEach(snapshot => {

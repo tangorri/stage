@@ -16,7 +16,7 @@
                         Destinataire :
                         <span class="result">{{ marchandis.destinataire }}</span>
                     </div>
-                    <div class="adresse" *ngIf="marchandis.destinataire === clientName">
+                    <div class="adresse" *ngIf="marchandis.destinataire == clientName">
                         {{ clientAdress }}
                     </div>
                 </div>

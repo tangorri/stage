@@ -20,7 +20,8 @@ export class ClientSearchComponent {
 
   client: any;
   searchQuery: string = '';
-  items: any;
+  items: Array<any>;
+  loadItems: Array<any>;
   clientId:string;
   clientName:any;
   clientVille:string;
@@ -28,46 +29,43 @@ export class ClientSearchComponent {
   constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController) {
     console.log("coucou recherche un client...");
 
-    this.initializeItems();
+    /* this.initializeItems(); */
 
-    this.client = dbAf.list('/clients/');
+    this.client = this.dbAf.list('/clients/');
     
     this.client.subscribe(snap => {
-      for(var i:number = 0; i < snap.length; i++) {
-        this.clientName = snap[i].$key;
-        this.clientVille = snap[i].ville;
-        this.clientId = snap[i].$key + ',   ' + snap[i].ville; 
-        this.items.push([this.clientName, this.clientVille]);
-      };
+      let clients = [];
+      snap.forEach(element => {
+        /* console.log("element",element); */
+        clients.push(element);
+      });
+      this.items = clients;
+      /* console.log("this.items:",clients); */
+      this.loadItems = clients;
     });
 
   }
 
   initializeItems() {
-    this.items = [
-      this.clientName,
-      this.clientVille
-    ];
+      this.items = this.loadItems; 
     console.log('Clients:', this.items);     
   }
 
   getItems(ev: any) {
-    // reset items back to all of the items
-     this.initializeItems(); 
-
+    this.initializeItems(); 
     // set val to the value of the searchbar
     let val = ev.target.value;
-
-    if (val && val.trim() != ' ') {
+    if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        console.log("item"+item);
+        return (item.$key.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
-  saveClient(clientName, clientVille) {
-    console.log(clientName, clientVille);
-    this.navCtrl.setRoot(RamassagePage, {clientName, clientVille});
+  saveClient(itemClicked) {
+    console.log(itemClicked.ville);
+    this.navCtrl.setRoot(RamassagePage, {ville:itemClicked.ville, name:itemClicked.$key});
   }
   nouveauClient(searchQuery) {
     console.log(searchQuery);
