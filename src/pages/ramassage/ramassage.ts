@@ -42,15 +42,15 @@ export class RamassagePage {
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
 
     // On récupère le client
-    this.clientId = navParams.get("searchQuery");
-    this.clientObject= navParams.get("itemClicked");
-    console.log(navParams.get("name"));
-    this.expediteur = navParams.get("name");
+    /* this.clientObject= navParams.get("itemClicked");
+    console.log(navParams.get("name")); */ 
 
 
     if(this.clientId) {
+      this.expediteur = navParams.get("searchQuery");
       console.log("new client: " + this.clientId);
     } else {
+      this.expediteur = navParams.get("name");
       console.log("client: ", this.expediteur);
     }
     
@@ -79,5 +79,7 @@ export class RamassagePage {
     let myModal = this.modalCtrl.create(ClientSearchComponent);
     myModal.present();
   };
+
+  
 
 }

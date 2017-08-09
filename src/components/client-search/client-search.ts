@@ -69,7 +69,7 @@ export class ClientSearchComponent {
   }
   nouveauClient(searchQuery) {
     console.log(searchQuery);
-    this.navCtrl.setRoot(RamassagePage, {searchQuery});
+    this.navCtrl.setRoot(RamassagePage, {name:searchQuery});
   }
 
 }
