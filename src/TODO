@@ -1,6 +1,8 @@
 ***********************************************************
 // DEV //
 --------------
+  !!! différencier expediteur | destinataire !!!
+
   Fixer l'adresse de livraison dans l'inventaire
 
   Migrer un bon vers la base delivered quand il est signé
@@ -8,7 +10,6 @@
   Fixer le composant client avec liste deroulante
   -limiter à 5 items
   -focus à l'ouverture de la modal
-  -gérer entrées destinataire / expediteur
   -proposer un ajout si il n'est pas dans la liste
     >>(kasu aux doublons)
 
