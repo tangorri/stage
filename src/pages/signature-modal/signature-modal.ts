@@ -51,7 +51,7 @@ export class SignatureModalPage {
 
 
   drawCancel() {
-    this.navCtrl.setRoot(InventairePage);
+    this.viewCtrl.dismiss();
   }
 
   drawComplete() {

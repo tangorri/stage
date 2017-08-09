@@ -8,6 +8,10 @@
 <ion-content padding>
     <signature-pad [options]="signaturePadOptions"></signature-pad>
 
+    <div *ngIf="marchandise.CR == true" id="cr">
+        !! Ce colis est en Contre Remboursement !!
+    </div>
+
     <ion-grid>
         <ion-row>
             <ion-col col-4>

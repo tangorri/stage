@@ -54,7 +54,7 @@ export class InventairePage {
         
       });
     });
-
+    /* var dateLivraison = this.marchandise.dateLivraison. */
     this.signatureImage = navParams.get('signatureImage');
     
   }

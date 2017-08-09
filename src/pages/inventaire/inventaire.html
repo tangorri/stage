@@ -35,15 +35,21 @@
                     <span class="result">{{ marchandis.quantite }}</span>
                 </div>
                 <div class="fiche">
-                    Poids (en kg) :
-                    <span class="result">{{ marchandis.poids }}</span>
+                    Poids :
+                    <span class="result">{{ marchandis.poids }} kg</span>
                 </div>
                 <div class="fiche">
-                    Prix TTC (en €):
-                    <span class="result">{{ marchandis.prix }}</span>
+                    Prix TTC :
+                    <span class="result">{{ marchandis.prix }} €</span>
                     <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
                 </div>
-                <div><img [src]="marchandis.signature" width="300" /></div>
+                <div *ngIf="marchandis.dateLivraison" class="fiche">
+                    Livré :
+                    <span class="result">{{ marchandis.dateLivraison | date: 'dd/MM/yyyy H:mm' }}</span>
+                </div>
+                <div>
+                    <img [src]="marchandis.signature" width="300" />
+                </div>
 
                 <div class="action">
                     <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
