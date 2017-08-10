@@ -75,13 +75,14 @@ export class RamassagePage {
     this.marchandiseBinding.dateRamassage = Date.now();
     this.marchandiseBinding.chauffeurRamassage = this.user;
     this.marchandiseBinding.delivered = false;
-    this.marchandiseBinding.expediteur = {
+    this.expediteur = {
       name: this.expName,
       adresse: this.expAdresse,
       codePostal: this.expCP,
       ville: this.expVille,
       tel: this.expTel
-    }; 
+    }
+    this.marchandiseBinding.expediteur = this.expediteur; 
     this.marchandiseBinding.destinataire = {
       name: this.destName,
       adresse: this.destAdresse,
@@ -89,6 +90,7 @@ export class RamassagePage {
       ville: this.destVille,
       tel: this.destTel
     };
+    this.marchandiseBinding.echange = this.chauffeur2;
     console.log(this.marchandiseBinding);
     for(let cle in this.marchandiseBinding) {
       if (this.marchandiseBinding[cle] === undefined) {
@@ -160,10 +162,12 @@ export class RamassagePage {
     let myModal = this.modalCtrl.create(ChauffeursComponent);
     myModal.onDidDismiss(res => {
       if(res) {
-        this.chauffeur2 = res;
-        this.chauffeurName = res.username
-        console.log("Nom du 2eme chauffeur: ",this.chauffeurName);
-        
+        this.chauffeur2 = {
+          name:res.username,
+          id:res.$key
+        };
+        this.chauffeurName = this.chauffeur2.name;
+        console.log("Nom du 2eme chauffeur: ",this.chauffeur2.name);
       }
     })
     myModal.present();

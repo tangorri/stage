@@ -1,11 +1,8 @@
 ***********************************************************
 // DEV //
 --------------
-
-  Fixer le composant client avec liste deroulante
-  -proposer un ajout si il n'est pas dans la liste
-    uniquement dans le bl 
-  -ajouter tel
+  Proposer un ajout si le client n'est pas dans la liste
+   >> uniquement dans la base bl 
 
   Gérer les échanges (avec notifications ?)
 
