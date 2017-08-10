@@ -13,17 +13,17 @@
                 <div class="ref">
                     <div>
                         Destinataire :
-                        <span class="result">{{ marchandis.destinataire }}</span>
+                        <span class="result">{{ marchandis.destinataire.name }}</span>
                     </div>
-                    <div class="adresse" *ngIf="marchandis.destinataire == clientName">
-                        {{ clientAdress }}
+                    <div class="adresse">
+                        {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.codePostal }} {{ marchandis.destinataire.ville }}
                     </div>
                 </div>
 
                 <!-- fiche article -->
                 <div class="fiche">
                     Expéditeur :
-                    <span class="result">{{ marchandis.expediteur }}</span>
+                    <span class="result">{{ marchandis.expediteur.name }}, {{ marchandis.expediteur.ville }}</span>
                 </div>
                 <div class="fiche">
                     Désignation :

@@ -27,10 +27,11 @@ import { ClientSearchComponent } from "../../components/client-search/client-sea
 
 export class RamassagePage {
 
-  marchandise: FirebaseListObservable<any>;
-  client: FirebaseListObservable<any>;
-  marchandiseBinding : any;
   user:any;
+  marchandise: FirebaseListObservable<any>;
+  marchandiseBinding : any;
+  client: FirebaseListObservable<any>;
+
   clientId:string ='';
   clientObject: any;
   clientVille:string ='';
@@ -38,57 +39,53 @@ export class RamassagePage {
   clientAdresse:string ='';
   clientCP:string ='';
   clientType:string ='';
+
   expediteur:any;
+  expCP: string ='';
+  expAdresse: string ='';
+  expVille: string ='';
+  expName: string ='';
+
   destinataire:any;
+  destCP: string ='';
+  destAdresse: string ='';
+  destVille: string ='';
+  destName: string ='';
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
     // connexion database
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
 
-    // On récupère le client 
+    // On récupère le type de client 
     this.clientType = navParams.get("clientType");
-    this.clientName = navParams.get("name");
-    this.clientVille = navParams.get("ville");
-    this.clientAdresse = navParams.get("adresse");
-    this.clientCP = navParams.get("codePostal");
 
     this.expediteur = this.getExp();
     this.destinataire = this.getDest();
-
-/*     if(this.clientType == "expediteur") {
-      if(this.clientName) {
-        this.expediteur = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
-        console.log("client: ", this.expediteur);
-      }
-      if(this.clientId) {
-        this.expediteur = navParams.get("searchQuery");
-        console.log("new client: " + this.clientId);
-      }
-      return this.expediteur;  
-    };
-    if(this.clientType == "destinataire") {
-      if(this.clientName) {
-        this.destinataire = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
-        console.log("client: ", this.destinataire);
-      }
-      if(this.clientId) {
-        this.destinataire = navParams.get("searchQuery");
-        console.log("new client: " + this.clientId);
-      }
-      return this.destinataire; 
-    }; */
     
   }
 
    saveBL(bl) {
     this.marchandiseBinding = bl.value as Marchandise;
     this.marchandiseBinding.dateRamassage = Date.now();
+    this.marchandiseBinding.chauffeurRamassage = this.user;
+    this.marchandiseBinding.delivered = false;
+    this.marchandiseBinding.expediteur = {
+      name: this.expName,
+      adresse: this.expAdresse,
+      codePostal: this.expCP,
+      ville: this.expVille
+    }; 
+    this.marchandiseBinding.destinataire = {
+      name: this.destName,
+      adresse: this.destAdresse,
+      codePostal: this.destCP,
+      ville: this.destVille
+    };
     console.log(this.marchandiseBinding);
     for(let cle in this.marchandiseBinding) {
       if (this.marchandiseBinding[cle] === undefined) {
         delete this.marchandiseBinding[cle];
-        /* console.log("coucou"+cle); */
       }
     }
 
@@ -112,32 +109,40 @@ export class RamassagePage {
 
   getExp() {
     if(this.clientType == "expediteur") {
-      if(this.clientName) {
-        this.expediteur = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
+      this.expName = this.navParams.get("name");
+      this.expVille = this.navParams.get("ville");
+      this.expAdresse = this.navParams.get("adresse");
+      this.expCP = this.navParams.get("codePostal");
+
+      if(this.expName) {
+        this.expediteur = this.expName + ',  ' + this.expAdresse +' ' +  this.expCP +' ' +  this.expVille;
         console.log("expediteur: ", this.expediteur);
       }
       if(this.clientId) {
         this.expediteur = this.navParams.get("searchQuery");
         console.log("new expediteur: " + this.clientId);
       }
-      return this.expediteur;  
+      return this.expediteur;
     };
   }
 
   getDest() {
     if(this.clientType == "destinataire") {
-      if(this.clientName) {
-        this.destinataire = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
+      this.destName = this.navParams.get("name");
+      this.destVille = this.navParams.get("ville");
+      this.destAdresse = this.navParams.get("adresse");
+      this.destCP = this.navParams.get("codePostal");
+
+      if(this.destName) {
+        this.destinataire = this.destName + ',  ' + this.destAdresse +' ' +  this.destCP +' ' +  this.destVille;
         console.log("destinataire: ", this.destinataire);
       }
       if(this.clientId) {
         this.destinataire = this.navParams.get("searchQuery");
         console.log("new destinataire: " + this.clientId);
       }
-      return this.destinataire; 
+      return this.destinataire;
     };
   }
-
-  
 
 }
