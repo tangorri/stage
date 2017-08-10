@@ -22,14 +22,21 @@ import { EchangePage } from "../echange/echange";
 //Modèles
 import { Marchandise } from '../../modeles/marchandise.modele';
 import { Client } from '../../modeles/client.modele';
+import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 
 @Component({
   selector: 'page-inventaire',
   templateUrl: 'inventaire.html',
-  providers: [UtilisateurProvider]
+  providers: [UtilisateurProvider],
+  entryComponents: [ChauffeursComponent]
 })
 
 export class InventairePage {
+  marchandiseChange: any;
+  user: string;
+  marchandiseBinding: any;
+  chauffeur2: any= {};
+  chauffeurName: any;
 
   marchandise: any;
   client: any;
@@ -39,8 +46,9 @@ export class InventairePage {
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams) {
 
-    var user = firebase.auth().currentUser.uid;
-    this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
+    this.signatureImage = navParams.get('signatureImage');
+    this.user = firebase.auth().currentUser.uid;
+    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
 
     this.client = dbAf.list('/clients/', { preserveSnapshot: true });
     this.client.subscribe(snapshots => {
@@ -51,9 +59,29 @@ export class InventairePage {
       });
     });
 
-    this.signatureImage = navParams.get('signatureImage');
-    
   }
+
+  echanger(key:string) {
+    let myModal = this.modalCtrl.create(ChauffeursComponent);
+    myModal.onDidDismiss(res => {
+      if(res) {
+        this.chauffeur2 = {
+          name:res.username,
+          id:res.$key
+        };
+        this.chauffeurName = this.chauffeur2.name;
+        console.log("Nom du 2eme chauffeur: ",this.chauffeur2.name);
+        this.marchandise.update(key,{echange: this.chauffeur2});
+      }
+    })
+    myModal.present();
+  }
+
+  openModal(key:string) {
+    let myModal = this.modalCtrl.create(SignatureModalPage, {key:key});
+    myModal.present();
+  }; 
+
 
   suppr(key:string) {
     // Confirmer la suppression
@@ -84,7 +112,7 @@ export class InventairePage {
     confirm.present();
   }; 
 
-  modifier(key:string) {
+/*   modifier(key:string) {
     // Confirmer la modif
     let confirm = this.alertCtrl.create({
       title: 'MODIFIER',
@@ -106,12 +134,7 @@ export class InventairePage {
       ]
     });
     confirm.present();
-  }; 
-
-  openModal(key:string) {
-    let myModal = this.modalCtrl.create(SignatureModalPage, {key:key});
-    myModal.present();
-  }; 
+  };  */
 
   geoloc(key:string) {
     console.log('geoloc');

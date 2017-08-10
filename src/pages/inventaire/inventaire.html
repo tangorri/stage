@@ -45,6 +45,10 @@
                     <span class="result">{{ marchandis.prix }} €</span>
                     <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
                 </div>
+                <div *ngIf="marchandis.echange">
+                    Echange prévu avec
+                    <span class="result">{{ marchandis.echange.name }}</span>
+                </div>
                 <div *ngIf="marchandis.dateLivraison" class="fiche">
                     Livré :
                     <span class="result">{{ marchandis.dateLivraison | date: 'dd/MM/yyyy H:mm' }}</span>
@@ -54,7 +58,7 @@
                 </div>
 
                 <div class="action">
-                    <img (click)="modifier(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
+                    <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
                     <img (click)="suppr(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
                     <img (click)="openModal(marchandis.$key)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
                     <img (click)="geoloc(marchandis.$key)" src="assets/img/geoloc.svg" alt="geoloc" width="50" height="50">
