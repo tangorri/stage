@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 // Database
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -25,12 +25,12 @@ export class ClientSearchComponent {
   clientId:string;
   clientName:any;
   clientVille:string;
+  clientType:string;
 
-  constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController) {
-    console.log("coucou recherche un client...");
+  constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController, public navParams: NavParams) {
 
     /* this.initializeItems(); */
-
+    this.clientType = navParams.get("clientType");
     this.client = this.dbAf.list('/clients/');
     
     this.client.subscribe(snap => {
@@ -47,8 +47,8 @@ export class ClientSearchComponent {
   }
 
   initializeItems() {
-      this.items = this.loadItems; 
-    console.log('Clients:', this.items);     
+    this.items = this.loadItems; 
+    /* console.log('Clients:', this.items); */     
   }
 
   getItems(ev: any) {
@@ -57,19 +57,18 @@ export class ClientSearchComponent {
     let val = ev.target.value;
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        console.log("item"+item);
+        /* console.log("item"+item); */
         return (item.$key.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
   saveClient(itemClicked) {
-    console.log(itemClicked.ville);
-    this.navCtrl.setRoot(RamassagePage, {ville:itemClicked.ville, name:itemClicked.$key});
+    this.navCtrl.setRoot(RamassagePage, {clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.$key});
   }
   nouveauClient(searchQuery) {
-    console.log(searchQuery);
-    this.navCtrl.setRoot(RamassagePage, {name:searchQuery});
+    /* console.log(searchQuery); */
+    this.navCtrl.setRoot(RamassagePage, {clientType: this.clientType, name:searchQuery});
   }
 
 }

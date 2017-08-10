@@ -12,9 +12,9 @@
 
             <ion-row>
                 <ion-col>
-                    <ion-item>
+                    <ion-item class="item">
                         <ion-label fixed>Expediteur</ion-label>
-                        <ion-input type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchClient()" value="expediteur"></ion-input>{{ expediteur }}
+                        <ion-input type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchExp()"></ion-input>{{ expediteur }}
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -56,8 +56,8 @@
                 </ion-col>
                 <ion-col>
                     <ion-item>
+                        <ion-checkbox class="item-checkbox-right" color="dark" checked="false" [(ngModel)]="CR" name="CR"></ion-checkbox>
                         <ion-label>Contre Remboursement</ion-label>
-                        <ion-checkbox color="dark" checked="false" [(ngModel)]="CR" name="CR"></ion-checkbox>
                     </ion-item>
                 </ion-col>
             </ion-row>

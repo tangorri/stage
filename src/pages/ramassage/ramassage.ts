@@ -33,26 +33,51 @@ export class RamassagePage {
   user:any;
   clientId:string ='';
   clientObject: any;
-  clientVille: any;
-  clientName: any;
+  clientVille:string ='';
+  clientName:string ='';
+  clientAdresse:string ='';
+  clientCP:string ='';
+  clientType:string ='';
   expediteur:any;
+  destinataire:any;
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
+    // connexion database
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
 
-    // On récupère le client
-    /* this.clientObject= navParams.get("itemClicked");
-    console.log(navParams.get("name")); */ 
+    // On récupère le client 
+    this.clientType = navParams.get("clientType");
+    this.clientName = navParams.get("name");
+    this.clientVille = navParams.get("ville");
+    this.clientAdresse = navParams.get("adresse");
+    this.clientCP = navParams.get("codePostal");
 
+    this.expediteur = this.getExp();
+    this.destinataire = this.getDest();
 
-    if(this.clientId) {
-      this.expediteur = navParams.get("searchQuery");
-      console.log("new client: " + this.clientId);
-    } else {
-      this.expediteur = navParams.get("name");
-      console.log("client: ", this.expediteur);
-    }
+/*     if(this.clientType == "expediteur") {
+      if(this.clientName) {
+        this.expediteur = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
+        console.log("client: ", this.expediteur);
+      }
+      if(this.clientId) {
+        this.expediteur = navParams.get("searchQuery");
+        console.log("new client: " + this.clientId);
+      }
+      return this.expediteur;  
+    };
+    if(this.clientType == "destinataire") {
+      if(this.clientName) {
+        this.destinataire = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
+        console.log("client: ", this.destinataire);
+      }
+      if(this.clientId) {
+        this.destinataire = navParams.get("searchQuery");
+        console.log("new client: " + this.clientId);
+      }
+      return this.destinataire; 
+    }; */
     
   }
 
@@ -75,10 +100,43 @@ export class RamassagePage {
     }); 
   } 
 
-  searchClient() {
-    let myModal = this.modalCtrl.create(ClientSearchComponent);
+  searchExp() {
+    let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "expediteur"});
     myModal.present();
   };
+  
+  searchDest() {
+    let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "destinataire"});
+    myModal.present();
+  };
+
+  getExp() {
+    if(this.clientType == "expediteur") {
+      if(this.clientName) {
+        this.expediteur = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
+        console.log("expediteur: ", this.expediteur);
+      }
+      if(this.clientId) {
+        this.expediteur = this.navParams.get("searchQuery");
+        console.log("new expediteur: " + this.clientId);
+      }
+      return this.expediteur;  
+    };
+  }
+
+  getDest() {
+    if(this.clientType == "destinataire") {
+      if(this.clientName) {
+        this.destinataire = this.clientName + ',  ' + this.clientAdresse +' ' +  this.clientCP +' ' +  this.clientVille;
+        console.log("destinataire: ", this.destinataire);
+      }
+      if(this.clientId) {
+        this.destinataire = this.navParams.get("searchQuery");
+        console.log("new destinataire: " + this.clientId);
+      }
+      return this.destinataire; 
+    };
+  }
 
   
 

@@ -56,7 +56,7 @@ export class SignatureModalPage {
 
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
-    this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now()});
+    this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now(), delivered: true});
     this.navCtrl.setRoot(InventairePage, {signatureImage: this.signatureImage});
   }
 

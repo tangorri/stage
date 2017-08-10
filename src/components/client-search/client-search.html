@@ -1,11 +1,10 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Clients</ion-title>
+        <ion-title id="title">{{ clientType }}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
     <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" placeholder="Nom, raison sociale" class="searchBar"></ion-searchbar>
 
     <ion-list *ngFor="let item of items">
