@@ -114,14 +114,9 @@ export class RamassagePage {
       this.expAdresse = this.navParams.get("adresse");
       this.expCP = this.navParams.get("codePostal");
 
-      if(this.expName) {
-        this.expediteur = this.expName + ',  ' + this.expAdresse +' ' +  this.expCP +' ' +  this.expVille;
-        console.log("expediteur: ", this.expediteur);
-      }
-      if(this.clientId) {
-        this.expediteur = this.navParams.get("searchQuery");
-        console.log("new expediteur: " + this.clientId);
-      }
+      this.expediteur = this.expName + ',  ' + this.expAdresse +' ' +  this.expCP +' ' +  this.expVille;
+      console.log("expediteur: ", this.expediteur);
+
       return this.expediteur;
     };
   }
@@ -133,14 +128,9 @@ export class RamassagePage {
       this.destAdresse = this.navParams.get("adresse");
       this.destCP = this.navParams.get("codePostal");
 
-      if(this.destName) {
-        this.destinataire = this.destName + ',  ' + this.destAdresse +' ' +  this.destCP +' ' +  this.destVille;
-        console.log("destinataire: ", this.destinataire);
-      }
-      if(this.clientId) {
-        this.destinataire = this.navParams.get("searchQuery");
-        console.log("new destinataire: " + this.clientId);
-      }
+      this.destinataire = this.destName + ',  ' + this.destAdresse +' ' +  this.destCP +' ' +  this.destVille;
+      console.log("destinataire: ", this.destinataire);
+
       return this.destinataire;
     };
   }
