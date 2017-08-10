@@ -60,8 +60,8 @@ export class RamassagePage {
     // On récupère le type de client 
     this.clientType = navParams.get("clientType");
 
-    this.expediteur = this.getExp();
-    this.destinataire = this.getDest();
+/*     this.expediteur = this.getExp();
+    this.destinataire = this.getDest(); */
     
   }
 
@@ -99,36 +99,44 @@ export class RamassagePage {
 
   searchExp() {
     let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "expediteur"});
+    myModal.onDidDismiss(exp => {
+      this.getExp(exp);
+      console.log("exp:",exp);
+    })
     myModal.present();
   };
   
   searchDest() {
     let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "destinataire"});
+    myModal.onDidDismiss(dest => {
+      this.getDest(dest);
+      console.log("dest:",dest);
+    })
     myModal.present();
   };
 
-  getExp() {
-    if(this.clientType == "expediteur") {
-      this.expName = this.navParams.get("name");
-      this.expVille = this.navParams.get("ville");
-      this.expAdresse = this.navParams.get("adresse");
-      this.expCP = this.navParams.get("codePostal");
+  getExp(client) {
+    if(client.clientType == "expediteur") {
+      this.expName = client.name;
+      this.expVille = client.ville;
+      this.expAdresse = client.adresse;
+      this.expCP = client.codePostal;
 
-      this.expediteur = this.expName + ',  ' + this.expAdresse +' ' +  this.expCP +' ' +  this.expVille;
+      this.expediteur = client.name + ',  ' + client.adresse +' ' +  client.codePostal +' ' +  client.ville;
       console.log("expediteur: ", this.expediteur);
 
       return this.expediteur;
     };
   }
 
-  getDest() {
-    if(this.clientType == "destinataire") {
-      this.destName = this.navParams.get("name");
-      this.destVille = this.navParams.get("ville");
-      this.destAdresse = this.navParams.get("adresse");
-      this.destCP = this.navParams.get("codePostal");
+  getDest(client) {
+    if(client.clientType == "destinataire") {
+      this.destName = client.name;
+      this.destVille = client.ville;
+      this.destAdresse = client.adresse;
+      this.destCP = client.codePostal;
 
-      this.destinataire = this.destName + ',  ' + this.destAdresse +' ' +  this.destCP +' ' +  this.destVille;
+      this.destinataire =  client.name + ',  ' + client.adresse +' ' +  client.codePostal +' ' +  client.ville;
       console.log("destinataire: ", this.destinataire);
 
       return this.destinataire;
