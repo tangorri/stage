@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams, ViewController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, ModalController, NavParams, ViewController, Searchbar } from 'ionic-angular';
 
 // Database
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -16,7 +16,10 @@ import { Client } from '../../modeles/client.modele';
   templateUrl: 'client-search.html'
 })
 
+
 export class ClientSearchComponent {
+
+  @ViewChild('searchbar') searchbar: Searchbar;
 
   client: any;
   searchQuery: string = '';
@@ -25,11 +28,10 @@ export class ClientSearchComponent {
   clientId:string;
   clientName:any;
   clientVille:string;
-  clientType:string;
+  clientType:any;
 
   constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController) {
 
-    /* this.initializeItems(); */
     this.clientType = navParams.get("clientType");
     this.client = this.dbAf.list('/clients/');
     
@@ -46,28 +48,30 @@ export class ClientSearchComponent {
 
   }
 
+  ionViewDidEnter() {
+    setTimeout(res => {
+      this.searchbar.setFocus();
+    }, 100);
+  }
+
   initializeItems() {
-    this.items = this.loadItems; 
-    /* console.log('Clients:', this.items); */     
+    this.items = this.loadItems;     
   }
 
   getItems(ev: any) {
     this.initializeItems(); 
-    // set val to the value of the searchbar
     let val = ev.target.value;
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        /* console.log("item"+item); */
         return (item.$key.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
   saveClient(itemClicked) {
-    this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.$key});
+    this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.$key, tel:itemClicked.tel});
   }
   nouveauClient(searchQuery) {
-    /* console.log(searchQuery); */
     this.viewCtrl.dismiss({clientType: this.clientType, name:searchQuery});
   }
 

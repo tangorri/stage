@@ -62,6 +62,11 @@
                 </ion-col>
             </ion-row>
 
+            <ion-item>
+                <ion-label>Prévoir échange</ion-label>
+                <ion-input color="secondary" (click)="echanger()" [(ngModel)]="chauffeurName" name="chauffeurName"></ion-input>{{ chauffeurName }}
+            </ion-item>
+
             <button ion-button full color="primary">Ajouter une marchandise</button>
         </ion-list>
     </form>

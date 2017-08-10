@@ -19,7 +19,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { EchangePage } from "../echange/echange";
 
 
-//Modèle
+//Modèles
 import { Marchandise } from '../../modeles/marchandise.modele';
 import { Client } from '../../modeles/client.modele';
 
@@ -30,7 +30,7 @@ import { Client } from '../../modeles/client.modele';
 })
 
 export class InventairePage {
-  // Modèles
+
   marchandise: any;
   client: any;
   clientName: string;
@@ -42,21 +42,15 @@ export class InventairePage {
     var user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + user + '/cargaison/');
 
-    
-
     this.client = dbAf.list('/clients/', { preserveSnapshot: true });
     this.client.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         this.clientName = snapshot.key;
         this.client = snapshot.val() as Client;
-        this.clientAdress = this.client.adresse + ', ' + this.client.codePostal + ' ' + this.client.ville;
-        console.log(this.client);
-        console.log("nom: "+this.clientName);
-        console.log("adresse: "+this.clientAdress);
-        
+        /* console.log(this.client); */
       });
     });
-    /* var dateLivraison = this.marchandise.dateLivraison. */
+
     this.signatureImage = navParams.get('signatureImage');
     
   }
@@ -123,12 +117,4 @@ export class InventairePage {
     console.log('geoloc');
   }; 
 
-
-
-
-
 }
-
-
-
-

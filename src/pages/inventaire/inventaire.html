@@ -18,12 +18,15 @@
                     <div class="adresse">
                         {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.codePostal }} {{ marchandis.destinataire.ville }}
                     </div>
+                    <div class="adresse">
+                        {{ marchandis.destinataire.tel }}
+                    </div>
                 </div>
 
                 <!-- fiche article -->
                 <div class="fiche">
                     Expéditeur :
-                    <span class="result">{{ marchandis.expediteur.name }}, {{ marchandis.expediteur.ville }}</span>
+                    <span class="result">{{ marchandis.expediteur.name }}, {{ marchandis.expediteur.ville }}</span><br /> <span class="tel">{{ marchandis.expediteur.tel }}</span>
                 </div>
                 <div class="fiche">
                     Désignation :

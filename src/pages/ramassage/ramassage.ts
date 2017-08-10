@@ -16,16 +16,19 @@ import { AccueilPage } from '../accueil/accueil';
 import { Marchandise } from '../../modeles/marchandise.modele';
 import { Client } from '../../modeles/client.modele';
 import { ClientSearchComponent } from "../../components/client-search/client-search";
+import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 
 
 @Component({
   selector: 'page-ramassage',
   templateUrl: 'ramassage.html',
   providers: [UtilisateurProvider],
-  entryComponents: [ClientSearchComponent]
+  entryComponents: [ClientSearchComponent, ChauffeursComponent]
 })
 
 export class RamassagePage {
+  chauffeurName: any;
+  chauffeur2: any;
 
   user:any;
   marchandise: FirebaseListObservable<any>;
@@ -38,19 +41,21 @@ export class RamassagePage {
   clientName:string ='';
   clientAdresse:string ='';
   clientCP:string ='';
-  clientType:string ='';
+  clientType:any;
 
   expediteur:any;
-  expCP: string ='';
-  expAdresse: string ='';
-  expVille: string ='';
   expName: string ='';
+  expAdresse: string ='';
+  expCP: string ='';
+  expVille: string ='';
+  expTel:  string ='';
 
   destinataire:any;
-  destCP: string ='';
-  destAdresse: string ='';
-  destVille: string ='';
   destName: string ='';
+  destAdresse: string ='';
+  destCP: string ='';
+  destVille: string ='';
+  destTel:  string ='';
 
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
     // connexion database
@@ -74,13 +79,15 @@ export class RamassagePage {
       name: this.expName,
       adresse: this.expAdresse,
       codePostal: this.expCP,
-      ville: this.expVille
+      ville: this.expVille,
+      tel: this.expTel
     }; 
     this.marchandiseBinding.destinataire = {
       name: this.destName,
       adresse: this.destAdresse,
       codePostal: this.destCP,
-      ville: this.destVille
+      ville: this.destVille,
+      tel: this.destTel
     };
     console.log(this.marchandiseBinding);
     for(let cle in this.marchandiseBinding) {
@@ -100,8 +107,10 @@ export class RamassagePage {
   searchExp() {
     let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "expediteur"});
     myModal.onDidDismiss(exp => {
-      this.getExp(exp);
-      console.log("exp:",exp);
+      if(exp) {
+        this.getExp(exp);
+        console.log("exp:",exp);
+      }
     })
     myModal.present();
   };
@@ -109,32 +118,36 @@ export class RamassagePage {
   searchDest() {
     let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "destinataire"});
     myModal.onDidDismiss(dest => {
-      this.getDest(dest);
-      console.log("dest:",dest);
+      if(dest) {
+        this.getDest(dest);
+        console.log("dest:",dest);
+      }
     })
     myModal.present();
   };
 
   getExp(client) {
-    if(client.clientType == "expediteur") {
+
       this.expName = client.name;
-      this.expVille = client.ville;
       this.expAdresse = client.adresse;
       this.expCP = client.codePostal;
+      this.expVille = client.ville;
+      this.expTel = client.tel;
 
       this.expediteur = client.name + ',  ' + client.adresse +' ' +  client.codePostal +' ' +  client.ville;
       console.log("expediteur: ", this.expediteur);
 
       return this.expediteur;
-    };
+
   }
 
   getDest(client) {
     if(client.clientType == "destinataire") {
       this.destName = client.name;
-      this.destVille = client.ville;
       this.destAdresse = client.adresse;
       this.destCP = client.codePostal;
+      this.destVille = client.ville;
+      this.destTel = client.tel;
 
       this.destinataire =  client.name + ',  ' + client.adresse +' ' +  client.codePostal +' ' +  client.ville;
       console.log("destinataire: ", this.destinataire);
@@ -143,4 +156,16 @@ export class RamassagePage {
     };
   }
 
+  echanger() {
+    let myModal = this.modalCtrl.create(ChauffeursComponent);
+    myModal.onDidDismiss(res => {
+      if(res) {
+        this.chauffeur2 = res;
+        this.chauffeurName = res.username
+        console.log("Nom du 2eme chauffeur: ",this.chauffeurName);
+        
+      }
+    })
+    myModal.present();
+  };
 }

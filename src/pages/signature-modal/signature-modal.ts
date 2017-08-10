@@ -12,6 +12,7 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { TabsPage } from "../tabs/tabs";
 
 @Component({
   selector: 'page-signature-modal',
@@ -57,7 +58,7 @@ export class SignatureModalPage {
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
     this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now(), delivered: true, chauffeurLivraison: this.user});
-    this.navCtrl.setRoot(InventairePage, {signatureImage: this.signatureImage});
+    this.navCtrl.setRoot(TabsPage, {tabIndex: 3, signatureImage: this.signatureImage});
   }
 
   drawClear() {

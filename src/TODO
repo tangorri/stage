@@ -1,14 +1,11 @@
 ***********************************************************
 // DEV //
 --------------
-  !!! différencier expediteur | destinataire !!!
 
   Fixer le composant client avec liste deroulante
-  -focus à l'ouverture de la modal
   -proposer un ajout si il n'est pas dans la liste
-    >>(kasu aux doublons)
-
-  Fixer pb tab apres fermeture modal
+    uniquement dans le bl 
+  -ajouter tel
 
   Gérer les échanges (avec notifications ?)
 

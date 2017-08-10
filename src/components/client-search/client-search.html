@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" placeholder="Nom, raison sociale" class="searchBar"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" placeholder="Nom, raison sociale" class="searchBar" #searchbar></ion-searchbar>
 
     <ion-list *ngFor="let item of items">
         <ion-item (click)="saveClient(item)">

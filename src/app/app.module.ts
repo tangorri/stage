@@ -40,6 +40,7 @@ import { Loader } from '../providers/loader/loader'
 import { UtilisateurProvider } from '../providers/utilisateur/utilisateur';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ClientSearchComponent } from '../components/client-search/client-search';
+import { ChauffeursComponent } from '../components/chauffeurs/chauffeurs';
 
 
 
@@ -56,7 +57,8 @@ import { ClientSearchComponent } from '../components/client-search/client-search
     TabsPage,
     SignatureModalPage,
     Loader,
-    ClientSearchComponent
+    ClientSearchComponent,
+    ChauffeursComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,8 @@ import { ClientSearchComponent } from '../components/client-search/client-search
     InventairePage,
     TabsPage,
     SignatureModalPage,
-    ClientSearchComponent
+    ClientSearchComponent,
+    ChauffeursComponent
   ],
   providers: [
     StatusBar,
