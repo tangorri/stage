@@ -61,11 +61,6 @@ export class AccueilPage {
     thisClass.navCtrl.setRoot(EchangePage);
   };
 
-  deleteBL() {
-    let thisClass = this; 
-    thisClass.navCtrl.setRoot(LivraisonPage);
-  };
-
   showBL() {
     let thisClass = this; 
     thisClass.navCtrl.setRoot(InventairePage);

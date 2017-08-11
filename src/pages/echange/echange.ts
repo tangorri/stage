@@ -1,82 +1,92 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 
-import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
-
-import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
+import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 //Pages
-import { InventairePage } from '../inventaire/inventaire';
 import { AccueilPage } from '../accueil/accueil';
 
-//Modèle
+//Modèles
 import { Marchandise } from '../../modeles/marchandise.modele';
+import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 
 @Component({
   selector: 'page-echange',
-  templateUrl: 'echange.html',
-  providers: [UtilisateurProvider]
+  templateUrl: 'echange.html'
 })
 export class EchangePage {
+  chauffeurName: any;
+  chauffeur2: { name: any; id: any; };
 
   // le modèle des marchandises
-  marchandise: FirebaseObjectObservable<any>;
-  key:string;
+  marchandise: any;
   user:any;
-  marchandiseBinding : object;
 
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
+  constructor( public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public modalCtrl: ModalController) {
 
     // On récupère l'id de l'utilisateur en cours
     this.user = firebase.auth().currentUser.uid;
-    console.log(this.user);
-
-    // On récupère l'id du bon de livraison à modifier
-    this.key = navParams.get("key");
-    console.log("key:"+this.key);
 
     // On se connecte à la base de donnée sur l'élément à modifier
-    this.marchandise = dbAf.object('/users/' + this.user + '/cargaison/' + this.key);
+    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/',{
+      query: {
+        orderByChild: 'echange'
+      }
+    });
+    console.log("constructeur",this.marchandise);
     this.marchandise.subscribe(res => {
-      this.marchandiseBinding = res as Marchandise;
-    });
 
+      console.log("res: ",res);
+    });
+    
+    
+    
   } 
-  
-   updateBL() {
-    // Confirmer la modif
-    let confirm = this.alertCtrl.create({
-      title: 'MODIFIER',
-      message: 'Voulez vous bien modifier ce bon ?',
-      buttons: [
-        {
-          text: 'Annuler',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
-        },
-        {
-          text: 'Modifier',
-          handler: () => {
-
-            //Modifier le bon
-            this.marchandise.update(this.marchandiseBinding).then(res => {
-              alert("Le bon à bien été modifié");
-              this.navCtrl.setRoot(AccueilPage);
-            }).catch(e => {
-              console.log("Une erreur est survenue");
-            })
-          }
-        }
-      ]
+  annuler(key) {
+    
+    let echangeRemove = this.dbAf.list('/users/' + this.user + '/cargaison/'+ key + '/echange/');
+    echangeRemove.remove().then(res => {
+      console.log('echange supprimé');
+      
     });
-    confirm.present(); 
   }
-  
-  
+  echanger(key:string) {
+    let myModal = this.modalCtrl.create(ChauffeursComponent);
+    myModal.onDidDismiss(res => {
+      if(res) {
+        this.chauffeur2 = {
+          name:res.username,
+          id:res.$key
+        };
+        this.chauffeurName = this.chauffeur2.name;
+        console.log("Nom du 2eme chauffeur: ",this.chauffeur2.name);
+        this.marchandise.update(key,{echange: this.chauffeur2});
+      }
+    })
+    myModal.present();
+  }
+  valider(marchandis) {
+    let chauffeurId;
 
+    let echangeOk =  this.dbAf.list('/users/' + marchandis.echange.id + '/cargaison/');
+    delete marchandis.echange;
+    echangeOk.update(marchandis.$key, marchandis).then(res =>{
+      this.marchandise.remove(marchandis.$key);
+    });
+  }
+
+  validateAll(marchandise) {
+    this.marchandise.subscribe(res => {
+      res.forEach(element => { 
+        if(element.echange) {   
+          this.valider(element);
+        }
+      });
+    });
+    
+  }
 
 }

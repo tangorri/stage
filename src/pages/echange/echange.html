@@ -1,52 +1,47 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Modifications</ion-title>
+        <ion-title>Valider les échanges</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+    <ul>
 
-
-    <ion-list id="form">
-
-        <ion-item>
-            <ion-label inset>Référence</ion-label>
-            <ion-input type="number" [(ngModel)]="marchandiseBinding.reference"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label inset>Designation</ion-label>
-            <ion-input [(ngModel)]="marchandiseBinding.designation"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label inset>Quantité</ion-label>
-            <ion-input type="number" [(ngModel)]="marchandiseBinding.quantite"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label inset>Poids (en kg)</ion-label>
-            <ion-input type="number" [(ngModel)]="marchandiseBinding.poids"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label inset>Prix TTC (en €)</ion-label>
-            <ion-input type="number" [(ngModel)]="marchandiseBinding.prix"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label inset>Expediteur</ion-label>
-            <ion-input type="text" [(ngModel)]="marchandiseBinding.expediteur"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label inset>Destinataire</ion-label>
-            <ion-input type="text" [(ngModel)]="marchandiseBinding.destinataire"></ion-input>
-        </ion-item>
-
-        <button ion-button full color="primary" (click)="updateBL()">Modifier Le Bon de Livraison</button>
-    </ion-list>
-
+        <li *ngFor="let marchandis of marchandise | async">
+            <ion-row *ngIf="marchandis.echange">
+                <ion-col>
+                    <ion-item>
+                        {{ marchandis.destinataire.name }}
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.ville }}
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        {{ marchandis.quantite }}
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        {{ marchandis.echange.name }}
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <div class="action">
+                        <img (click)="annuler(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
+                        <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
+                        <img (click)="valider(marchandis)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
+                    </div>
+                </ion-col>
+            </ion-row>
+        </li>
+    </ul>
+    <div>
+        <button ion-button full (click)="validateAll(marchandise)">Valider tous les échanges</button>
+    </div>
 
 </ion-content>
