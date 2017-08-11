@@ -14,9 +14,7 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 })
 export class HomePage {
 
-  /* name: string; */
   email: string;
-  password: string;
 
 
   constructor(public navCtrl: NavController, private utilisateurProvider: UtilisateurProvider) {
@@ -25,7 +23,7 @@ export class HomePage {
   }
 
   login() {
-    this.utilisateurProvider.connexion(this.email, this.password).then(authData => {
+    this.utilisateurProvider.connexion(this.email).then(authData => {
       console.log('login !');
       this.navCtrl.setRoot(TabsPage)
     }, error => {

@@ -63,13 +63,13 @@ export class ClientSearchComponent {
     let val = ev.target.value;
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        return (item.$key.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.nom.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
   saveClient(itemClicked) {
-    this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.$key, tel:itemClicked.tel});
+    this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.nom, tel:itemClicked.tel});
   }
   nouveauClient(searchQuery) {
     this.viewCtrl.dismiss({clientType: this.clientType, name:searchQuery});

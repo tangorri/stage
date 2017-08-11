@@ -1,16 +1,14 @@
 <ion-header>
     <ion-navbar>
         <ion-title id="title">Chauffeurs</ion-title>
+        <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" placeholder="Nom du chauffeur" class="searchBar" #searchbar></ion-searchbar>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" placeholder="Nom du chauffeur" class="searchBar" #searchbar></ion-searchbar>
-
     <ion-list *ngFor="let item of items">
         <ion-item (click)="chooseChauffeur(item)">
             <span id="name">{{ item.username }}</span>
         </ion-item>
     </ion-list>
-
 </ion-content>
