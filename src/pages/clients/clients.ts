@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
 // loader
 import { Loader } from '../../providers/loader/loader';
@@ -28,9 +29,9 @@ class Client {
 
 export class ClientsPage {
   // le modèle des clients
-  client: FirebaseListObservable<any>;
+  client: any;
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, public loader: Loader) {
 
     this.client = dbAf.list('/clients');
 

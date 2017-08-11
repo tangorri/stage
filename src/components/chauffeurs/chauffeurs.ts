@@ -3,6 +3,7 @@ import { NavController, ModalController, NavParams, ViewController, Searchbar } 
 
 // Database
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
 // Pages
 import { RamassagePage } from '../../pages/ramassage/ramassage';
@@ -22,7 +23,7 @@ export class ChauffeursComponent {
   items: Array<any>;
   loadItems: Array<any>;
 
-  constructor(public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, private dbAf: AngularFireOfflineDatabase,  public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController) {
     this.users = this.dbAf.list('/users/');
     this.users.subscribe(snap => {
       let chauffeurs = [];

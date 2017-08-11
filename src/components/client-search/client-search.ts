@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ModalController, NavParams, ViewController, Searchbar } from 'ionic-angular';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
 // Database
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -30,7 +31,7 @@ export class ClientSearchComponent {
   clientVille:string;
   clientType:any;
 
-  constructor( public navCtrl: NavController, private dbAf: AngularFireDatabase,  public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor( public navCtrl: NavController, private dbAf: AngularFireOfflineDatabase,  public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController) {
 
     this.clientType = navParams.get("clientType");
     this.client = this.dbAf.list('/clients/');

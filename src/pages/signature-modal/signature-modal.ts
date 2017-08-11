@@ -12,6 +12,7 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 import { TabsPage } from "../tabs/tabs";
 
 @Component({
@@ -35,7 +36,7 @@ export class SignatureModalPage {
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider) {
 
     // On récupère l'id de l'utilisateur en cours
     this.user = firebase.auth().currentUser.uid;
@@ -56,7 +57,7 @@ export class SignatureModalPage {
   }
 
   drawComplete() {
-    this.signatureImage = this.signaturePad.toDataURL();
+    this.signatureImage = this.signaturePad.toDataURL("image/svg+xml");
     this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now(), delivered: true, chauffeurLivraison: this.user});
     this.navCtrl.setRoot(TabsPage, {tabIndex: 3, signatureImage: this.signatureImage});
   }

@@ -23,6 +23,7 @@ import { Firebase } from '@ionic-native/firebase';
 
 // AngulireFire
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireOfflineModule } from 'angularfire2-offline';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
@@ -67,6 +68,7 @@ import { ChauffeursComponent } from '../components/chauffeurs/chauffeurs';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     SignaturePadModule,
+    AngularFireOfflineModule,
     HttpModule
   ],
   bootstrap: [IonicApp],

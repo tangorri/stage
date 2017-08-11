@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, ModalController } from 'ioni
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
 //Pages
 import { AccueilPage } from '../accueil/accueil';
@@ -25,7 +26,7 @@ export class EchangePage {
   user:any;
 
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public modalCtrl: ModalController) {
+  constructor( public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, public modalCtrl: ModalController) {
 
     // On récupère l'id de l'utilisateur en cours
     this.user = firebase.auth().currentUser.uid;
@@ -48,7 +49,7 @@ export class EchangePage {
   annuler(key) {
     
     let echangeRemove = this.dbAf.list('/users/' + this.user + '/cargaison/'+ key + '/echange/');
-    echangeRemove.remove().then(res => {
+    echangeRemove.remove().offline.then(res => {
       console.log('echange supprimé');
       
     });
@@ -73,13 +74,13 @@ export class EchangePage {
 
     let echangeOk =  this.dbAf.list('/users/' + marchandis.echange.id + '/cargaison/');
     delete marchandis.echange;
-    echangeOk.update(marchandis.$key, marchandis).then(res =>{
+    echangeOk.update(marchandis.$key, marchandis).offline.then(res =>{
       this.marchandise.remove(marchandis.$key);
     });
   }
 
   validateAll(marchandise) {
-    this.marchandise.subscribe(res => {
+    this.marchandise.offline.subscribe(res => {
       res.forEach(element => { 
         if(element.echange) {   
           this.valider(element);

@@ -14,6 +14,7 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
 // Pages
 import { EchangePage } from "../echange/echange";
@@ -44,7 +45,7 @@ export class InventairePage {
   clientAdress: string;
   signatureImage: string;
 
-  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams ) {
 
     this.signatureImage = navParams.get('signatureImage');
     this.user = firebase.auth().currentUser.uid;
@@ -54,7 +55,7 @@ export class InventairePage {
     this.client.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         this.clientName = snapshot.key;
-        this.client = snapshot.val() as Client;
+        this.client = snapshot.val as Client;
         /* console.log(this.client); */
       });
     });

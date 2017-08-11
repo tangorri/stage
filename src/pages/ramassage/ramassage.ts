@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
 // Pages
 import { AccueilPage } from '../accueil/accueil';
@@ -31,9 +32,9 @@ export class RamassagePage {
   chauffeur2: any;
 
   user:any;
-  marchandise: FirebaseListObservable<any>;
+  marchandise: any;
   marchandiseBinding : any;
-  client: FirebaseListObservable<any>;
+  client: any;
 
   clientId:string ='';
   clientObject: any;
@@ -57,7 +58,7 @@ export class RamassagePage {
   destVille: string ='';
   destTel:  string ='';
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
     // connexion database
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
@@ -98,9 +99,9 @@ export class RamassagePage {
       }
     }
 
-    this.marchandise.push(this.marchandiseBinding).then( res => {
+    this.marchandise.push(this.marchandiseBinding).offline.then( res => {
       alert('Bon de livraison ajouté avec succés');
-      this.navCtrl.setRoot(AccueilPage)
+      this.navCtrl.setRoot(AccueilPage);
     }).catch(e => {
       console.log('Une erreur est survenue');
     }); 
