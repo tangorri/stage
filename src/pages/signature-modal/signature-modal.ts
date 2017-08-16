@@ -57,7 +57,7 @@ export class SignatureModalPage {
   }
 
   drawComplete() {
-    this.signatureImage = this.signaturePad.toDataURL("image/svg+xml");
+    this.signatureImage = this.signaturePad.toDataURL();
     this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now(), delivered: true, chauffeurLivraison: this.user});
     this.navCtrl.setRoot(TabsPage, {tabIndex: 3, signatureImage: this.signatureImage});
   }

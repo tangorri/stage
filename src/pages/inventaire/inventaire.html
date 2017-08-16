@@ -7,61 +7,125 @@
 <ion-content padding>
     <service-loader></service-loader>
     <div>
+        <h2>En cours :</h2>
         <ul id="listeMarchandise">
             <li *ngFor="let marchandis of marchandise | async">
-                <!-- reference article -->
-                <div class="ref">
-                    <div>
-                        Destinataire :
-                        <span class="result">{{ marchandis.destinataire.name }}</span>
-                    </div>
-                    <div class="adresse">
-                        {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.codePostal }} {{ marchandis.destinataire.ville }}
-                    </div>
-                    <div class="adresse">
-                        {{ marchandis.destinataire.tel }}
-                    </div>
-                </div>
+                <div *ngIf="marchandis.delivered === false">
 
-                <!-- fiche article -->
-                <div class="fiche">
-                    Expéditeur :
-                    <span class="result">{{ marchandis.expediteur.name }}, {{ marchandis.expediteur.ville }}</span><br /> <span class="tel">{{ marchandis.expediteur.tel }}</span>
-                </div>
-                <div class="fiche">
-                    Désignation :
-                    <span class="result">{{ marchandis.designation }}</span>
-                </div>
-                <div class="fiche">
-                    Quantité :
-                    <span class="result">{{ marchandis.quantite }}</span>
-                </div>
-                <div class="fiche">
-                    Poids :
-                    <span class="result">{{ marchandis.poids }} kg</span>
-                </div>
-                <div class="fiche">
-                    Prix TTC :
-                    <span class="result">{{ marchandis.prix }} €</span>
-                    <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
-                </div>
-                <div *ngIf="marchandis.echange">
-                    Echange prévu avec
-                    <span class="result">{{ marchandis.echange.name }}</span>
-                </div>
-                <div *ngIf="marchandis.dateLivraison" class="fiche">
-                    Livré :
-                    <span class="result">{{ marchandis.dateLivraison | date: 'dd/MM/yyyy H:mm' }}</span>
-                </div>
-                <div *ngIf="marchandis.signature">
-                    <img [src]="marchandis.signature" width="300" />
-                </div>
+                    <!-- reference article -->
+                    <div class="ref">
+                        <div>
+                            Destinataire :
+                            <span class="result">{{ marchandis.destinataire.name }}</span>
+                        </div>
+                        <div class="adresse">
+                            {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.codePostal }} {{ marchandis.destinataire.ville }}
+                        </div>
+                        <!-- <div class="adresse">
+                            {{ marchandis.destinataire.tel }}
+                        </div> -->
+                    </div>
 
-                <div class="action">
-                    <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
-                    <img (click)="suppr(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
-                    <img (click)="openModal(marchandis.$key)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
-                    <img (click)="geoloc(marchandis.$key)" src="assets/img/geoloc.svg" alt="geoloc" width="50" height="50">
+                    <!-- fiche article -->
+                    <div class="fiche">
+                        Expéditeur :
+                        <span class="result">{{ marchandis.expediteur.name }}, {{ marchandis.expediteur.ville }}</span><br />
+                        <!-- <span class="tel">{{ marchandis.expediteur.tel }}</span> -->
+                    </div>
+                    <div class="fiche">
+                        Désignation :
+                        <span class="result">{{ marchandis.designation }}</span>
+                    </div>
+                    <div class="fiche">
+                        Quantité :
+                        <span class="result">{{ marchandis.quantite }}</span>
+                    </div>
+                    <div class="fiche">
+                        Poids :
+                        <span class="result">{{ marchandis.poids }} kg</span>
+                    </div>
+                    <div class="fiche">
+                        Prix TTC :
+                        <span class="result">{{ marchandis.prix }} €</span>
+                        <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
+                    </div>
+                    <div *ngIf="marchandis.echange" class="fiche">
+                        Echange prévu avec
+                        <span class="result">{{ marchandis.echange.name }}</span>
+                    </div>
+                    <!-- <div *ngIf="marchandis.dateLivraison" class="fiche">
+                        Livré :
+                        <span class="result">{{ marchandis.dateLivraison | date: 'dd/MM/yyyy H:mm' }}</span>
+                    </div>
+                    <div *ngIf="marchandis.signature">
+                        <img [src]="marchandis.signature" width="300" />
+                    </div> -->
+
+                    <ion-row class="action">
+                        <ion-col>
+                            <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
+                        </ion-col>
+                        <ion-col>
+                            <img (click)="openModal(marchandis.$key)" src="assets/img/signature.svg" alt="livré" width="50" height="50">
+                        </ion-col>
+                        <ion-col>
+                            <img (click)="geoloc(marchandis.$key)" src="assets/img/geoloc.svg" alt="geoloc" width="50" height="50">
+                        </ion-col>
+                        <!-- <img (click)="suppr(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50"> -->
+                    </ion-row>
+                </div>
+            </li>
+        </ul>
+        <h2>Déjà livré(s) :</h2>
+        <ul id="liste-livree">
+            <li *ngFor="let marchandis of marchandise | async">
+                <div *ngIf="marchandis.delivered === true">
+                    <!-- reference article -->
+                    <div class="ref">
+                        <div>
+                            Destinataire :
+                            <span class="result">{{ marchandis.destinataire.name }}</span>
+                        </div>
+                        <div class="adresse">
+                            {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.codePostal }} {{ marchandis.destinataire.ville }}
+                        </div>
+                        <!-- <div class="adresse">
+                            {{ marchandis.destinataire.tel }}
+                        </div> -->
+                    </div>
+
+                    <!-- fiche article -->
+                    <div class="fiche">
+                        Expéditeur :
+                        <span class="result">{{ marchandis.expediteur.name }}, {{ marchandis.expediteur.ville }}</span><br />
+                        <!-- <span class="tel">{{ marchandis.expediteur.tel }}</span> -->
+                    </div>
+                    <div class="fiche">
+                        Désignation :
+                        <span class="result">{{ marchandis.designation }}</span>
+                    </div>
+                    <div class="fiche">
+                        Quantité :
+                        <span class="result">{{ marchandis.quantite }}</span>
+                    </div>
+                    <div class="fiche">
+                        Poids :
+                        <span class="result">{{ marchandis.poids }} kg</span>
+                    </div>
+                    <div class="fiche">
+                        Prix TTC :
+                        <span class="result">{{ marchandis.prix }} €</span>
+                        <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
+                    </div>
+                    <div *ngIf="marchandis.dateLivraison" class="fiche">
+                        Livré :
+                        <span class="result">{{ marchandis.dateLivraison | date: 'dd/MM/yyyy H:mm' }}</span>
+                    </div>
+                    <div *ngIf="marchandis.signature" class="fiche">
+                        <img [src]="marchandis.signature" width="300" />
+                    </div>
+
+
                 </div>
             </li>
         </ul>

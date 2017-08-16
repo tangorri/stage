@@ -32,16 +32,34 @@
                 </ion-col>
                 <ion-col>
                     <div class="action">
-                        <img (click)="annuler(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
                         <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
                         <img (click)="valider(marchandis)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
+                        <img (click)="annuler(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
                     </div>
                 </ion-col>
             </ion-row>
         </li>
     </ul>
+
+    <table>
+        <tr>
+            <th>Destinataire</th>
+            <th>Adresse</th>
+            <th>Quantité</th>
+            <th>Chauffeur</th>
+        </tr>
+        <li *ngFor="let marchandis of marchandise | async">
+            <tr *ngIf="marchandis.echange">
+                <td>{{ marchandis.destinataire.name }}</td>
+                <td>{{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.ville }}</td>
+                <td>{{ marchandis.quantite }}</td>
+                <td>{{ marchandis.echange.name }}</td>
+            </tr>
+        </li>
+    </table>
+
     <div>
-        <button ion-button full (click)="validateAll(marchandise)">Valider tous les échanges</button>
+        <button ion-button block (click)="validateAll(marchandise)">Valider tous les échanges</button>
     </div>
 
 </ion-content>

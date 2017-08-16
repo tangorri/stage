@@ -2,7 +2,11 @@
 // DEV //
 --------------
 
--griser les bons livrés et les mettre a la fin
+  fixer les case vide laissées par les bons livrés
+
+  mettre ou enlever alertes suivant le besoin
+
+  formater en tableaux les échanges 
 
   Soigner l'ui et css
 
