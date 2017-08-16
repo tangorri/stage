@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Searchbar } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
 
@@ -14,12 +14,19 @@ import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
 })
 export class HomePage {
 
+  @ViewChild('searchbar') searchbar: Searchbar;
+
   email: string;
 
 
   constructor(public navCtrl: NavController, private utilisateurProvider: UtilisateurProvider) {
-    console.log('se connecter avec: admin@admin.fr   mdp: admin1');
-    console.log('ou avec: livreur@livreur.fr   mdp: livreur');
+
+  }
+
+  ionViewDidEnter() {
+    setTimeout(res => {
+      this.searchbar.setFocus();
+    }, 100);
   }
 
   login() {

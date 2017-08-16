@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title id="title">Nouveau Client :</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form #newClient="ngForm" (ngSubmit)="saveNewClient(newClient)">
+        <ion-list id="form">
+
+            <ion-item>
+                <ion-label fixed>Nom ou Raison sociale</ion-label>
+                <ion-input type="text" [(ngModel)]="newClientName" name="newClientName"></ion-input> {{ newClientName }}
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Adresse</ion-label>
+                <ion-input type="text" [(ngModel)]="newClientAdress" name="newClientAdress"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Code Postal</ion-label>
+                <ion-input type="text" [(ngModel)]="newClientCP" name="newClientCP"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Ville</ion-label>
+                <ion-input type="text" [(ngModel)]="newClientVille" name="newClientVille"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Telephone</ion-label>
+                <ion-input type="text" [(ngModel)]="newClientTel" name="newClientTel"></ion-input>
+            </ion-item>
+
+            <button ion-button full color="primary">Enregistrer les données ckient</button>
+        </ion-list>
+    </form>
+
+</ion-content>

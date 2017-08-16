@@ -65,9 +65,6 @@ export class RamassagePage {
 
     // On récupère le type de client 
     this.clientType = navParams.get("clientType");
-
-/*     this.expediteur = this.getExp();
-    this.destinataire = this.getDest(); */
     
   }
 

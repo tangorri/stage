@@ -11,10 +11,12 @@ import { RamassagePage } from '../../pages/ramassage/ramassage';
 //Modèles
 import { Marchandise } from '../../modeles/marchandise.modele';
 import { Client } from '../../modeles/client.modele';
+import { NewClientComponent } from "../new-client/new-client";
 
 @Component({
   selector: 'client-search',
-  templateUrl: 'client-search.html'
+  templateUrl: 'client-search.html',
+  entryComponents: [NewClientComponent]
 })
 
 
@@ -72,9 +74,15 @@ export class ClientSearchComponent {
   saveClient(itemClicked) {
     this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.nom, tel:itemClicked.tel});
   }
-  nouveauClient(searchQuery) {
-    this.viewCtrl.dismiss({clientType: this.clientType, name:searchQuery});
-  }
 
+  nouveauClient(searchQuery) {
+    let myModal = this.modalCtrl.create(NewClientComponent, searchQuery);
+    myModal.onDidDismiss(newClient => {       
+      if(newClient) {
+        this.viewCtrl.dismiss({clientType: this.clientType, adresse: newClient.adresse, codePostal: newClient.codePostal, ville:newClient.ville, name:newClient.name, tel:newClient.tel});
+      }
+    })
+    myModal.present();
+  }
 
 }
