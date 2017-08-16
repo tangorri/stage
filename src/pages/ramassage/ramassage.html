@@ -14,7 +14,7 @@
                 <ion-col>
                     <ion-item class="item">
                         <ion-label fixed>Expediteur</ion-label>
-                        <ion-input type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchExp()"></ion-input>{{ expediteur }}
+                        <ion-input class="text" type="text" [(ngModel)]="expediteur" name="expediteur" (tap)="searchExp()"></ion-input>{{ expediteur }}
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -22,7 +22,7 @@
                 <ion-col>
                     <ion-item>
                         <ion-label fixed>Destinataire</ion-label>
-                        <ion-input type="text" [(ngModel)]="destinataire" name="destinataire" (tap)="searchDest()"></ion-input>{{ destinataire }}
+                        <ion-input class="text" type="text" [(ngModel)]="destinataire" name="destinataire" (tap)="searchDest()"></ion-input>{{ destinataire }}
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -30,7 +30,7 @@
                 <ion-col>
                     <ion-item>
                         <ion-label fixed>Designation</ion-label>
-                        <ion-input type="text" [(ngModel)]="designation" name="designation"></ion-input>
+                        <ion-input class="text" type="text" [(ngModel)]="designation" name="designation"></ion-input>
                     </ion-item>
                 </ion-col>
                 <ion-col>

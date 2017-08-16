@@ -10,9 +10,11 @@ client-search {
     }
     #name {
         padding-left: 2rem;
+        text-transform: lowercase;
         text-transform: capitalize;
     }
     #ville {
+        text-transform: lowercase;
         text-transform: capitalize;
         padding-right: 2rem;
         float: right;

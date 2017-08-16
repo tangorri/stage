@@ -72,14 +72,14 @@ export class ClientSearchComponent {
   }
 
   saveClient(itemClicked) {
-    this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse, codePostal: itemClicked.codePostal, ville:itemClicked.ville, name:itemClicked.nom, tel:itemClicked.tel});
+    this.viewCtrl.dismiss({clientType: this.clientType, adresse: itemClicked.adresse.toLowerCase(), codePostal: itemClicked.codePostal, ville:itemClicked.ville.toLowerCase(), name:itemClicked.nom.toLowerCase(), tel:itemClicked.tel});
   }
 
   nouveauClient(searchQuery) {
-    let myModal = this.modalCtrl.create(NewClientComponent, searchQuery);
+    let myModal = this.modalCtrl.create(NewClientComponent, {searchQuery});
     myModal.onDidDismiss(newClient => {       
       if(newClient) {
-        this.viewCtrl.dismiss({clientType: this.clientType, adresse: newClient.adresse, codePostal: newClient.codePostal, ville:newClient.ville, name:newClient.name, tel:newClient.tel});
+        this.viewCtrl.dismiss({clientType: this.clientType, adresse: newClient.adresse.toLowerCase(), codePostal: newClient.codePostal, ville:newClient.ville.toLowerCase(), name:newClient.name.toLowerCase(), tel:newClient.tel});
       }
     })
     myModal.present();
