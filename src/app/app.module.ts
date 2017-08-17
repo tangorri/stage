@@ -20,6 +20,8 @@ import { AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Firebase } from '@ionic-native/firebase';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 // AngulireFire
 import { AngularFireModule } from 'angularfire2';
@@ -43,6 +45,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { ClientSearchComponent } from '../components/client-search/client-search';
 import { ChauffeursComponent } from '../components/chauffeurs/chauffeurs';
 import { NewClientComponent } from '../components/new-client/new-client';
+import { GoogleMapComponent } from '../components/google-map/google-map';
 
 
 
@@ -61,7 +64,8 @@ import { NewClientComponent } from '../components/new-client/new-client';
     Loader,
     ClientSearchComponent,
     ChauffeursComponent,
-    NewClientComponent
+    NewClientComponent,
+    GoogleMapComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +91,8 @@ import { NewClientComponent } from '../components/new-client/new-client';
     SignatureModalPage,
     ClientSearchComponent,
     ChauffeursComponent,
-    NewClientComponent
+    NewClientComponent,
+    GoogleMapComponent
   ],
   providers: [
     StatusBar,
@@ -96,7 +101,9 @@ import { NewClientComponent } from '../components/new-client/new-client';
     Loader,
     Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UtilisateurProvider
+    UtilisateurProvider,
+    Geolocation,
+    GoogleMaps
   ]
 })
 export class AppModule {}

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
-
 import { ModalController } from 'ionic-angular';
-import { SignatureModalPage } from '../signature-modal/signature-modal';
 
 // Services
 import { Loader } from '../../providers/loader/loader';
@@ -16,20 +14,21 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 
-// Pages
+// Pages, Components
 import { EchangePage } from "../echange/echange";
-
+import { SignatureModalPage } from '../signature-modal/signature-modal';
+import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
+import { GoogleMapComponent } from "../../components/google-map/google-map";
 
 //Modèles
 import { Marchandise } from '../../modeles/marchandise.modele';
 import { Client } from '../../modeles/client.modele';
-import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 
 @Component({
   selector: 'page-inventaire',
   templateUrl: 'inventaire.html',
   providers: [UtilisateurProvider],
-  entryComponents: [ChauffeursComponent]
+  entryComponents: [ChauffeursComponent, GoogleMapComponent]
 })
 
 export class InventairePage {
@@ -44,6 +43,7 @@ export class InventairePage {
   clientName: string;
   clientAdress: string;
   signatureImage: string;
+  adress: string;
 
   constructor(public navCtrl: NavController , private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, public loader: Loader, private utilisateurProvider: UtilisateurProvider, public alertCtrl: AlertController, public modalCtrl: ModalController, public navParams: NavParams ) {
 
@@ -112,33 +112,17 @@ export class InventairePage {
     });
     confirm.present();
   }; 
-
-/*   modifier(key:string) {
-    // Confirmer la modif
-    let confirm = this.alertCtrl.create({
-      title: 'MODIFIER',
-      message: 'Voulez vous bien modifier ce bon ?',
-      buttons: [
-        {
-          text: 'Annuler',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
-        },
-        {
-          text: 'Modifier',
-          handler: () => {
-            // Rediriger vers formulaire de modification
-            this.navCtrl.push(EchangePage, {key:key});
-          }
-        }
-      ]
-    });
-    confirm.present();
-  };  */
-
+  
   geoloc(key:string) {
-    console.log('geoloc');
+    let myAdress = this.dbAf.list('/users/' + this.user + '/cargaison/' + key + '/destinataire/');
+    myAdress.subscribe(res => {
+      this.clientAdress = res[0].$value + ', ' + res[1].$value + ' ' + res[4].$value;
+      console.log('res: ', this.clientAdress);
+    });
+    let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress});
+    myModal.present();
   }; 
+
+
 
 }
