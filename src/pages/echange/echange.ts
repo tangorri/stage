@@ -17,6 +17,7 @@ import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
   selector: 'page-echange',
   templateUrl: 'echange.html'
 })
+
 export class EchangePage {
   chauffeurName: any;
   chauffeur2: { name: any; id: any; };
@@ -26,34 +27,25 @@ export class EchangePage {
   user:any;
 
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, public modalCtrl: ModalController) {
+      // On récupère l'id de l'utilisateur en cours
+      this.user = firebase.auth().currentUser.uid;
+      // On se connecte à la base de donnée sur l'élément à modifier
+      this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
+      this.marchandise.subscribe(res => {
+        console.log("res: ",res);
+      }); 
 
-    // On récupère l'id de l'utilisateur en cours
-    this.user = firebase.auth().currentUser.uid;
-
-    // On se connecte à la base de donnée sur l'élément à modifier
-    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/',{
-      query: {
-        orderByChild: 'echange'
-      }
-    });
-    console.log("constructeur",this.marchandise);
-    this.marchandise.subscribe(res => {
-
-      console.log("res: ",res);
-    });
-    
-    
-    
-  } 
+  }
+  
   annuler(key) {
-    
     let echangeRemove = this.dbAf.list('/users/' + this.user + '/cargaison/'+ key + '/echange/');
     echangeRemove.remove().offline.then(res => {
       console.log('echange supprimé');
-      
     });
   }
+
   echanger(key:string) {
     let myModal = this.modalCtrl.create(ChauffeursComponent);
     myModal.onDidDismiss(res => {
@@ -69,6 +61,7 @@ export class EchangePage {
     })
     myModal.present();
   }
+
   valider(marchandis) {
     let chauffeurId;
 
@@ -87,7 +80,6 @@ export class EchangePage {
         }
       });
     });
-    
   }
 
 }

@@ -1,22 +1,17 @@
 ***********************************************************
 // DEV //
 --------------
-
-  fixer les case vide laissées par les bons livrés
-
   mettre ou enlever alertes suivant le besoin
 
-  formater en tableaux les échanges 
-
+  Implémenter google map 
+   
   Soigner l'ui et css
 
   Nettoyer et commenter le code
 
-
 ***********************************************************
 // OPTIONNEL //
 --------------
-  Implémenter google map  
 
   Envoie de mails
 

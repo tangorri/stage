@@ -6,42 +6,70 @@
 
 
 <ion-content padding>
+    <ion-row id="title" class="row">
+        <ion-col col-2>
+            <ion-item>
+                <h3 class="title">Chauffeur</h3>
+            </ion-item>
+        </ion-col>
+        <ion-col col-7>
+            <ion-item>
+                <h3 class="title">Destinataire</h3>
+            </ion-item>
+        </ion-col>
+        <ion-col col-1>
+            <ion-item>
+                <h3 class="title">Qté</h3>
+            </ion-item>
+        </ion-col>
+        <ion-col col-2>
+            <ion-item>
+                <h3 class="title">Actions</h3>
+            </ion-item>
+        </ion-col>
+    </ion-row>
     <ul>
-
         <li *ngFor="let marchandis of marchandise | async">
-            <ion-row *ngIf="marchandis.echange">
-                <ion-col>
-                    <ion-item>
-                        {{ marchandis.destinataire.name }}
+            <ion-row *ngIf="marchandis.echange && marchandis.delivered === false" class="row">
+                <ion-col col-2>
+                    <ion-item class="name">
+                        {{ marchandis.echange.name }}
                     </ion-item>
                 </ion-col>
-                <ion-col>
+                <ion-col col-7>
                     <ion-item>
-                        {{ marchandis.destinataire.adresse }}, {{ marchandis.destinataire.ville }}
+                        <span class="name">
+                            {{ marchandis.destinataire.name }}, 
+                        </span>
+                        <span class="ville">
+                            {{ marchandis.destinataire.adresse }}, 
+                            {{ marchandis.destinataire.ville }}
+                        </span>
                     </ion-item>
                 </ion-col>
-                <ion-col>
+                <ion-col col-1>
                     <ion-item>
                         {{ marchandis.quantite }}
                     </ion-item>
                 </ion-col>
-                <ion-col>
+                <ion-col col-2 class="action">
                     <ion-item>
-                        {{ marchandis.echange.name }}
+                        <ion-col>
+                            <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="30" height="30">
+                        </ion-col>
+                        <ion-col>
+                            <img (click)="valider(marchandis)" src="assets/img/checked.svg" alt="livré" width="30" height="30">
+                        </ion-col>
+                        <ion-col>
+                            <img (click)="annuler(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="30" height="30">
+                        </ion-col>
                     </ion-item>
-                </ion-col>
-                <ion-col>
-                    <div class="action">
-                        <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="50" height="50">
-                        <img (click)="valider(marchandis)" src="assets/img/delivered.svg" alt="livré" width="50" height="50">
-                        <img (click)="annuler(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="50" height="50">
-                    </div>
                 </ion-col>
             </ion-row>
         </li>
     </ul>
 
-    <table>
+    <!-- <table>
         <tr>
             <th>Destinataire</th>
             <th>Adresse</th>
@@ -56,7 +84,7 @@
                 <td>{{ marchandis.echange.name }}</td>
             </tr>
         </li>
-    </table>
+    </table> -->
 
     <div>
         <button ion-button block (click)="validateAll(marchandise)">Valider tous les échanges</button>

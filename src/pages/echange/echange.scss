@@ -3,11 +3,44 @@ page-echange {
         background-color: lightgrey;
         color: #282828;
     }
+    ion-col.col {
+        padding: 0.02;
+    }
+    #title {
+        padding-left: 40px;
+        text-align: center;
+    }
+    .title {
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
     li {
         list-style-type: none;
+    }
+    .row {
+        width: 93%;
+        /* padding-left: 40px; */
+    }
+    .item-block {
+        height: 50px;
+        background-color: white;
+        color: #282828;
+        font-size: 1.6rem;
+    }
+    .name {
+        text-align: left;
+        text-transform: capitalize;
+    }
+    .ville {
+        float: right;
+        font-style: italic;
+        text-transform: capitalize;
     }
     .button-block-md {
         width: 90%;
         margin-left: 4rem;
+    }
+    .action img {
+        margin-left: .5rem;
     }
 }
