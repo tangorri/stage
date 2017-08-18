@@ -39,6 +39,7 @@ export class InventairePage {
   chauffeurName: any;
 
   marchandise: any;
+  marchandiseLivree: any;
   client: any;
   clientName: string;
   clientAdress: string;
@@ -49,7 +50,26 @@ export class InventairePage {
 
     this.signatureImage = navParams.get('signatureImage');
     this.user = firebase.auth().currentUser.uid;
-    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
+    //Marchandise
+    this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/', {
+      query:{
+        orderByChild: 'delivered',
+        equalTo: false
+      }
+    });
+    this.marchandise.subscribe(queryMarchandise => {
+      console.log('query : ',queryMarchandise); 
+    });
+
+    this.marchandiseLivree = dbAf.list('/users/' + this.user + '/cargaison/', {
+      query:{
+        orderByChild: 'delivered',
+        equalTo: true
+      }
+    });
+    this.marchandiseLivree.subscribe(queryMarchandise => {
+      console.log('query : ',queryMarchandise); 
+    });
 
     this.client = dbAf.list('/clients/', { preserveSnapshot: true });
     this.client.subscribe(snapshots => {

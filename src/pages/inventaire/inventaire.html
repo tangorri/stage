@@ -78,7 +78,7 @@
         </ul>
         <h2>Déjà livré(s) :</h2>
         <ul id="liste-livree">
-            <li *ngFor="let marchandis of marchandise | async">
+            <li *ngFor="let marchandis of marchandiseLivree | async">
                 <div *ngIf="marchandis.delivered === true">
                     <!-- reference article -->
                     <div class="ref">
