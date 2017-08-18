@@ -24,7 +24,7 @@
         </ion-col>
         <ion-col col-2>
             <ion-item>
-                <h3 class="title">Actions</h3>
+                <h3 class="title">Annuler / Valider</h3>
             </ion-item>
         </ion-col>
     </ion-row>
@@ -34,6 +34,7 @@
                 <ion-col col-2>
                     <ion-item class="name">
                         {{ marchandis.echange.name }}
+                        <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="30" height="30" class="right">
                     </ion-item>
                 </ion-col>
                 <ion-col col-7>
@@ -55,13 +56,10 @@
                 <ion-col col-2 class="action">
                     <ion-item>
                         <ion-col>
-                            <img (click)="echanger(marchandis.$key)" src="assets/img/modifier.svg" alt="modifier" width="30" height="30">
+                            <img (click)="annuler(marchandis.$key)" src="assets/img/annuler.svg" alt="supprimer" width="30" height="30" class="left">
                         </ion-col>
                         <ion-col>
-                            <img (click)="valider(marchandis)" src="assets/img/checked.svg" alt="livré" width="30" height="30">
-                        </ion-col>
-                        <ion-col>
-                            <img (click)="annuler(marchandis.$key)" src="assets/img/supprimer.svg" alt="supprimer" width="30" height="30">
+                            <img (click)="valider(marchandis)" src="assets/img/checked.svg" alt="livré" width="30" height="30" class="right">
                         </ion-col>
                     </ion-item>
                 </ion-col>

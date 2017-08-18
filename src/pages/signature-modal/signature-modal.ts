@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { InventairePage } from "../inventaire/inventaire";
@@ -36,7 +36,7 @@ export class SignatureModalPage {
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider) {
 
     // On récupère l'id de l'utilisateur en cours
     this.user = firebase.auth().currentUser.uid;
@@ -57,9 +57,30 @@ export class SignatureModalPage {
   }
 
   drawComplete() {
-    this.signatureImage = this.signaturePad.toDataURL();
-    this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now(), delivered: true, chauffeurLivraison: this.user});
-    this.navCtrl.setRoot(TabsPage, {tabIndex: 3, signatureImage: this.signatureImage});
+
+    
+      // Confirmer la livraison
+      let confirm = this.alertCtrl.create({
+        title: 'Livraison effectuée',
+        message: 'Etes vous sûr de vouloir identifier cette livraison comme livrée ?',
+        buttons: [
+          {
+            text: 'Annuler',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Valider',
+            handler: () => {
+              this.signatureImage = this.signaturePad.toDataURL();
+              this.marchandise.update(this.key,{signature: this.signatureImage, dateLivraison:Date.now(), delivered: true, chauffeurLivraison: this.user});
+              this.navCtrl.setRoot(TabsPage, {tabIndex: 3, signatureImage: this.signatureImage});
+            }
+          }
+        ]
+      });
+      confirm.present();
   }
 
   drawClear() {

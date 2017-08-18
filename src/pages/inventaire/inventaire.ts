@@ -98,13 +98,22 @@ export class InventairePage {
     myModal.present();
   }
 
-  openModal(key:string) {
+  signature(key:string) {
     let myModal = this.modalCtrl.create(SignatureModalPage, {key:key});
     myModal.present();
   }; 
 
-
-  suppr(key:string) {
+  geoloc(key:string) {
+    let myAdress = this.dbAf.list('/users/' + this.user + '/cargaison/' + key + '/destinataire/');
+    myAdress.subscribe(res => {
+      this.clientAdress = res[0].$value + ', ' + res[1].$value + ' ' + res[4].$value;
+      console.log('res: ', this.clientAdress);
+    });
+    let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress});
+    myModal.present();
+  }; 
+  
+  /* suppr(key:string) {
     // Confirmer la suppression
     let confirm = this.alertCtrl.create({
       title: 'SUPPRIMER',
@@ -131,18 +140,7 @@ export class InventairePage {
       ]
     });
     confirm.present();
-  }; 
+  }; */ 
   
-  geoloc(key:string) {
-    let myAdress = this.dbAf.list('/users/' + this.user + '/cargaison/' + key + '/destinataire/');
-    myAdress.subscribe(res => {
-      this.clientAdress = res[0].$value + ', ' + res[1].$value + ' ' + res[4].$value;
-      console.log('res: ', this.clientAdress);
-    });
-    let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress});
-    myModal.present();
-  }; 
-
-
-
+  
 }

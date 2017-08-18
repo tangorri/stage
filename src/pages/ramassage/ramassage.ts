@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { NavParams } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
+import { ModalController, AlertController } from 'ionic-angular';
 
 import firebase from 'firebase';
 import { UtilisateurProvider } from '../../providers/utilisateur/utilisateur';
@@ -58,7 +58,7 @@ export class RamassagePage {
   destVille: string ='';
   destTel:  string ='';
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
     // connexion database
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
@@ -96,12 +96,30 @@ export class RamassagePage {
       }
     }
 
-    this.marchandise.push(this.marchandiseBinding).offline.then( res => {
-      alert('Bon de livraison ajouté avec succés');
-      this.navCtrl.setRoot(AccueilPage);
-    }).catch(e => {
-      console.log('Une erreur est survenue');
-    }); 
+    let confirm = this.alertCtrl.create({
+      title: 'Ajouter Bon de Livraison',
+      message: 'Etes vous sûr de vouloir ajouter ce bon de livraison ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Ajouter',
+          handler: () => {
+            this.marchandise.push(this.marchandiseBinding).offline.then( res => {
+              alert('Bon de livraison ajouté avec succés');
+              this.navCtrl.setRoot(AccueilPage);
+            }).catch(e => {
+              console.log('Une erreur est survenue');
+            });  
+          }
+        }
+      ]
+    });
+    confirm.present();
   } 
 
   searchExp() {
