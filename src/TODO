@@ -1,32 +1,24 @@
-***********************************************************
+*****************************************
 // DEV //
 --------------
-  mettre ou enlever alertes suivant le besoin
+  -Fixer google map 
 
-  Implémenter google map 
-   
-  Soigner l'ui et css
+  -Lier avec bdd locale pour le retour
 
-  Nettoyer et commenter le code
+  -Nettoyer et commenter le code
 
-***********************************************************
+*****************************************
 // OPTIONNEL //
 --------------
+  -Envoie de mails aux clients
 
-  Envoie de mails
+  -Notifications push (pour les échanges)
 
-  Motifications push (pour les échanges)
-
-
-***********************************************************
+*****************************************
 // PRODUCTION //
 --------------
-  Lier avec bdd locale
-
-  Déployer 
+  -Déployer 
   
-  Tester
+  -Tester
 
-***********************************************************
-// PRESENTER //
---------------
+*****************************************
