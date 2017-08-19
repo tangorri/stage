@@ -8,7 +8,6 @@ import firebase from 'firebase';
 // Pages
 import { RamassagePage } from '../ramassage/ramassage';
 import { EchangePage } from '../echange/echange';
-import { LivraisonPage } from '../livraison/livraison';
 import { InventairePage } from '../inventaire/inventaire';
 import { HomePage } from '../home/home';
 

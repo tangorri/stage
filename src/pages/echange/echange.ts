@@ -40,10 +40,28 @@ export class EchangePage {
   }
   
   annuler(key) {
-    let echangeRemove = this.dbAf.list('/users/' + this.user + '/cargaison/'+ key + '/echange/');
-    echangeRemove.remove().offline.then(res => {
-      console.log('echange supprimé');
+    let confirm = this.alertCtrl.create({
+      title: 'Annuler l\'échange',
+      message: 'Voulez vous annuler cet échange ?',
+      buttons: [
+        {
+          text: 'Non',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Oui',
+          handler: () => {
+            let echangeRemove = this.dbAf.list('/users/' + this.user + '/cargaison/'+ key + '/echange/');
+            echangeRemove.remove().offline.then(res => {
+              alert('echange supprimé');
+            }); 
+          }
+        }
+      ]
     });
+    confirm.present();
   }
 
   echanger(key:string) {
@@ -62,24 +80,64 @@ export class EchangePage {
     myModal.present();
   }
 
+  confirmValider(marchandis) {
+    let confirm = this.alertCtrl.create({
+      title: 'Valider l\'échange',
+      message: 'Voulez vous valider l\' échange avec '+ marchandis.echange.name +' ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Valider',
+          handler: () => {
+            this.valider(marchandis);
+          }
+        }
+      ]
+    });
+    confirm.present();
+    
+  }
+  
   valider(marchandis) {
     let chauffeurId;
-
     let echangeOk =  this.dbAf.list('/users/' + marchandis.echange.id + '/cargaison/');
     delete marchandis.echange;
     echangeOk.update(marchandis.$key, marchandis).offline.then(res =>{
       this.marchandise.remove(marchandis.$key);
-    });
+    }); 
   }
 
   validateAll(marchandise) {
-    this.marchandise.offline.subscribe(res => {
-      res.forEach(element => { 
-        if(element.echange) {   
-          this.valider(element);
+    let confirm = this.alertCtrl.create({
+      title: 'Valider tous les échanges',
+      message: 'Etes vous sûr de vouloir valider TOUS les échanges ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Valider tout',
+          handler: () => {
+            this.marchandise.subscribe(res => {
+              res.forEach(element => { 
+                if(element.echange) {   
+                  this.valider(element);
+                }
+              });
+            });
+          }
         }
-      });
+      ]
     });
+    confirm.present(); 
   }
 
 }

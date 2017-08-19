@@ -1,25 +1,23 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, AlertController } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 // Pages
 import { HomePage } from '../pages/home/home';
 import { AccueilPage } from '../pages/accueil/accueil';
 import { RamassagePage } from '../pages/ramassage/ramassage';
-import { LivraisonPage } from '../pages/livraison/livraison';
 import { EchangePage } from '../pages/echange/echange';
-import { ClientsPage } from '../pages/clients/clients';
 import { InventairePage } from '../pages/inventaire/inventaire';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignatureModalPage } from '../pages/signature-modal/signature-modal';
 
 // Native components
-import { AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Firebase } from '@ionic-native/firebase';
+import {} from '@types/googlemaps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
@@ -55,9 +53,7 @@ import { GoogleMapComponent } from '../components/google-map/google-map';
     HomePage,
     AccueilPage,
     RamassagePage,
-    LivraisonPage,
     EchangePage,
-    ClientsPage,
     InventairePage,
     TabsPage,
     SignatureModalPage,
@@ -83,9 +79,7 @@ import { GoogleMapComponent } from '../components/google-map/google-map';
     HomePage,
     AccueilPage,
     RamassagePage,
-    LivraisonPage,
     EchangePage,
-    ClientsPage,
     InventairePage,
     TabsPage,
     SignatureModalPage,
