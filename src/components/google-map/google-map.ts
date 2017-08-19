@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform} from 'ionic-angular';
 
 // GoogleMap components
@@ -8,26 +8,57 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, GoogleMapsAnimation, Ca
 
 import { InventairePage } from '../../pages/inventaire/inventaire';
 
+declare var google;
+
 @Component({
   selector: 'google-map',
   templateUrl: 'google-map.html'
 })
 export class GoogleMapComponent {
-  adress: string;
+  @ViewChild('map') mapElement: ElementRef;
+  destAdress: string;
+  destLatLng: string;
   marker: any;
-  map: GoogleMap;
+  map: any;
 
   constructor(public navCtrl: NavController ,public modalCtrl: ModalController, public navParams: NavParams, private geoLocation: Geolocation, public platform: Platform, private googleMaps: GoogleMaps) {
 
-    this.adress = navParams.get('adress');
-    console.log(this.adress);
+    this.destAdress = this.navParams.get('adress');
+    this.destLatLng = this.navParams.get('latLng');
+    console.log(this.destAdress);
+    console.log(this.destLatLng);
 
   }
 
-// Load map only after view is initialized
-  ngAfterViewInit() {
+  ionViewDidLoad(){
     this.loadMap();
   }
+
+  loadMap(){
+    
+    let latLng = new google.maps.LatLng(this.destLatLng);
+    console.log("la carte est en cours de chargement");
+ 
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    
+ 
+  }
+
+
+
+
+ /*  
+  // Load map only after view is initialized
+    ngAfterViewInit() {
+      this.loadMap();
+    }
+
  
   loadMap() {
     
@@ -60,16 +91,16 @@ export class GoogleMapComponent {
     // move the map's camera to position
     this.map.moveCamera(position);
   
-    /* // create new marker
+    // create new marker
     let markerOptions: MarkerOptions = {
-      position: ionic,
+      position: this.latLng,
       title: 'Ionic'
     };
   
     const marker: Marker = map.addMarker(markerOptions)
       .then((marker: Marker) => {
         marker.showInfoWindow();
-      }); */
-  }
+      });
+  } */
 
 }

@@ -43,6 +43,7 @@ export class InventairePage {
   client: any;
   clientName: string;
   clientAdress: string;
+  clientCoords: string;
   signatureImage: string;
   adress: string;
 
@@ -68,7 +69,7 @@ export class InventairePage {
       }
     });
     this.marchandiseLivree.subscribe(queryMarchandise => {
-      console.log('query : ',queryMarchandise); 
+      console.log('marchandiseLivree : ',queryMarchandise); 
     });
 
     this.client = dbAf.list('/clients/', { preserveSnapshot: true });
@@ -106,10 +107,11 @@ export class InventairePage {
   geoloc(key:string) {
     let myAdress = this.dbAf.list('/users/' + this.user + '/cargaison/' + key + '/destinataire/');
     myAdress.subscribe(res => {
-      this.clientAdress = res[0].$value + ', ' + res[1].$value + ' ' + res[4].$value;
-      console.log('res: ', this.clientAdress);
+      this.clientCoords = res[2].$value + ', ' + res[3].$value;
+      console.log('LatLng: ', this.clientCoords);
+      this.clientAdress = res[4].$value + ', ' + res[0].$value + ', ' + res[1].$value + ', ' + res[6].$value;
     });
-    let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress});
+    let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress, latLng: this.clientCoords});
     myModal.present();
   }; 
   

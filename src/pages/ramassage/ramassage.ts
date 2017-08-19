@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { NavParams } from 'ionic-angular';
@@ -30,12 +31,12 @@ import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 export class RamassagePage {
   chauffeurName: any;
   chauffeur2: any;
-
+  
   user:any;
   marchandise: any;
   marchandiseBinding : any;
   client: any;
-
+  
   clientId:string ='';
   clientObject: any;
   clientVille:string ='';
@@ -43,22 +44,24 @@ export class RamassagePage {
   clientAdresse:string ='';
   clientCP:string ='';
   clientType:any;
-
+  
   expediteur:any;
   expName: string ='';
   expAdresse: string ='';
   expCP: string ='';
   expVille: string ='';
   expTel:  string ='';
-
+  
   destinataire:any;
   destName: string ='';
   destAdresse: string ='';
   destCP: string ='';
   destVille: string ='';
-  destTel:  string ='';
+  destTel: string ='';
+  destLng: any;
+  destLat: any; 
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams, public http: Http) {
     // connexion database
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
@@ -86,7 +89,9 @@ export class RamassagePage {
       adresse: this.destAdresse,
       codePostal: this.destCP,
       ville: this.destVille,
-      tel: this.destTel
+      tel: this.destTel,
+      lat: this.destLat,
+      lng: this.destLng
     };
     this.marchandiseBinding.echange = this.chauffeur2;
     console.log(this.marchandiseBinding);
@@ -167,10 +172,19 @@ export class RamassagePage {
       this.destVille = client.ville;
       this.destTel = client.tel;
 
+      // obtenir les coordonées pour géoloc
+      let destAdresseSearch = this.destAdresse+'+'+this.destCP+'+'+this.destVille;
+      let url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+destAdresseSearch+'&sensor=true&region=FR';
+      console.log('url : ', url);
+      this.http.get(url).map(res => res.json()).subscribe(data => {
+        this.destLat = data.results[0].geometry.location.lat;
+        this.destLng = data.results[0].geometry.location.lng;
+        console.log("lat :",this.destLat);
+        console.log("lng :",this.destLng);
+      });
+      
       this.destinataire =  client.name + ',  ' + client.adresse +' ' +  client.codePostal +' ' +  client.ville;
       console.log("destinataire: ", this.destinataire);
-
-      return this.destinataire;
     };
   }
 
