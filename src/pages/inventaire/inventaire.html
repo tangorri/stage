@@ -51,9 +51,10 @@
                         <span class="result">{{ marchandis.prix }} €</span>
                         <span class="result" id="cr" *ngIf="marchandis.CR == true">!! CR !!</span>
                     </div>
-                    <div *ngIf="marchandis.echange" class="fiche">
+                    <div class="fiche">
                         Echange prévu avec
-                        <span class="result">{{ marchandis.echange.name }}</span>
+                        <span class="result" *ngIf="marchandis.echange">{{ marchandis.echange.name }}</span>
+                        <span class="result" *ngIf="!marchandis.echange"> / </span>
                     </div>
                     <!-- <div *ngIf="marchandis.dateLivraison" class="fiche">
                         Livré :
