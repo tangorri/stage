@@ -8,13 +8,14 @@ client-search {
         text-align: center;
         padding: 10px;
     }
-    #name {
+    ion-label.label.label-md {
         padding-left: 2rem;
         text-transform: lowercase;
+    }
+    ion-label.label.label-md::first-letter {
         text-transform: capitalize;
     }
     #ville {
-        text-transform: lowercase;
         text-transform: capitalize;
         padding-right: 2rem;
         float: right;

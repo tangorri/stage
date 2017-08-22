@@ -157,11 +157,8 @@ export class RamassagePage {
       this.expVille = client.ville;
       this.expTel = client.tel;
 
-      this.expediteur = client.name + ',  ' + client.ville;
+      this.expediteur = client.name.toLowerCase() + ',  ' + client.ville.toLowerCase();
       console.log("expediteur: ", this.expediteur);
-
-      return this.expediteur;
-
   }
 
   getDest(client) {
@@ -183,7 +180,7 @@ export class RamassagePage {
         console.log("lng :",this.destLng);
       });
       
-      this.destinataire =  client.name + ',  ' + client.adresse +' ' +  client.codePostal +' ' +  client.ville;
+      this.destinataire =  client.name.toLowerCase() + ',  ' +  client.ville.toLowerCase();
       console.log("destinataire: ", this.destinataire);
     };
   }

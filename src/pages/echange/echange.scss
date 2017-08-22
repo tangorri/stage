@@ -3,6 +3,9 @@ page-echange {
         background-color: lightgrey;
         color: #282828;
     }
+    ion-title {
+        text-align: center;
+    }
     ion-col.col {
         padding: 0.02;
     }
@@ -38,6 +41,7 @@ page-echange {
     }
     .button-block-md {
         width: 90%;
+        height: 50px;
         margin-left: 4rem;
     }
     .action img {
@@ -48,5 +52,10 @@ page-echange {
     }
     .left {
         float: left;
+    }
+    button span.button-inner {
+        color: white;
+        font-size: 1.8rem;
+        padding: 2rem;
     }
 }

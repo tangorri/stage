@@ -107,9 +107,9 @@ export class InventairePage {
   geoloc(key:string) {
     let myAdress = this.dbAf.list('/users/' + this.user + '/cargaison/' + key + '/destinataire/');
     myAdress.subscribe(res => {
-      this.clientCoords = res[2].$value + ', ' + res[3].$value;
+      this.clientCoords = res[2].$value + ',' + res[3].$value;
       console.log('LatLng: ', this.clientCoords);
-      this.clientAdress = res[4].$value + ', ' + res[0].$value + ', ' + res[1].$value + ', ' + res[6].$value;
+      this.clientAdress = res[0].$value + '+' + res[1].$value + '+' + res[6].$value;
     });
     let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress, latLng: this.clientCoords});
     myModal.present();

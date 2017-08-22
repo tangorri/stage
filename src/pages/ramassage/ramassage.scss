@@ -8,11 +8,40 @@ page-ramassage {
         text-align: center;
     }
     #form {
-        width: 70%;
+        width: 90%;
         margin: 2rem auto;
     }
-    .item input .text {
+    .text-input-md {
         text-transform: capitalize;
         text-align: right
+    }
+    .item-block {
+        height: 50px;
+        background-color: white;
+        color: #282828;
+        font-size: 1.6rem;
+    }
+    .checkbox-md .checkbox-icon {
+        background-color: white;
+    }
+    .checkbox-md .checkbox-checked {
+        background-color: #282828;
+        border-color: #282828;
+    }
+    span.button-inner {
+        color: #282828;
+    }
+    ion-label.label.label-md {
+        color: #282828;
+    }
+    .button-block-md {
+        width: 99%;
+        height: 50px;
+        margin: 10px auto;
+    }
+    button span.button-inner {
+        color: white;
+        font-size: 1.8rem;
+        padding: 2rem;
     }
 }

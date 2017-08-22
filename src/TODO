@@ -1,17 +1,15 @@
 *****************************************
 // DEV //
 --------------
+  -Bug du build android (conflits google service)
+
   -Fixer google map
   >> PB avec les données de l'adresse: certaines contiennent
      le nom d'un client ce qui fait bugger le géocodage
 
-  -Bug du build android (conflits google service)
-
   -Prévoir déconnexion auto
 
   -Lier avec bdd locale pour le retour
-
-  -harmoniser les textes (capitalize)
 
   -Nettoyer et commenter le code
 
