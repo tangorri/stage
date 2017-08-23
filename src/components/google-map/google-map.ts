@@ -20,15 +20,19 @@ export class GoogleMapComponent {
   destLatLng: string;
   marker: any;
   map: any;
+  url: string;
 
   constructor(public navCtrl: NavController ,public modalCtrl: ModalController, public navParams: NavParams, private geoLocation: Geolocation, public platform: Platform, private googleMaps: GoogleMaps) {
 
     this.destAdress = this.navParams.get('adress');
     this.destLatLng = this.navParams.get('latLng');
-    console.log(this.destAdress);
-    console.log(this.destLatLng);
-
+    console.log("lat, lng : ",this.destLatLng);
+    /* this.url = "https://www.google.fr/maps/@"+this.destLatLng+",15z?hl=fr";
+    console.log(this.url);
+    this.map = document.getElementById("gmap");
+    this.map.setAttribute('src', this.url); */
   }
+
 
   ionViewDidLoad(){
     this.loadMap();
@@ -50,57 +54,5 @@ export class GoogleMapComponent {
  
   }
 
-
-
-
- /*  
-  // Load map only after view is initialized
-    ngAfterViewInit() {
-      this.loadMap();
-    }
-
- 
-  loadMap() {
-    
-    // create a new map by passing HTMLElement
-    let element: HTMLElement = document.getElementById('map');
-    
-    this.map = this.googleMaps.create(element);
-    console.log('map is loading...');
-    console.log('map : ', this.map);
-  
-    // listen to MAP_READY event
-    // You must wait for this event to fire before adding something to the map or modifying it in anyway
-    this.map.one(GoogleMapsEvent.MAP_READY).then(
-      () => {
-        console.log('Map is ready!');
-        // Now you can add elements to the map like the marker
-      }
-    );
-  
-    // create CameraPosition
-    let position: CameraPosition = {
-      target: {
-        lat: 43.3576191,
-        lng: -1.2144617
-      },
-      zoom: 18,
-      tilt: 30
-    };
-  
-    // move the map's camera to position
-    this.map.moveCamera(position);
-  
-    // create new marker
-    let markerOptions: MarkerOptions = {
-      position: this.latLng,
-      title: 'Ionic'
-    };
-  
-    const marker: Marker = map.addMarker(markerOptions)
-      .then((marker: Marker) => {
-        marker.showInfoWindow();
-      });
-  } */
 
 }

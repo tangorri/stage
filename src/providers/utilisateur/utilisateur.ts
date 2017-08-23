@@ -118,21 +118,25 @@ export class UtilisateurProvider {
   }
 
 
-  constructor(public http: Http ) {
+  constructor(public http: Http) {
     this.afAuth = firebase.auth();
     this.userProfile = firebase.database().ref('users');
   }
 
+  
   connexion(identifiant:string) : any {
     console.log(identifiant);
+    /* let connected = this.afAuth.signInWithEmailAndPassword(this.utilisateurs[identifiant].mail, identifiant).then(()=>{
+      setTimeout(this.deconnexion(), 20000);
+    });
+    return connected; */
     return this.afAuth.signInWithEmailAndPassword(this.utilisateurs[identifiant].mail, identifiant);
-    
   }
-
+  
   deconnexion() {
+    console.log("logout");
     return this.afAuth.signOut();
   }
-
   getUser(userId: any) {
     var userRef= this.userProfile.child(userId);
     console.log('userId : ' + userId);

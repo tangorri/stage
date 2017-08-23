@@ -109,7 +109,7 @@ export class InventairePage {
     myAdress.subscribe(res => {
       this.clientCoords = res[2].$value + ',' + res[3].$value;
       console.log('LatLng: ', this.clientCoords);
-      this.clientAdress = res[0].$value + '+' + res[1].$value + '+' + res[6].$value;
+      this.clientAdress = res[0].$value + ', ' + res[1].$value + ', ' + res[6].$value;
     });
     let myModal = this.modalCtrl.create(GoogleMapComponent, {adress: this.clientAdress, latLng: this.clientCoords});
     myModal.present();

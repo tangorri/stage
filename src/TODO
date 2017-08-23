@@ -4,10 +4,10 @@
   -Bug du build android (conflits google service)
 
   -Fixer google map
-  >> PB avec les données de l'adresse: certaines contiennent
-     le nom d'un client ce qui fait bugger le géocodage
 
-  -Prévoir déconnexion auto
+  -Fixer déconnexion auto
+
+  -Numéro BL autoincrément
 
   -Lier avec bdd locale pour le retour
 

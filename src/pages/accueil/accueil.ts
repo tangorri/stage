@@ -33,20 +33,21 @@ export class AccueilPage {
 
   
      this.getUserName(firebase.auth().currentUser.uid);
-
-  }
-
-  getUserName(userId) {
-    this.utilisateurProvider.getUser(userId).then(snapshot => {
-      this.user = snapshot.val() as User;
-      console.log(this.user);
-     this.profileLoaded = true; 
+     
+    }
+    
+    getUserName(userId) {
+      this.utilisateurProvider.getUser(userId).then(snapshot => {
+        this.user = snapshot.val() as User;
+        console.log(this.user);
+        this.profileLoaded = true; 
+        /* setTimeout(this.utilisateurProvider.deconnexion, 60000); */
     });
   }
 
   logout() {
-    this.utilisateurProvider.deconnexion().then( (rep) => {
-      this.navCtrl.setRoot(HomePage);
+    this.navCtrl.push(HomePage).then( (rep) => {
+      this.utilisateurProvider.deconnexion()
     });
   }
 
