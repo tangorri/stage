@@ -173,12 +173,27 @@ export class RamassagePage {
       let destAdresseSearch = this.destAdresse+'+'+this.destCP+'+'+this.destVille;
       let url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+destAdresseSearch+'&sensor=true&region=FR';
       console.log('url : ', url);
-      this.http.get(url).map(res => res.json()).subscribe(data => {
-        this.destLat = data.results[0].geometry.location.lat;
-        this.destLng = data.results[0].geometry.location.lng;
-        console.log("lat :",this.destLat);
-        console.log("lng :",this.destLng);
-      });
+      this.http.get(url).map(res => res.json())
+        .subscribe(
+          data => {
+            if (data.result) {
+              this.destLat = data.results[0].geometry.location.lat;
+              this.destLng = data.results[0].geometry.location.lng;
+            } else {
+                console.log("L'adresse complète n'est pas valide.");
+                let destAdresseSearch = this.destCP+'+'+this.destVille;
+                let url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+destAdresseSearch+'&sensor=true&region=FR';
+                this.http.get(url).map(res => res.json())
+                .subscribe(
+                  data => {
+                    this.destLat = data.results[0].geometry.location.lat;
+                    this.destLng = data.results[0].geometry.location.lng;
+                });
+            }
+            console.log("lat, lng : ",this.destLat, " , ",this.destLng);
+          }
+        );
+                        
       
       this.destinataire =  client.name.toLowerCase() + ',  ' +  client.ville.toLowerCase();
       console.log("destinataire: ", this.destinataire);
