@@ -30,7 +30,7 @@ import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 
 export class RamassagePage {
   u: any;
-  numeroUser: any;
+  prefixeUser: any;
   utilisateur: any;
   chauffeurName: any;
   chauffeur2: any;
@@ -82,16 +82,14 @@ export class RamassagePage {
     this.utilisateur.subscribe(res => {
       if(res.length === 4) {
         this.dernierBL = res[0].$value;
-        this.numeroUser = res[2].$value;
+        this.prefixeUser = res[2].$value;
       };
       if(res.length === 5) {
         this.dernierBL = res[1].$value;
-        this.numeroUser = res[3].$value;
+        this.prefixeUser = res[3].$value;
       };
-      /* console.log("res : ", res.length); 
-      console.log("prefixe : ",this.numeroUser); */ 
-      console.log("dernierBL : ",this.dernierBL); 
     });
+    console.log("dernierBL : ",this.dernierBL);
     this.marchandiseBinding = bl.value as Marchandise;
     this.marchandiseBinding.dateRamassage = Date.now();
     this.marchandiseBinding.chauffeurRamassage = this.user;
@@ -113,8 +111,8 @@ export class RamassagePage {
       lng: this.destLng
     };
     this.marchandiseBinding.echange = this.chauffeur2;
-
-    this.marchandiseBinding.numéroBL = this.numeroUser + '-' + (this.dernierBL+1);
+    this.dernierBL++;
+    this.marchandiseBinding.numéroBL = this.prefixeUser + '-' + this.dernierBL;
     console.log("numéroBL : ",this.marchandiseBinding.numéroBL);
 
     console.log(this.marchandiseBinding);
@@ -138,7 +136,7 @@ export class RamassagePage {
           text: 'Ajouter',
           handler: () => {
             this.marchandise.push(this.marchandiseBinding).offline.then( res => {
-              this.u.update(this.user,{dernierBL: (this.dernierBL+1)})
+              this.u.update(this.user,{dernierBL: (this.dernierBL + 1)})
               alert('Bon de livraison ajouté avec succés');
               this.navCtrl.setRoot(AccueilPage);
             }).catch(e => {

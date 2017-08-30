@@ -32,7 +32,7 @@ export class ChauffeursComponent {
         chauffeurs.push(element);
       });
       this.items = chauffeurs;
-       console.log("this.items:",chauffeurs); 
+       /* console.log("this.items:",chauffeurs);  */
       this.loadItems = chauffeurs;
     });
   }
