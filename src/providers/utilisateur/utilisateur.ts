@@ -11,6 +11,10 @@ export class UtilisateurProvider {
   private afAuth: any;
   private userProfile: any;
   public utilisateurs= {
+    "bureau": {
+      "mail": "bureau@64.fr",
+      "username": "bureau"
+    },
     "gaetan64": {
       "mail": "gaetan64@64.fr",
       "username": "gaetan64"
@@ -43,10 +47,6 @@ export class UtilisateurProvider {
       "mail": "loritz64@64.fr",
       "username": "loritz64"
     },
-    "livreur": {
-      "mail": "livreur@livreur.fr",
-      "username": "livreur"
-    },
     "jeanmichel64": {
       "mail": "jeanmichel64@64.fr",
       "username": "jeanmichel64"
@@ -66,10 +66,6 @@ export class UtilisateurProvider {
     "beatrice64": {
       "mail": "beatrice64@64.fr",
       "username": "beatrice64"
-    },
-    "admin": {
-      "mail": "admin@admin.fr",
-      "username": "admin"
     },
     "frederic40": {
       "mail": "frederic40@40.fr",
@@ -123,13 +119,8 @@ export class UtilisateurProvider {
     this.userProfile = firebase.database().ref('users');
   }
 
-  
   connexion(identifiant:string) : any {
-    console.log(identifiant);
-    /* let connected = this.afAuth.signInWithEmailAndPassword(this.utilisateurs[identifiant].mail, identifiant).then(()=>{
-      setTimeout(this.deconnexion(), 20000);
-    });
-    return connected; */
+    /* console.log(identifiant); */
     return this.afAuth.signInWithEmailAndPassword(this.utilisateurs[identifiant].mail, identifiant);
   }
   
@@ -139,7 +130,7 @@ export class UtilisateurProvider {
   }
   getUser(userId: any) {
     var userRef= this.userProfile.child(userId);
-    console.log('userId : ' + userId);
+    /* console.log('userId : ' + userId); */
     return userRef.once('value');
   }
   

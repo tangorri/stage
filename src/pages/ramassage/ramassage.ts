@@ -29,6 +29,9 @@ import { ChauffeursComponent } from "../../components/chauffeurs/chauffeurs";
 })
 
 export class RamassagePage {
+  u: any;
+  numeroUser: any;
+  utilisateur: any;
   chauffeurName: any;
   chauffeur2: any;
   
@@ -36,6 +39,7 @@ export class RamassagePage {
   marchandise: any;
   marchandiseBinding : any;
   client: any;
+  dernierBL: number;
   
   clientId:string ='';
   clientObject: any;
@@ -65,6 +69,8 @@ export class RamassagePage {
     // connexion database
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
+    this.utilisateur = this.dbAf.list('/users/' + this.user);
+    this.u = this.dbAf.list('/users/');
 
     // On récupère le type de client 
     this.clientType = navParams.get("clientType");
@@ -72,18 +78,31 @@ export class RamassagePage {
   }
 
    saveBL(bl) {
+    // on récupère le dernier numéro pour incrémenter les suivants
+    this.utilisateur.subscribe(res => {
+      if(res.length === 4) {
+        this.dernierBL = res[0].$value;
+        this.numeroUser = res[2].$value;
+      };
+      if(res.length === 5) {
+        this.dernierBL = res[1].$value;
+        this.numeroUser = res[3].$value;
+      };
+      /* console.log("res : ", res.length); 
+      console.log("prefixe : ",this.numeroUser); */ 
+      console.log("dernierBL : ",this.dernierBL); 
+    });
     this.marchandiseBinding = bl.value as Marchandise;
     this.marchandiseBinding.dateRamassage = Date.now();
     this.marchandiseBinding.chauffeurRamassage = this.user;
     this.marchandiseBinding.delivered = false;
-    this.expediteur = {
+    this.marchandiseBinding.expediteur = {
       name: this.expName,
       adresse: this.expAdresse,
       codePostal: this.expCP,
       ville: this.expVille,
       tel: this.expTel
-    }
-    this.marchandiseBinding.expediteur = this.expediteur; 
+    }; 
     this.marchandiseBinding.destinataire = {
       name: this.destName,
       adresse: this.destAdresse,
@@ -94,6 +113,10 @@ export class RamassagePage {
       lng: this.destLng
     };
     this.marchandiseBinding.echange = this.chauffeur2;
+
+    this.marchandiseBinding.numéroBL = this.numeroUser + '-' + (this.dernierBL+1);
+    console.log("numéroBL : ",this.marchandiseBinding.numéroBL);
+
     console.log(this.marchandiseBinding);
     for(let cle in this.marchandiseBinding) {
       if (this.marchandiseBinding[cle] === undefined) {
@@ -115,6 +138,7 @@ export class RamassagePage {
           text: 'Ajouter',
           handler: () => {
             this.marchandise.push(this.marchandiseBinding).offline.then( res => {
+              this.u.update(this.user,{dernierBL: (this.dernierBL+1)})
               alert('Bon de livraison ajouté avec succés');
               this.navCtrl.setRoot(AccueilPage);
             }).catch(e => {

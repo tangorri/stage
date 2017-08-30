@@ -1,13 +1,7 @@
 *****************************************
 // DEV //
 --------------
-  -Bug du build android (conflits google service)
-
-  -Fixer google map
-
-  -Fixer déconnexion auto
-
-  -Numéro BL autoincrément
+  -Fixer Numéro BL (pb lors de l'ajout de 2 bons sans recharger)
 
   -Lier avec bdd locale pour le retour
 
@@ -16,6 +10,10 @@
 *****************************************
 // OPTIONNEL //
 --------------
+  -Google map
+
+  -Déconnexion auto avec envoie des données sur bdd locale
+
   -Envoie de mails aux clients
 
   -Notifications push (pour les échanges)
