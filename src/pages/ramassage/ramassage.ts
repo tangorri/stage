@@ -106,9 +106,9 @@ export class RamassagePage {
       adresse: this.destAdresse,
       codePostal: this.destCP,
       ville: this.destVille,
-      tel: this.destTel,
+      tel: this.destTel/* ,
       lat: this.destLat,
-      lng: this.destLng
+      lng: this.destLng */
     };
     this.marchandiseBinding.echange = this.chauffeur2;
     this.dernierBL++;
@@ -192,7 +192,7 @@ export class RamassagePage {
       this.destTel = client.tel;
 
       // obtenir les coordonées pour géoloc
-      let destAdresseSearch = this.destAdresse+'+'+this.destCP+'+'+this.destVille;
+      /* let destAdresseSearch = this.destAdresse+'+'+this.destCP+'+'+this.destVille;
       let url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+destAdresseSearch+'&sensor=true&region=FR';
       console.log('url : ', url);
       this.http.get(url).map(res => res.json())
@@ -214,7 +214,7 @@ export class RamassagePage {
             }
             console.log("lat, lng : ",this.destLat, " , ",this.destLng);
           }
-        );
+        ); */
                         
       
       this.destinataire =  client.name.toLowerCase() + ',  ' +  client.ville.toLowerCase();

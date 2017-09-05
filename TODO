@@ -1,6 +1,12 @@
 *****************************************
 // DEV //
 --------------
+  -prévoir interface web pour les clients
+
+  -ajouter observation sur modal signature
+
+  -rentrer tous les clients dans la bdd qui ne sont pas facturés
+
   -Fixer Numéro BL (pb lors de l'ajout de 2 bons sans recharger)
 
   -Lier avec bdd locale pour le retour
