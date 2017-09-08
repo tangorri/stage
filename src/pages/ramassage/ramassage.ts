@@ -34,62 +34,69 @@ export class RamassagePage {
   utilisateur: any;
   chauffeurName: any;
   chauffeur2: any;
-  
-  user:any;
+
+  user: any;
   marchandise: any;
-  marchandiseBinding : any;
+  marchandiseBinding: any;
   client: any;
   dernierBL: number;
-  
-  clientId:string ='';
-  clientObject: any;
-  clientVille:string ='';
-  clientName:string ='';
-  clientAdresse:string ='';
-  clientCP:string ='';
-  clientType:any;
-  
-  expediteur:any;
-  expName: string ='';
-  expAdresse: string ='';
-  expCP: string ='';
-  expVille: string ='';
-  expTel:  string ='';
-  
-  destinataire:any;
-  destName: string ='';
-  destAdresse: string ='';
-  destCP: string ='';
-  destVille: string ='';
-  destTel: string ='';
-  destLng: any;
-  destLat: any; 
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase, private utilisateurProvider: UtilisateurProvider, public modalCtrl: ModalController, public navParams: NavParams, public http: Http) {
-    // connexion database
+  clientId: string = '';
+  clientObject: any;
+  clientVille: string = '';
+  clientName: string = '';
+  clientAdresse: string = '';
+  clientCP: string = '';
+  clientType: any;
+
+  expediteur: any;
+  expName: string = '';
+  expAdresse: string = '';
+  expCP: string = '';
+  expVille: string = '';
+  expTel: string = '';
+
+  destinataire: any;
+  destName: string = '';
+  destAdresse: string = '';
+  destCP: string = '';
+  destVille: string = '';
+  destTel: string = '';
+  destLng: any;
+  destLat: any;
+
+  constructor(
+    public navCtrl: NavController, public alertCtrl: AlertController,
+    private afAuth: AngularFireAuth, private dbAf: AngularFireOfflineDatabase,
+    private utilisateurProvider: UtilisateurProvider,
+    public modalCtrl: ModalController,
+    public navParams: NavParams, public http: Http
+  ) {
+
+    // Récupérer données utilisateur et marchandise.
     this.user = firebase.auth().currentUser.uid;
     this.marchandise = dbAf.list('/users/' + this.user + '/cargaison/');
     this.utilisateur = this.dbAf.list('/users/' + this.user);
     this.u = this.dbAf.list('/users/');
 
-    // On récupère le type de client 
+    // On récupère le type de client
     this.clientType = navParams.get("clientType");
-    
   }
 
-   saveBL(bl) {
+  // sauvegarser un bon de livraison
+  saveBL(bl): void {
     // on récupère le dernier numéro pour incrémenter les suivants
     this.utilisateur.subscribe(res => {
-      if(res.length === 4) {
+      if (res.length === 4) {
         this.dernierBL = res[0].$value;
         this.prefixeUser = res[2].$value;
       };
-      if(res.length === 5) {
+      if (res.length === 5) {
         this.dernierBL = res[1].$value;
         this.prefixeUser = res[3].$value;
       };
     });
-    console.log("dernierBL : ",this.dernierBL);
+    console.log("dernierBL : ", this.dernierBL);
     this.marchandiseBinding = bl.value as Marchandise;
     this.marchandiseBinding.dateRamassage = Date.now();
     this.marchandiseBinding.chauffeurRamassage = this.user;
@@ -100,7 +107,7 @@ export class RamassagePage {
       codePostal: this.expCP,
       ville: this.expVille,
       tel: this.expTel
-    }; 
+    };
     this.marchandiseBinding.destinataire = {
       name: this.destName,
       adresse: this.destAdresse,
@@ -113,10 +120,10 @@ export class RamassagePage {
     this.marchandiseBinding.echange = this.chauffeur2;
     this.dernierBL++;
     this.marchandiseBinding.numéroBL = this.prefixeUser + '-' + this.dernierBL;
-    console.log("numéroBL : ",this.marchandiseBinding.numéroBL);
+    console.log("numéroBL : ", this.marchandiseBinding.numéroBL);
 
     console.log(this.marchandiseBinding);
-    for(let cle in this.marchandiseBinding) {
+    for (let cle in this.marchandiseBinding) {
       if (this.marchandiseBinding[cle] === undefined) {
         delete this.marchandiseBinding[cle];
       }
@@ -135,56 +142,57 @@ export class RamassagePage {
         {
           text: 'Ajouter',
           handler: () => {
-            this.marchandise.push(this.marchandiseBinding).offline.then( res => {
-              this.u.update(this.user,{dernierBL: (this.dernierBL + 1)})
+            this.marchandise.push(this.marchandiseBinding).offline
+            .then(res => {
+              this.u.update(this.user, { dernierBL: (this.dernierBL + 1) });
               alert('Bon de livraison ajouté avec succés');
               this.navCtrl.setRoot(AccueilPage);
             }).catch(e => {
               console.log('Une erreur est survenue');
-            });  
+            });
           }
         }
       ]
     });
     confirm.present();
-  } 
-
-  searchExp() {
-    let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "expediteur"});
-    myModal.onDidDismiss(exp => {
-      if(exp) {
-        this.getExp(exp);
-        console.log("exp:",exp);
-      }
-    })
-    myModal.present();
-  };
-  
-  searchDest() {
-    let myModal = this.modalCtrl.create(ClientSearchComponent,{clientType: "destinataire"});
-    myModal.onDidDismiss(dest => {
-      if(dest) {
-        this.getDest(dest);
-        console.log("dest:",dest);
-      }
-    })
-    myModal.present();
-  };
-
-  getExp(client) {
-
-      this.expName = client.name;
-      this.expAdresse = client.adresse;
-      this.expCP = client.codePostal;
-      this.expVille = client.ville;
-      this.expTel = client.tel;
-
-      this.expediteur = client.name.toLowerCase() + ',  ' + client.ville.toLowerCase();
-      console.log("expediteur: ", this.expediteur);
   }
 
-  getDest(client) {
-    if(client.clientType == "destinataire") {
+  searchExp() {
+    let myModal = this.modalCtrl.create(ClientSearchComponent, { clientType: "expediteur" });
+    myModal.onDidDismiss(exp => {
+      if (exp) {
+        this.getExp(exp);
+        console.log("exp:", exp);
+      }
+    })
+    myModal.present();
+  };
+
+  searchDest() {
+    let myModal = this.modalCtrl.create(ClientSearchComponent, { clientType: "destinataire" });
+    myModal.onDidDismiss(dest => {
+      if (dest) {
+        this.getDest(dest);
+        console.log("dest:", dest);
+      }
+    })
+    myModal.present();
+  };
+
+  getExp(client) :void {
+
+    this.expName = client.name;
+    this.expAdresse = client.adresse;
+    this.expCP = client.codePostal;
+    this.expVille = client.ville;
+    this.expTel = client.tel;
+
+    this.expediteur = client.name.toLowerCase() + ',  ' + client.ville.toLowerCase();
+    console.log("expediteur: ", this.expediteur);
+  }
+
+  getDest(client): void {
+    if (client.clientType == "destinataire") {
       this.destName = client.name;
       this.destAdresse = client.adresse;
       this.destCP = client.codePostal;
@@ -215,23 +223,23 @@ export class RamassagePage {
             console.log("lat, lng : ",this.destLat, " , ",this.destLng);
           }
         ); */
-                        
-      
-      this.destinataire =  client.name.toLowerCase() + ',  ' +  client.ville.toLowerCase();
+
+
+      this.destinataire = client.name.toLowerCase() + ',  ' + client.ville.toLowerCase();
       console.log("destinataire: ", this.destinataire);
     };
   }
 
-  echanger() {
+  echanger (): void {
     let myModal = this.modalCtrl.create(ChauffeursComponent);
     myModal.onDidDismiss(res => {
-      if(res) {
+      if (res) {
         this.chauffeur2 = {
-          name:res.username,
-          id:res.$key
+          name: res.username,
+          id: res.$key
         };
         this.chauffeurName = this.chauffeur2.name;
-        console.log("Nom du 2eme chauffeur: ",this.chauffeur2.name);
+        console.log("Nom du 2eme chauffeur: ", this.chauffeur2.name);
       }
     })
     myModal.present();
